@@ -1,0 +1,168 @@
+.sidenav {
+    text-align: left;
+    height: 55px;
+    width: 100%;
+    position: fixed;
+    z-index: 4;
+    top: 80px;
+    left: 0;
+    /*background-color: #f7fae9;*/
+    background-color: white;
+    overflow-y: hidden;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    padding: 0;
+    overflow-x: auto;
+    display: flex;
+}
+.sidenav ::after{
+    align-items: center;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    width: 100%;
+}
+.sidenav::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.sidenav::-webkit-scrollbar
+{
+	width: 2px;
+	height: 2px;
+	background-color: #F5F5F5;
+}
+
+.sidenav::-webkit-scrollbar-thumb
+{
+	background-color: #141414;
+}
+
+.sidenav ul{
+    list-style: none;
+    padding: 0;
+    margin:0;
+    display: flex;
+}
+.sidenav li{
+    display: inline-flex;
+    float: left;
+    height:100%;
+    width: max-content;
+    margin: 0 auto;
+    padding: 1em;
+}
+.sidenav li:hover{
+    cursor:pointer;
+    background-color: #e7e7e7;
+}
+.sidenav i{
+    text-align: center;
+    padding:3px 0.2em;
+    display: inline-flex;
+    width:auto;
+    transition:0.3s;
+}
+.sidenav a {
+    display: inline-flex;
+    color: #424040;
+    font-size: 110%;
+    font-weight: 500;
+    text-decoration: none;
+    width:auto;
+    height:auto;
+    transition:1s;
+}
+
+.sidenav-blank{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+} 
+
+.sidenav p:hover{
+    cursor: pointer;
+}
+.sidenav p{
+    padding: 0;
+    margin:0;
+    display:none;
+}
+
+
+@media screen and (max-width:900px){
+    .sidenav a, .sidenav i{
+        font-size: 100%;
+    }
+    .sidenav li{
+    padding: 1.2em;
+    }
+}
+@media screen and (max-width:600px){
+   
+
+
+    .sidenav{
+        text-align: left;
+        height: 100%;
+        position: fixed;
+        z-index: 4;
+        left: 0;
+        bottom:5px;
+        /*background-color: #f7fae9;*/
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border-top: 1px solid white;
+        height: 0;
+        top:80px;
+        width:100%;
+        background-color: #e7e7e7;/* #f7fae4ec;*/
+        align-items: center;
+        list-style-type: none;
+        margin:0;
+        padding:0;
+        width: 100%;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        display: none;
+    }
+    .sidenav ul{
+        display: unset;
+        list-style: none;
+        padding: 0;
+        width:100%;
+        
+    }
+    .sidenav li{
+        display: table;
+        vertical-align: bottom;
+        height:auto;
+        padding: 15px 15px;
+        width:100%;
+    }
+    .sidenav i{
+        display: inline-flex;
+        vertical-align: middle;
+        float: left;
+        padding: 5px 0;
+        padding-left:1em;
+        height:auto;
+    }
+    .sidenav a{
+        display: table-flex;
+        vertical-align: middle;
+        float: left;
+        margin-left: 5px;
+        padding-left: 5px;
+        text-align: left;
+        color:#111111e7;
+        font-size: 1.5em;
+        height:auto;
+    }
+}
