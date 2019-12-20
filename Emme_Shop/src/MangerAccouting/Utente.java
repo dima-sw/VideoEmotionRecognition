@@ -2,8 +2,14 @@ package MangerAccouting;
 
 import java.io.Serializable;
 
+/**
+ * Classe Astratta Utente 
+ * @author cetra
+ *@see java.io.Serializable
+ */
 public abstract class Utente implements Serializable {
 
+	
 	private static final long serialVersionUID = 1L;
 	
 	String username;
