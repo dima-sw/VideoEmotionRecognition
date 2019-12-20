@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ManagerNegozio.Negozio;
+import managernegozio.Negozio;
 import manageraccouting.Cliente;
 import manageraccouting.GestoreAccouting;
 import manageraccouting.Utente;
@@ -27,6 +27,7 @@ public class Login extends HttpServlet {
 	static Cliente cliente=new Cliente();
 	static Venditore venditore=new Venditore();
 	static GestoreAccouting gestoreaccouting=new GestoreAccouting();
+	static Negozio neg=new Negozio();
 	
 	public Login() {
 		super();
@@ -105,7 +106,7 @@ public class Login extends HttpServlet {
 									request.getSession().setAttribute("utente", utente);
 									
 									address="./venditore/index-venditore.jsp";	
-									Negozio negozio=model.getNegozio(utente.getUsername());
+									Negozio negozio=neg.getNegozio(utente.getUsername());
 									if(negozio!=null) {
 										request.getSession().setAttribute("negozioBean", negozio);
 									    request.getSession().setAttribute("negozioNome", negozio.getNomeNegozio());		

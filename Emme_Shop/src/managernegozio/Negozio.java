@@ -1,133 +1,169 @@
 package managernegozio;
 
+import java.io.Serializable;
+import java.sql.SQLException;
+
+import dao.ClienteDAO;
+import dao.NegozioDAO;
+
 /**
  * 
  * @author manlio
  * la classe Negozio gestisce le operazioni di aggiunta,rimozione,modifca di un prodotto e categoria
  *
  */
-public class Negozio {
+public class Negozio implements Serializable {
 
-	public Negozio(String nome, String design, String descrizione, String via, String città, int cap, String logo) {
-		this.nome = nome;
-		this.design = design;
-		this.descrizione = descrizione;
-		this.via = via;
-		this.città = città;
-		this.cap = cap;
-		this.logo = logo;
-	}
-	
-	/**
-	 * 
-	 * @return string
-	 */
-	public String getNome() {
-		return nome;
-	}
-	/**
-	 * Questo metodo settare il nome del negozio
-	 * @param nome è il nome del negozio nuovo da assegnare
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	/**
-	 * 
-	 * @return string
-	 */
-	public String getDesign() {
-		return design;
-	}
-	
-	/**
-	 * Questo metodo setta il layout del menu
-	 * @param design è il nome del design da assegnare
-	 */
-	public void setDesign(String design) {
-		this.design = design;
-	}
-	/**
-	 * 
-	 * @return string
-	 */
-	public String getDescrizione() {
-		return descrizione;
-	}
-	/**
-	 * Questo metodo setta una descrizione al negozio
-	 * @param descrizione è il nome della descrizione da assegnare
-	 */
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	/**
-	 * 
-	 * @return string
-	 */
-	public String getVia() {
-		return via;
-	}
-	/**
-	 * Questo metodo setta la via del negozio
-	 * @param  via è la via da assegnare
-	 */
-	public void setVia(String via) {
-		this.via = via;
-	}
-	/**
-	 * 
-	 * @return string
-	 */
-	public String getCittà() {
-		return città;
-	}
-	
-	/**
-	 * Questo metodo setta la città del negozio
-	 * @param città è la città da assegnare
-	 */
-	public void setCittà(String città) {
-		this.città = città;
-	}
-	/**
-	 * 
-	 * @return int
-	 */
-	public int getCap() {
-		return cap;
-	}
-	/**
-	 * Questo metodo setta il cap al negozio
-	 * @param cap è il cap del negozio  da assegnare
-	 */
-	public void setCap(int cap) {
-		this.cap = cap;
-	}
-	/**
-	 * 
-	 * @return string
-	 */
-	public String getLogo() {
-		return logo;
-	}
-	/**
-	 * Questo metodo setta il logo del negozio
-	 * @param logo è il logo del negozio  da assegnare
-	 */
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-	
-	
-	private String nome;
+	static NegozioDAO model= new NegozioDAO();
+
+	private String nomeNegozio;
+	private String usernameVenditore;
 	private String design;
+	private String colore;
+	private String partitaIva;
+	private String dataIscrizione;
 	private String descrizione;
 	private String via;
-	private String città;
-	private int cap;
+	private String citta;
+	private String cap;
 	private String logo;
+	
+	public Negozio() {
+		this.nomeNegozio = "";
+		this.usernameVenditore = "";
+		this.design = "";
+		this.colore = "";
+		this.partitaIva  ="";
+		this.dataIscrizione = "";
+		this.descrizione = "";
+		this.via = "";
+		this.citta = "";
+		this.cap = "";
+		this.logo = "";
+	}
+	
+	public Negozio(String nomeNegozio, String usernameVenditore, String template, String colore, String partitaIva,
+				String dataIscrizione, String descrizione, String via, String citta, String cap, String Logo) {
+			this.nomeNegozio = nomeNegozio;
+			this.usernameVenditore = usernameVenditore;
+			this.design = template;
+			this.colore = colore;
+			this.partitaIva = partitaIva;
+			this.dataIscrizione = dataIscrizione;
+			this.descrizione = descrizione;
+			this.via = via;
+			this.citta = citta;
+			this.cap = cap;
+			this.logo = Logo;
+		}
+		
+		/**
+		 * Restituisce il negozio del venditore passato come username
+		 * @param username
+		 * @return Negozio
+		 * @throws SQLException
+		 */
+		public Negozio getNegozio(String username) throws SQLException {
+		
+			return model.getNegozio(username);
+		}
+
+		
+		
+		public String getLogo() {
+			return this.logo;
+		}
+
+
+
+		public void setLogo(String logo) {
+			this.logo = logo;
+		}
+
+
+
+		public String getNomeNegozio() {
+			return nomeNegozio;
+		}
+	
+		public void setNomeNegozio(String nomeNegozio) {
+			this.nomeNegozio = nomeNegozio;
+		}
+		
+		public String getUsernameVenditore() {
+			return usernameVenditore;
+		}
+		
+		public void setUsernameVenditore(String usernameVenditore) {
+			this.usernameVenditore = usernameVenditore;
+		}
+		
+		public String getDesign() {
+			return design;
+		}
+		
+		public void setDesign(String design) {
+			this.design = design;
+		}
+		
+		public String getColore() {
+			return colore;
+		}
+		
+		public void setColore(String colore) {
+			this.colore = colore;
+		}
+		
+		public String getPartitaIva() {
+			return partitaIva;
+		}
+		
+		public void setPartitaIva(String partitaIva) {
+			this.partitaIva = partitaIva;
+		}
+		
+		public String getDataIscrizione() {
+			return dataIscrizione;
+		}
+		
+		public void setDataIscrizione(String dataIscrizione) {
+			this.dataIscrizione = dataIscrizione;
+		}
+		
+		public String getDescrizione() {
+			return descrizione;
+		}
+		
+		public void setDescrizione(String descrizione) {
+			this.descrizione = descrizione;
+		}
+		
+		public String getVia() {
+			return via;
+		}
+		
+		public void setVia(String via) {
+			this.via = via;
+		}
+		
+		public String getCitta() {
+			return citta;
+		}
+		
+		public void setCitta(String citta) {
+			this.citta = citta;
+		}
+		
+		public String getCap() {
+			return cap;
+		}
+		
+		public void setCap(String cap) {
+			this.cap = cap;
+		}
+
+		
+
 
 }
 
