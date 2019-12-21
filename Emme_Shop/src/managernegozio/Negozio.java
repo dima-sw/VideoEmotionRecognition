@@ -68,6 +68,22 @@ public class Negozio implements Serializable {
 			return model.getNegozio(username);
 		}
 
+		/**
+		 * 
+		 * @param negozio
+		 * @throws SQLException
+		 */
+		public Negozio addNegozio(String nomeNegozio, String usernameVenditore, String template, String colore, String partitaIva,
+				String dataIscrizione, String descrizione, String via, String citta, String cap, String Logo) throws SQLException {
+			
+			Negozio negozio=new Negozio( nomeNegozio, usernameVenditore, template, colore, partitaIva,
+				 dataIscrizione, descrizione, via, citta, cap, Logo);
+			
+			model.addNegozio(negozio);
+			return negozio;
+		}
+
+		
 		
 		
 		public String getLogo() {
@@ -162,11 +178,7 @@ public class Negozio implements Serializable {
 			this.cap = cap;
 		}
 
-		public void addNegozio(Negozio negozio) throws SQLException {
-			model.addNegozio(negozio);
-			
-		}
-
+		
 		
 
 

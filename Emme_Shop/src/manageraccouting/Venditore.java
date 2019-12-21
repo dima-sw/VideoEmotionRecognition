@@ -60,8 +60,12 @@ public class Venditore extends Utente {
 			return model.checkLoginSeller(username, password);
 	}
 	
-	public void registrazione(Venditore venditore) throws SQLException {
+	public Venditore addVenditore(String username, String password, String nome, String cognome, String email, String sesso,
+			String telefono, String via, String citta, String cap) throws SQLException {
+			
+		Venditore venditore=new Venditore(username, password, nome, cognome, email, sesso, telefono, via, citta,  cap);
 		model.addVenditore(venditore);
+		return venditore;
 	}
 	
 	

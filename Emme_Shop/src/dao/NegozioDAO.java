@@ -34,6 +34,12 @@ public class NegozioDAO {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param usernameVenditore
+	 * @return il negozio riferito a quel venditore
+	 * @throws SQLException
+	 */
 	public synchronized Negozio getNegozio(String usernameVenditore) throws SQLException {
   	  
   	  Connection connection = null;
@@ -76,8 +82,12 @@ public class NegozioDAO {
 		return negozioBean;
 	}
 	
-	
-	
+
+	/**
+	 * 
+	 * @param negozio
+	 * @throws SQLException
+	 */
 	public synchronized void addNegozio(Negozio negozio) throws SQLException {
 
 		Connection connection = null;

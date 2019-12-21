@@ -17,15 +17,7 @@ import manageraccouting.Venditore;
 public class VenditoreDAO {
 	
 	private static DataSource ds;
-	
-	private static final String TABLE_CLIENTE = "cliente";
 	private static final String TABLE_VENDITORE = "venditore";
-	private static final String TABLE_AMMINISTRATORE = "amministratore";
-	private static final String TABLE_PRODOTTO="prodotto";
-	private static final String TABLE_CATEGORIA="categoria";
-	private static final String TABLE_NEGOZIO="negozio";
-	private static final String TABLE_FATTURA="fattura";
-	private static final String TABLE_RIFERIMENTO="riferimento";
 	
 	
 	
@@ -89,6 +81,11 @@ public class VenditoreDAO {
 			return bean;
 	}
 	
+	/**
+	 * 
+	 * @param venditore
+	 * @throws SQLException
+	 */
 	public synchronized void addVenditore(Venditore venditore)throws SQLException{
 
 		Connection connection=null;

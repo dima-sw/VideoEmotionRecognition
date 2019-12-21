@@ -18,7 +18,7 @@ import manageraccouting.Venditore;
 @WebServlet("/RegisterSeller")
 public class RegisterSeller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       static Venditore model=new Venditore();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,21 +32,25 @@ public class RegisterSeller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Venditore venditore = new Venditore();
-		
-		venditore.setUsername(request.getParameter("username"));
-		venditore.setPassword(request.getParameter("password"));
-		venditore.setNome(request.getParameter("fname"));
-		venditore.setCognome(request.getParameter("lname"));
-		venditore.setEmail(request.getParameter("email"));
-		venditore.setSesso(request.getParameter("gender"));
-		venditore.setTelefono(request.getParameter("phone"));
-		venditore.setVia(request.getParameter("street"));
-		venditore.setCitta(request.getParameter("city"));
-		venditore.setCap(request.getParameter("CAP"));
-		
 		try {
-		venditore.registrazione(venditore);
+		
+		
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		String nome=request.getParameter("fname");
+		String cognome=request.getParameter("lname");
+		String email=request.getParameter("email");
+		String sesso=request.getParameter("gender");
+		String telefono=request.getParameter("phone");
+		String via=request.getParameter("street");
+		String città=request.getParameter("city");
+		String cap=request.getParameter("CAP");
+		
+		Venditore venditore=null;
+		venditore=model.addVenditore(username, password, nome, cognome, email, sesso, telefono, via, città, cap);
+		
+		
+		
 		HttpSession session=request.getSession();
 		session.setAttribute("username-venditore", venditore.getUsername());
 		String address="./seller/questionNegozio.jsp";//domanda se vuoi creare il tuo negozio subito
@@ -57,17 +61,7 @@ public class RegisterSeller extends HttpServlet {
 		System.out.println("Error:" + e.getMessage());
 		String address="./seller/venditore-registrazione.jsp";
 		response.sendRedirect(address);
-		
-	}
-
-		
-		
-		
-		
-		
-		
-		
-		
+		}
 	}
 
 	/**

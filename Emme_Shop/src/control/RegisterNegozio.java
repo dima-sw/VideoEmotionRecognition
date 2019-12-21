@@ -20,7 +20,7 @@ import managernegozio.Negozio;
 @WebServlet("/RegisterNegozio")
 public class RegisterNegozio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    static Negozio model=new Negozio();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,40 +33,41 @@ public class RegisterNegozio extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Negozio negozio = new Negozio();
-		
-		HttpSession session=request.getSession();
-		session.setAttribute("venditore-loggato","n");
-		
-		negozio.setNomeNegozio(request.getParameter("nomeNegozio"));
-		negozio.setUsernameVenditore((String) session.getAttribute("username-venditore"));
-		negozio.setDesign(request.getParameter("design"));
-		negozio.setColore(request.getParameter("color"));
-		negozio.setPartitaIva(request.getParameter("Piva").trim());
-		Date dt = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String currentTime = sdf.format(dt);
-		negozio.setDataIscrizione(currentTime);
-		negozio.setDescrizione(request.getParameter("descrizione"));
-		negozio.setVia(request.getParameter("street"));
-		negozio.setCitta(request.getParameter("city"));
-		negozio.setCap(request.getParameter("CAP"));
-		negozio.setLogo("images/favicon.ico");
-		
-		session.setAttribute("NomeNegozio", negozio.getNomeNegozio());
-		session.setAttribute("urlLogoNegozio", negozio.getLogo());
-		
 		try {
-		
-		negozio.addNegozio(negozio);
-		
-		int n=1;
-		if(n==0) throw new SQLException();
-		//HttpSession session=request.getSession();
-		//session.removeAttribute("username-venditore");
-		
-		String address="./seller/uploadImage.jsp";
-		response.sendRedirect(address);
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("venditore-loggato","n");
+			
+			String nomeNegozio=request.getParameter("nomeNegozio");
+			String usernameVenditore=(String) session.getAttribute("username-venditore");
+			String template=request.getParameter("design");
+			String colore=request.getParameter("color");
+			String partitaIva=request.getParameter("Piva").trim();
+			Date dt = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String dataIscrizione = sdf.format(dt);
+			
+			String descrizione=request.getParameter("descrizione");
+			String via=request.getParameter("street");
+			String citta=request.getParameter("city");
+			String cap=request.getParameter("CAP");
+			String Logo=("images/favicon.ico");
+			
+			session.setAttribute("NomeNegozio", nomeNegozio);
+			session.setAttribute("urlLogoNegozio", Logo);
+			
+			
+			
+			model.addNegozio(nomeNegozio, usernameVenditore, template, colore, partitaIva,
+					 dataIscrizione, descrizione, via, citta, cap, Logo);
+			
+			int n=1;
+			if(n==0) throw new SQLException();
+			//HttpSession session=request.getSession();
+			//session.removeAttribute("username-venditore");
+			
+			String address="./seller/uploadImage.jsp";
+			response.sendRedirect(address);
 	}
 	catch (SQLException e) {//errore ricarica il form registrazione
 		System.out.println("Error:" + e.getMessage());
