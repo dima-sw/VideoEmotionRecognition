@@ -3,40 +3,7 @@
     pageEncoding="UTF-8"
     session="true"
 %>
-<%!	
-	String cercato="",cercato1="",cercato2="";
-	String username="",tipo=""; 
-%>
 
-<%@include file="./WEB-INF/utilities/checkLogRedirect.jsp" %>
-
-<%
-	synchronized(session) {
-		session = request.getSession();
-		
-	    username=(String)session.getAttribute("username");
-	    cercato = (String)session.getAttribute("cercato");
-	    tipo = (String)session.getAttribute("tipo");
-	    
-	    
-		if(cercato!=null && cercato.equals("s")){
-			
-			if(tipo!=null && tipo.equals("cliente")){
-				cercato1="<tr><td ><code>Cliente <b>"+username+"</b> non trovato oppure password errata!</code></td></tr>";
-				cercato2="";
-			}
-			else if(tipo!=null && tipo.equals("venditore")){
-				cercato1="";
-				cercato2="<tr><td ><code>Venditore <b>"+username+"</b> non trovato oppure password errata!</code></td></tr>";
-			}
-			session.setAttribute("cercato","n");
-		}
-		else{
-			cercato1="";cercato2="";cercato="";
-		}
-	
-	}
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -70,16 +37,7 @@
         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     </head>
-    <body onresize='resize()'  id='home' 
-    <% if(!cercato.equals("")) {%>
-    		onload="closeNav(),scrollToDiv('accedi'),scrollToDivForAll('accedi')"
-    <% 
-       }
-    %>
-    //aggiunta per espressioni regolari
-    
-    
-    >
+    <body onresize='resize()'  id='home'>
       
         <header>
            <%@ include file="./WEB-INF/fragment/header.jsp" %>
@@ -140,7 +98,7 @@
                     <span><input type="password" class='text-input' name="password"  placeholder='Password...' required/></span>
                     <input type="hidden" name="azione" value="Cliente"/>
                     <span><input type="submit" class='send-button' value="Accedi"/></span>
-                    <span style="font-size:11px"><%=cercato1 %></span>
+                    <span style="font-size:11px"></span>
                   </p>
                 </form>
                 <form action='Login' method='POST'>
@@ -150,7 +108,7 @@
                     <span><input type="password" class='text-input' placeholder='Password...' name="password" required/></span>
                     <input type="hidden" name="azione" value="Venditore"/>
                     <span><input type="submit" class='send-button' value="Accedi"/></span>
-                    <span style="font-size:11px"><%=cercato2 %></span>
+                    <span style="font-size:11px"></span>
                   </p>
                 </form>
               </div>
@@ -370,7 +328,7 @@
                     <span><input type="password" class='text-input' name="password"  placeholder='Password...' required/></span>
                     <input type="hidden" name="azione" value="Amministratore"/>
                     <span><input type="submit" class='send-button' value="Accedi"/></span>
-                    <span style="font-size:9px"><%=cercato1 %></span>
+                    <span style="font-size:9px"></span>
                   </p>
                 </form>
                 
