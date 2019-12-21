@@ -60,7 +60,7 @@ public class Cliente extends Utente{
 
 	
 	/**
-	 * erifica se i dati inseriti corrispondono ad un utente nel database
+	 * verifica se i dati inseriti corrispondono ad un utente nel database
 	 * 
 	 * @param user
 	 * @param password

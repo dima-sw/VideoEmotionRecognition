@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import manageraccouting.Utente;
 import manageraccouting.Venditore;
 
+
 public class VenditoreDAO {
 	
 	private static DataSource ds;
@@ -87,6 +88,45 @@ public class VenditoreDAO {
 		else
 			return bean;
 	}
+	
+	public synchronized void addVenditore(Venditore venditore)throws SQLException{
+
+		Connection connection=null;
+		PreparedStatement preparedStatement = null;
+
+		String insertVenditore="INSERT INTO "+VenditoreDAO.TABLE_VENDITORE
+				+"(username,password,nome,cognome,email,sesso,telefono,via,città,cap)"
+				+"VALUES(?,?,?,?,?,?,?,?,?,?)";
+
+		try {	
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(insertVenditore);
+
+			preparedStatement.setString(1,venditore.getUsername());
+			preparedStatement.setString(2,venditore.getPassword());
+			preparedStatement.setString(3,venditore.getNome());
+			preparedStatement.setString(4,venditore.getCognome());
+			preparedStatement.setString(5,venditore.getEmail());
+			preparedStatement.setString(6,venditore.getSesso());
+			preparedStatement.setString(7,venditore.getTelefono());
+			preparedStatement.setString(8,venditore.getVia());
+			preparedStatement.setString(9,venditore.getCitta());
+			preparedStatement.setString(10,venditore.getCap());
+
+			preparedStatement.execute();
+			connection.commit();
+
+		}finally {
+			try {
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			}finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+	}
+
 	
 
 }

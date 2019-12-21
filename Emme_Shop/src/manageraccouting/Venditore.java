@@ -48,7 +48,7 @@ public class Venditore extends Utente {
 
 	
 	/**
-	 * erifica se i dati inseriti corrispondono ad un utente nel database
+	 * verifica se i dati inseriti corrispondono ad un utente nel database
 	 * 
 	 * @param username
 	 * @param password
@@ -59,6 +59,12 @@ public class Venditore extends Utente {
 		
 			return model.checkLoginSeller(username, password);
 	}
+	
+	public void registrazione(Venditore venditore) throws SQLException {
+		model.addVenditore(venditore);
+	}
+	
+	
 	
 	
 	

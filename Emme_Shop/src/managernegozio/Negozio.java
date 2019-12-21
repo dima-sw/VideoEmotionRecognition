@@ -162,6 +162,11 @@ public class Negozio implements Serializable {
 			this.cap = cap;
 		}
 
+		public void addNegozio(Negozio negozio) throws SQLException {
+			model.addNegozio(negozio);
+			
+		}
+
 		
 
 

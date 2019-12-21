@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import managernegozio.Negozio;
 
 
+
 public class NegozioDAO {
 
 	private static DataSource ds;
@@ -76,5 +77,46 @@ public class NegozioDAO {
 	}
 	
 	
+	
+	public synchronized void addNegozio(Negozio negozio) throws SQLException {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String insertNegozio = "INSERT INTO " + NegozioDAO.TABLE_NEGOZIO
+				+ "(nome,usernameVenditore,design,colore,Piva,dataIscrizione,descrizione,via,città,cap,logo)"
+				+"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(insertNegozio);
+			
+			preparedStatement.setString(1,negozio.getNomeNegozio());
+			preparedStatement.setString(2,negozio.getUsernameVenditore());
+			preparedStatement.setString(3,negozio.getDesign());
+			preparedStatement.setString(4,negozio.getColore());
+			preparedStatement.setString(5,negozio.getPartitaIva());
+			preparedStatement.setString(6,negozio.getDataIscrizione());
+			preparedStatement.setString(7, negozio.getDescrizione());
+			preparedStatement.setString(8, negozio.getVia());
+			preparedStatement.setString(9, negozio.getCitta());
+			preparedStatement.setString(10,negozio.getCap());
+			preparedStatement.setString(11,negozio.getLogo());
+
+			preparedStatement.execute();
+			
+			connection.commit();
+
+		} finally {
+			try {
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+	}	
 	
 }
