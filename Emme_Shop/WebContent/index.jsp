@@ -91,22 +91,24 @@
            
             <div id='accedi'>
               <div class='login'>
-                <form action='Login' method='POST'>
+                <form action='LoginCliente' method='POST'>
                   <p>
                     <span>Accedi come Cliente</span>
                     <span><input type="text" class='text-input' name="username" value="" placeholder='Username...' required/></span>
                     <span><input type="password" class='text-input' name="password"  placeholder='Password...' required/></span>
-                    <input type="hidden" name="azione" value="Cliente"/>
+                    
                     <span><input type="submit" class='send-button' value="Accedi"/></span>
                     <span style="font-size:11px"></span>
                   </p>
                 </form>
-                <form action='Login' method='POST'>
+                
+                
+                <form action='LoginVenditore' method='POST'>
                   <p>
                     <span>Accedi come Venditore</span>
                     <span><input type="text" class='text-input' name="username" placeholder='Username...' value="" required/></span>
                     <span><input type="password" class='text-input' placeholder='Password...' name="password" required/></span>
-                    <input type="hidden" name="azione" value="Venditore"/>
+                    
                     <span><input type="submit" class='send-button' value="Accedi"/></span>
                     <span style="font-size:11px"></span>
                   </p>
@@ -320,13 +322,12 @@
              <br><br><br><br><br><br><br>
               <div class='login'>
               
-                <form action='Login' method='POST'>
+                <form action='LoginGestoreAccouting' method='POST'>
                   <p>
                   <br><br><br>
                     <span>Area Riservata</span>
                     <span><input type="text" class='text-input' name="username" value="" placeholder='Username...' required/></span>
                     <span><input type="password" class='text-input' name="password"  placeholder='Password...' required/></span>
-                    <input type="hidden" name="azione" value="Amministratore"/>
                     <span><input type="submit" class='send-button' value="Accedi"/></span>
                     <span style="font-size:9px"></span>
                   </p>

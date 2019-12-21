@@ -5,8 +5,7 @@
 %>
 
 <%! Venditore venditore=null; 
-	Negozio neg=new Negozio();
-	Categoria cat=new Categoria();%>
+	%>
 
 <%
 
@@ -14,17 +13,14 @@
 	venditore = (Venditore)request.getSession().getAttribute("utente");
 	if (venditore!=null){
 		session.setAttribute("username-venditore",venditore.getUsername());
-		negozio=neg.getNegozio(venditore.getUsername());
+		negozio=(Negozio) request.getSession().getAttribute("negozioBean");
 	}
-	if(negozio==null){
-		 response.sendRedirect("../seller/registrazione-negozio.jsp");
-	}
+	
 	Collection<Categoria>  categorie=null;
-	if(venditore!=null && negozio!=null)   
-		{
-		  
-		  categorie= cat.getAllCategoryBySeller(venditore.getUsername());
-		
+	if(venditore!=null && negozio!=null)
+	{
+		categorie=(Collection <Categoria>)request.getSession().getAttribute("categorie");
+	
 	
 %>
 

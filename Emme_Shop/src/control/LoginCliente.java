@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class LoginCliente
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/LoginCliente")
+public class LoginCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public LoginCliente() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,23 +25,9 @@ public class Logout extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IllegalStateException {
-		
-		
-		if(request.getSession().getAttribute("cliente-loggato")==null && request.getSession().getAttribute("venditore-loggato")==null && request.getSession().getAttribute("amministratore-loggato")==null) {
-
-			response.sendRedirect("index.jsp");
-		}
-		
-		if(true) {
-			request.getSession().invalidate();
-			response.sendRedirect("index.jsp");
-		}
-		
-		
-		
-		
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
