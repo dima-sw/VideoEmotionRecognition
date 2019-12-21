@@ -1,5 +1,10 @@
 package managernegozio;
 
+import java.sql.SQLException;
+import java.util.Collection;
+
+import dao.CategoriaDAO;
+
 /**
  * 
  * @author manlio
@@ -7,64 +12,68 @@ package managernegozio;
  */
 public class Categoria {
 	
-	public Categoria(String nomeCategoria, String descrizione, String path) {
-		this.nomeCategoria = nomeCategoria;
-		this.descrizione = descrizione;
-		this.path = path;
-	}
 	
-	public Categoria() {
-		this.nomeCategoria = " ";
-		this.descrizione = " ";
-		this.path = " ";
+private static final long serialVersionUID = 1L;
+	
+	static CategoriaDAO model= new CategoriaDAO();
+	
+	
+	private String nomeNegozio;
+	private String nomeCategoria;
+	private String descrizione;
+	private String path;
+	
+	public Categoria()
+	{
+		this.nomeNegozio="";
+		this.nomeCategoria="";
+		this.descrizione="";
+		this.path="";
+	}
+	public Categoria(String nomeNegozio, String nomeCategoria,String path, String descrizione)
+	{
+		this.nomeNegozio=nomeNegozio;
+		this.nomeCategoria=nomeCategoria;
+		this.descrizione=descrizione;
+		this.path=path;
 	}
 	
 	/**
 	 * 
-	 * @return String
+	 * @param usernameVenditore
+	 * @return Restituisce la collection di tutte le categorie
+	 * @throws SQLException
 	 */
+	public Collection<Categoria> getAllCategoryBySeller(String usernameVenditore) throws SQLException{
+		return model.getAllCategoryBySeller(usernameVenditore);
+	}
+	
+	
+	
+	
+	public String getNomeNegozio() {
+		return nomeNegozio;
+	}
+	public void setNomeNegozio(String nomeNegozio) {
+		this.nomeNegozio = nomeNegozio;
+	}
 	public String getNomeCategoria() {
 		return nomeCategoria;
 	}
-	/**
-	 * questo metodo assegna il nome di una categoria
-	 * @param nomeCategoria il nome della categoria da assegnare
-	 */
 	public void setNomeCategoria(String nomeCategoria) {
 		this.nomeCategoria = nomeCategoria;
 	}
-	
-	/**
-	 * 
-	 * @return String
-	 */
 	public String getDescrizione() {
 		return descrizione;
 	}
-	/**
-	 * questo metodo assegna una descrizione
-	 * @param descrizione il nome della categoria da assegnare
-	 */
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	/**
-	 * 
-	 * @return String
-	 */
 	public String getPath() {
 		return path;
 	}
-	
-	/**
-	 * questo metodo assegna il path dove è contenuta l'immagine della categoria
-	 * @param path il path da assegnare
-	 */
 	public void setPath(String path) {
 		this.path = path;
 	}
 	
-	private String nomeCategoria;
-	private String descrizione;
-	private String path;
 }

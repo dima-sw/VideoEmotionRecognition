@@ -127,9 +127,7 @@ public class Login extends HttpServlet {
 		} 
 		catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
-		}
-
-		
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
