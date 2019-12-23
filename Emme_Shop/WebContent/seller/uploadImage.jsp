@@ -43,7 +43,7 @@
     
 
             <div id='vendi' style='padding-top:10px;'>
-              	<form id="regForm1" action="../upload" method="POST"  enctype="multipart/form-data"  style='margin:0 auto;'> <!--Fase di realizzazione-->
+              	<form id="regForm1" action="../Upload" method="POST"  enctype="multipart/form-data"  style='margin:0 auto;'> <!--Fase di realizzazione-->
                   <h2><center>Vendi con noi</center></h2><!-- Deve comparire in ogni statement -->
                   
                     <div class="tab1"> 
@@ -51,7 +51,7 @@
                      
                        <br><br>
                        <h3> Cambia logo sito! </h3>
-				            <form action="upload" method="post" enctype="multipart/form-data">
+				            <form action="Upload" method="post" enctype="multipart/form-data">
 				               <input type="file" name="file"  /><br><br><br>
 				                <input type="submit" value="Carica Immagine" class="acquista-btn"/>
 				            </form>  

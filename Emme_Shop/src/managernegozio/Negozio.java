@@ -82,6 +82,10 @@ public class Negozio implements Serializable {
 			model.addNegozio(negozio);
 			return negozio;
 		}
+		
+		public boolean updateLogoNegozio(String nomeNegozio,String urlLogo) throws SQLException {
+			return model.updateLogoNegozio(nomeNegozio, urlLogo);
+		}
 
 		
 		

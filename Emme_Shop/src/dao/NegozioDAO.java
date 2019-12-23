@@ -1,17 +1,15 @@
 package dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 import managernegozio.Negozio;
-
 
 
 public class NegozioDAO {
@@ -127,6 +125,42 @@ public class NegozioDAO {
 					connection.close();
 			}
 		}
-	}	
+	}
+	
+	public synchronized boolean updateLogoNegozio(String nomeNegozio,String logo) throws SQLException {
+		 
+		 Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			boolean flag=false;
+			
+			String update = "UPDATE " + NegozioDAO.TABLE_NEGOZIO
+					                 +" SET logo= ? "
+					                 +" where nome= ? ";
+			
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(update);
+				preparedStatement.setString(1,logo);
+				preparedStatement.setString(2,nomeNegozio);
+				
+				preparedStatement.executeUpdate();
+				
+				connection.commit();
+
+				flag=true;
+				}
+
+			 finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			 }
+			return flag;
+	 }
+
 	
 }
