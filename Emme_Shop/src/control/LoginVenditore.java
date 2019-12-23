@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import eccezione.NegozioNonEsistenteException;
+import eccezione.ParametroNonCorrettoException;
+import eccezione.UtenteNonTrovatoException;
 import manageraccouting.Utente;
 import manageraccouting.Venditore;
 import managernegozio.Categoria;
@@ -40,64 +43,55 @@ public class LoginVenditore extends HttpServlet {
 		Utente utente=null;
 		
 		try {
+			String address="";
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			
-			if (username==null || password==null)
-				response.sendRedirect("./index.jsp");
-
-			else {
-
-				utente = model.checkLogin(username, password);
-				
-				request.getSession().setAttribute("venditore-loggato","n");
+			utente = model.checkLogin(username, password);
 			
-				if(utente==null) {
-					response.sendRedirect("./index.jsp");
-				}
-				else {
-					request.getSession().setAttribute("username", "");
+			request.getSession().setAttribute("venditore-loggato","n");	
+			request.getSession().setAttribute("username", "");
+			request.getSession().setAttribute("utente", utente);
 					
-
-					String address="";
+			Venditore venditore=(Venditore) utente;
+			address="./venditore/index-venditore.jsp";	
 					
-					if(utente instanceof Venditore) {
-						request.getSession().setAttribute("utente", utente);
-						
-						Venditore venditore=(Venditore) utente;
-						address="./venditore/index-venditore.jsp";	
-						
-						Negozio negozio=modelnegozio.getNegozio(utente.getUsername());
-						
-						if(negozio!=null) {
-							request.getSession().setAttribute("negozioBean", negozio);
-						    request.getSession().setAttribute("negozioNome", negozio.getNomeNegozio());		
-						}
-						if(negozio==null){
-							 response.sendRedirect("../seller/registrazione-negozio.jsp");
-						
-							 //request.getSession().setAttribute("venditore-loggato","s");
-						}
-						
-						
-						Collection<Categoria>  categorie=null;
-						
-						if(venditore!=null && negozio!=null)   
-							{
-							  
-							  categorie= modelcat.getAllCategoryBySeller(venditore.getUsername());
-							  request.getSession().setAttribute("categorie", categorie);
-							}
-					}
-					response.sendRedirect(address);
-				}
-			}
+			Negozio negozio=modelnegozio.getNegozio(utente.getUsername());					
+			request.getSession().setAttribute("negozioBean", negozio);
+			request.getSession().setAttribute("negozioNome", negozio.getNomeNegozio());		
+					
+					
+			Collection<Categoria>  categorie=null;
+					
+			categorie= modelcat.getAllCategoryBySeller(venditore.getUsername());
+			request.getSession().setAttribute("categorie", categorie);
+				
+			
+			response.sendRedirect(address);
+		
+		}
+		catch (UtenteNonTrovatoException e) {
+			System.out.println("Error:" + e.getMessage());
+			request.getSession().setAttribute("messaggioerrore", e.getMessage());
+			
+			response.sendRedirect("./index.jsp");
+		}
+		catch(NegozioNonEsistenteException e) {
+			System.out.println("Errore:"+e.getMessage());
+			//carica la registrazione del negozio per il venditore se non esiste
+			
+			response.sendRedirect("../seller/registrazione-negozio.jsp");
+		}
+		catch (ParametroNonCorrettoException e) {
+			System.out.println("Error:"+e.getMessage());
+			request.getSession().setAttribute("messaggioerrore", e.getMessage());
+			
+			response.sendRedirect("./index.jsp");
 		}
 		catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
-		}
-
-		
+			response.sendRedirect("./index.jsp");//usare#posizione nella pagina come accedi
+		}	
 	}
 
 	/**

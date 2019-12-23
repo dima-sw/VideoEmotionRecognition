@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import dao.ClienteDAO;
 import dao.NegozioDAO;
+import eccezione.NegozioNonEsistenteException;
 
 /**
  * 
@@ -58,19 +59,38 @@ public class Negozio implements Serializable {
 		}
 		
 		/**
-		 * Restituisce il negozio del venditore passato come username
-		 * @param username
+		 *
+		 *Restituisce il negozio del venditore passato come username
+		 *
+		 * @param usernameVenditore 
 		 * @return Negozio
 		 * @throws SQLException
+		 * @throws NegozioNonEsistenteException 
 		 */
-		public Negozio getNegozio(String username) throws SQLException {
-		
-			return model.getNegozio(username);
+		public Negozio getNegozio(String usernameVenditore) throws SQLException, NegozioNonEsistenteException {
+			
+			Negozio negozio=model.getNegozio(usernameVenditore);
+			if (negozio==null)
+				throw new NegozioNonEsistenteException("negozio del Venitore: "+usernameVenditore+" non trovato");
+			else
+				return negozio;
 		}
 
 		/**
+		 * Aggiunge un nuovo negozio, i parametri di ingresso sono controllati al momento dell'inserimento con javascript
 		 * 
-		 * @param negozio
+		 * @param nomeNegozio
+		 * @param usernameVenditore
+		 * @param template
+		 * @param colore
+		 * @param partitaIva
+		 * @param dataIscrizione
+		 * @param descrizione
+		 * @param via
+		 * @param citta
+		 * @param cap
+		 * @param Logo
+		 * @return Negozio restituisce il negozio creato
 		 * @throws SQLException
 		 */
 		public Negozio addNegozio(String nomeNegozio, String usernameVenditore, String template, String colore, String partitaIva,
@@ -78,10 +98,17 @@ public class Negozio implements Serializable {
 			
 			Negozio negozio=new Negozio( nomeNegozio, usernameVenditore, template, colore, partitaIva,
 				 dataIscrizione, descrizione, via, citta, cap, Logo);
+			try {
+				model.addNegozio(negozio);
+				return negozio;
+			}
+			catch (SQLException e) {
+				throw new SQLException("Creazione del nuovo negozio fallita, errore: "+e.getMessage());
+				
+			}
 			
-			model.addNegozio(negozio);
-			return negozio;
 		}
+		
 		
 		public boolean updateLogoNegozio(String nomeNegozio,String urlLogo) throws SQLException {
 			return model.updateLogoNegozio(nomeNegozio, urlLogo);

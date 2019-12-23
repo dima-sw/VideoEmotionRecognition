@@ -6,7 +6,7 @@
         driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
         username="root"
-        password="manlio98"
+        password="sassuolo69"
         defaultAutoCommit="false"
         url="jdbc:mysql://localhost:3306/emmeshop_db?serverTimezone=CET"/>
 </Context>

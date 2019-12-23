@@ -5,13 +5,14 @@
 %>
 
 <%! Venditore venditore=null; 
+	Negozio negozio=null;
 	%>
 
 <%
 
-    Negozio negozio=null;
+    
 	venditore = (Venditore)request.getSession().getAttribute("utente");
-	if (venditore!=null){
+	if (venditore!=null){//controllo inutile perchè gia fatto in precedenza
 		session.setAttribute("username-venditore",venditore.getUsername());
 		negozio=(Negozio) request.getSession().getAttribute("negozioBean");
 	}
@@ -79,7 +80,7 @@
             <div id='mySidenav' class="sidenav">
               <ul >
                 
-                <li  onclick="window.open('ordini.jsp','_self')">
+                <li  onclick="window.open('../VisualizzaOrdineVenditore','_self')">
                     Controlla ordini
                 </li>
                 

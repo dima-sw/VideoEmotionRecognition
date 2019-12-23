@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import dao.CategoriaDAO;
+import eccezione.ParametroNonCorrettoException;
 
 /**
  * 
@@ -43,9 +44,13 @@ private static final long serialVersionUID = 1L;
 	 * @param usernameVenditore
 	 * @return Restituisce la collection di tutte le categorie
 	 * @throws SQLException
+	 * @throws ParametroNonCorrettoException 
 	 */
-	public Collection<Categoria> getAllCategoryBySeller(String usernameVenditore) throws SQLException{
-		return model.getAllCategoryBySeller(usernameVenditore);
+	public Collection<Categoria> getAllCategoryBySeller(String usernameVenditore) throws SQLException, ParametroNonCorrettoException{
+		if(usernameVenditore==null)
+			throw new ParametroNonCorrettoException("Username Sbagliato del venditore: "+usernameVenditore);
+		else
+			return model.getAllCategoryBySeller(usernameVenditore);
 	}
 	
 	

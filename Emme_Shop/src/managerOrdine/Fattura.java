@@ -2,101 +2,110 @@ package managerOrdine;
 
 import java.util.Date;
 
-
-
 /**
  * 
  * @author manlio
  *  la classe Fattura gestisce le operazioni di un ordine
  */
 public class Fattura {
-	
 
-	public Fattura(int numeroFattura, Date dataOrdine, String viaDestinaziomne, String citt‡Destinazione,
-			int capDestinazione) {
-		
-		this.numeroFattura = numeroFattura;
+
+	private String username_Cliente;
+	private String nomeNegozio;
+	private Riferimento listaRiferimento;
+	private String dataOrdine;
+	private String viaDestinazione;
+	private String cittaDestinazione;
+	private String capDestinazione;
+
+	private int numFattura;
+	
+	public Fattura() {
+	
+		this.numFattura = 0;
+		this.username_Cliente = "";
+		this.nomeNegozio = "";
+		this.dataOrdine = "";
+		this.viaDestinazione = "";
+		this.cittaDestinazione = "";
+		this.capDestinazione = "";
+	}
+	
+	public Fattura(int numFattura, String username_Cliente, String nomeNegozio,
+			String dataOrdine,  String descrizione, String viaPartenza, String cittaPartenza,
+			String capPartenza, String viaDestinazione, String cittaDestinazione, String capDestinazione) {
+	
+		this.numFattura = numFattura;
+		this.username_Cliente = username_Cliente;
+		this.nomeNegozio = nomeNegozio;
 		this.dataOrdine = dataOrdine;
-		this.viaDestinazione = viaDestinaziomne;
-		this.citt‡Destinazione = citt‡Destinazione;
+		this.viaDestinazione = viaDestinazione;
+		this.cittaDestinazione = cittaDestinazione;
 		this.capDestinazione = capDestinazione;
 	}
 	
-
-	public Fattura() {
-		this.numeroFattura = 0;
-		this.dataOrdine = new Date();
-		this.viaDestinazione = "";
-		this.citt‡Destinazione = "";
-		this.capDestinazione = 0;
-	}
-
 	
 	
 	
-	/**
-	 * @return the numeroFattura
-	 */
-	public int getNumeroFattura() {
-		return numeroFattura;
+	public int getNumFattura() {
+		return numFattura;
 	}
-	/**
-	 * @param numeroFattura the numeroFattura to set
-	 */
-	public void setNumeroFattura(int numeroFattura) {
-		this.numeroFattura = numeroFattura;
+	public void setNumFattura(int last_inserted_id) {
+		this.numFattura = last_inserted_id;
 	}
-	/**
-	 * @return the dataOrdine
-	 */
-	public Date getDataOrdine() {
+	public String getUsername_Cliente() {
+		return username_Cliente;
+	}
+	public void setUsername_Cliente(String username_Cliente) {
+		this.username_Cliente = username_Cliente;
+	}
+	public String getNomeNegozio() {
+		return nomeNegozio;
+	}
+	public void setNomeNegozio(String nomeNegozio) {
+		this.nomeNegozio = nomeNegozio;
+	}
+	public Riferimento getListaProdotti() {
+		return listaRiferimento;
+	}
+	public void setListaRiferimenti(Riferimento riferimenti) {
+		this.listaRiferimento = riferimenti;
+	}
+	public String getDataOrdine() {
 		return dataOrdine;
 	}
-	/**
-	 * @param dataOrdine the dataOrdine to set
-	 */
-	public void setDataOrdine(Date dataOrdine) {
+	public void setDataOrdine(String dataOrdine) {
 		this.dataOrdine = dataOrdine;
 	}
-	/**
-	 * @return the viaDestinaziomne
-	 */
-	public String getViaDestinaziomne() {
+	public String getViaDestinazione() {
 		return viaDestinazione;
 	}
-	/**
-	 * @param viaDestinaziomne the viaDestinaziomne to set
-	 */
-	public void setViaDestinaziomne(String viaDestinaziomne) {
-		this.viaDestinazione = viaDestinaziomne;
+	public void setViaDestinazione(String viaDestinazione) {
+		this.viaDestinazione = viaDestinazione;
 	}
-	/**
-	 * @return the citt‡Destinazione
-	 */
-	public String getCitt‡Destinazione() {
-		return citt‡Destinazione;
+	public String getCittaDestinazione() {
+		return cittaDestinazione;
 	}
-	/**
-	 * @param citt‡Destinazione the citt‡Destinazione to set
-	 */
-	public void setCitt‡Destinazione(String citt‡Destinazione) {
-		this.citt‡Destinazione = citt‡Destinazione;
+	public void setCittaDestinazione(String cittaDestinazione) {
+		this.cittaDestinazione = cittaDestinazione;
 	}
-	/**
-	 * @return the capDestinazione
-	 */
-	public int getCapDestinazione() {
+	public String getCapDestinazione() {
 		return capDestinazione;
 	}
-	/**
-	 * @param capDestinazione the capDestinazione to set
-	 */
-	public void setCapDestinazione(int capDestinazione) {
+	public void setCapDestinazione(String capDestinazione) {
 		this.capDestinazione = capDestinazione;
 	}
-	private int numeroFattura;
-	private Date dataOrdine;
-	private String viaDestinazione;
-	private String citt‡Destinazione;
-	private int capDestinazione;
+	
+	@Override
+	public String toString() {
+		return "FatturaBean [numFattura=" + numFattura + ", username_Cliente=" + username_Cliente + ", nomeNegozio="
+				+ nomeNegozio + ", listaRiferimento=" + listaRiferimento + ", dataOrdine=" + dataOrdine + ", viaDestinazione="
+				+ viaDestinazione + ", cittaDestinazione=" + cittaDestinazione + ", capDestinazione=" + capDestinazione
+				+ "]";
+	}
+
+
+
+
+
 }

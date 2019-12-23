@@ -42,7 +42,7 @@ public class NegozioDAO {
   	  
   	  Connection connection = null;
    	  PreparedStatement preparedStatement = null;
-   	  Negozio negozioBean = null;
+   	  Negozio negozio = null;
    	  
 		  String selectSQL = "SELECT * FROM " + NegozioDAO.TABLE_NEGOZIO+" WHERE usernameVenditore=?";
 		  
@@ -55,17 +55,17 @@ public class NegozioDAO {
 
 			while (rs.next()) {
 				
-				negozioBean=new Negozio();
-				negozioBean.setNomeNegozio(rs.getString("nome"));
-				negozioBean.setUsernameVenditore(rs.getString("usernameVenditore"));
-				negozioBean.setDesign(rs.getString("design"));
-				negozioBean.setColore(rs.getString("colore"));
-				negozioBean.setPartitaIva(rs.getString("Piva"));
-				negozioBean.setDataIscrizione(rs.getString("dataIscrizione"));
-				negozioBean.setVia(rs.getString("via"));
-				negozioBean.setCitta(rs.getString("città"));
-				negozioBean.setCap(rs.getString("cap"));
-				negozioBean.setLogo(rs.getString("logo"));
+				negozio=new Negozio();
+				negozio.setNomeNegozio(rs.getString("nome"));
+				negozio.setUsernameVenditore(rs.getString("usernameVenditore"));
+				negozio.setDesign(rs.getString("design"));
+				negozio.setColore(rs.getString("colore"));
+				negozio.setPartitaIva(rs.getString("Piva"));
+				negozio.setDataIscrizione(rs.getString("dataIscrizione"));
+				negozio.setVia(rs.getString("via"));
+				negozio.setCitta(rs.getString("città"));
+				negozio.setCap(rs.getString("cap"));
+				negozio.setLogo(rs.getString("logo"));
 			}
 
 		} finally {
@@ -77,7 +77,7 @@ public class NegozioDAO {
 					connection.close();
 			}
 		}
-		return negozioBean;
+		return negozio;
 	}
 	
 

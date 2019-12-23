@@ -3,6 +3,8 @@ package manageraccouting;
 import java.sql.SQLException;
 
 import dao.VenditoreDAO;
+import eccezione.ParametroNonCorrettoException;
+import eccezione.UtenteNonTrovatoException;
 
 public class Venditore extends Utente {
 
@@ -52,35 +54,50 @@ public class Venditore extends Utente {
 	 * 
 	 * @param username
 	 * @param password
-	 * @return Utente
+	 * @return Utente Ritorna un istanza utente
 	 * @throws SQLException
+	 * @throws UtenteNonTrovatoException 
+	 * @throws ParametroNonCorrettoException 
 	 */
-	public Utente checkLogin(String username, String password) throws SQLException {
-		
-			return model.checkLoginSeller(username, password);
+	public Utente checkLogin(String username, String password) throws SQLException, UtenteNonTrovatoException, ParametroNonCorrettoException {
+			if(username==null || password==null)
+				throw new ParametroNonCorrettoException("Username e Password inseriti errati");
+			
+			Utente utente= model.checkLoginSeller(username, password);
+			
+			if(utente==null)
+				throw new UtenteNonTrovatoException("Venditore non trovato, non esiste");
+			else 
+				return utente;
 	}
 	
+	/**
+	 * Crea un nuovo venditore, i parametri sono controllati da javascript e espressioni regolari direttamente all'inserimento.
+	 * @param username
+	 * @param password
+	 * @param nome
+	 * @param cognome
+	 * @param email
+	 * @param sesso
+	 * @param telefono
+	 * @param via
+	 * @param citta
+	 * @param cap
+	 * @return Venditore conferma avvenuta creazione e aggiunta al database
+	 * @throws SQLException
+	 */
 	public Venditore addVenditore(String username, String password, String nome, String cognome, String email, String sesso,
 			String telefono, String via, String citta, String cap) throws SQLException {
 			
 		Venditore venditore=new Venditore(username, password, nome, cognome, email, sesso, telefono, via, citta,  cap);
-		model.addVenditore(venditore);
-		return venditore;
+		try {
+			model.addVenditore(venditore);
+			return venditore;
+		}
+		catch(SQLException e) {
+			throw new SQLException("Creazione venditore fallita, errore: "+e.getMessage());
+		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

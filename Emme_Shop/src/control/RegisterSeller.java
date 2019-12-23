@@ -59,7 +59,7 @@ public class RegisterSeller extends HttpServlet {
 	}
 	catch (SQLException e) {//errore ricarica il form registrazione
 		System.out.println("Error:" + e.getMessage());
-		String address="./seller/venditore-registrazione.jsp";
+		String address="./seller/sellerRegistration.jsp";
 		response.sendRedirect(address);
 		}
 	}

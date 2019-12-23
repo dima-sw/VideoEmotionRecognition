@@ -25,8 +25,12 @@ import managernegozio.Negozio;
 @WebServlet("/Upload")
 public class Upload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Negozio negozio = new Negozio();
-       
+	static Negozio model = new Negozio();
+    
+	static String UPLOAD_DIRECTORY_CETRANGOLO ="C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5_Tomcat8.5\\webapps\\emme_Shop\\images\\negozi";
+	static String UPLOAD_DIRECTORY_SANTONASTASIO = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\emme_Shop\\images\\negozi";
+    
+	static String UPLOAD_DIRECTORY=UPLOAD_DIRECTORY_CETRANGOLO;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,9 +44,8 @@ public class Upload extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-    	String UPLOAD_DIRECTORY = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\emmeShop\\images\\negozi";
-        
-    	HttpSession session=request.getSession();
+    	
+		HttpSession session=request.getSession();
 		String nomeNegozio=(String) session.getAttribute("NomeNegozio");
 		String urlLogo="";
 		UPLOAD_DIRECTORY+="\\"+nomeNegozio;
@@ -62,10 +65,12 @@ public class Upload extends HttpServlet {
                         item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeNegozio+estensione));
                         urlLogo="images/negozi/"+nomeNegozio+"/"+nomeNegozio+estensione;
                         session.setAttribute("urlLogoNegozio", urlLogo);
-                        negozio.updateLogoNegozio(nomeNegozio,urlLogo);
+                        model.updateLogoNegozio(nomeNegozio,urlLogo);
                     }
                 }
-                negozio.updateLogoNegozio(nomeNegozio,urlLogo);
+                model.updateLogoNegozio(nomeNegozio,urlLogo);//a qui
+                
+                
                //File uploaded successfully
                //request.setAttribute("message", "File Uploaded Successfully");
             } catch (Exception ex) {
