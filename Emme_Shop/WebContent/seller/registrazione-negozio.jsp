@@ -3,6 +3,10 @@
     
    <%
    		String UsernameVenditore=(String) session.getAttribute("username-venditore");
+   		if(UsernameVenditore==null){
+   			session.invalidate();
+   			response.sendRedirect("../index.jsp");
+   		}
    %>
 
 <!DOCTYPE html>

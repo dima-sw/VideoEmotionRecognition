@@ -35,12 +35,13 @@
 
             <div id='vendi' style='margin: 0 auto;margin-top: -20px;'>
               	<form id="regForm1" action="RegisterSeller" method="POST"   style='margin:0 auto;'> <!--Fase di realizzazione-->
-                 <br><br><center>
+                 <center>
                   		<h1>Creiamo il nostro shop...</h1><!-- Deve comparire in ogni statement -->
-                  		<br><p> <h2 style="font-weight:normal;">Vuoi creare il tuo adesso adesso?</h2></p>
-						<br><h2 ><a href="registrazione-negozio.jsp">Procedi con la creazione!</a></h2>&nbsp;
-						<h3 style="font-weight:normal;"><a href="../index.jsp" style='font-size:0.8em;'>Salta...</a></h3><br><br><br><br>
-				<br></center>
+                  		<p> <h2 style="font-weight:normal;">Vuoi creare il tuo adesso adesso?</h2></p>
+						<h3 style="font-weight:normal;font-size:0.9em;color:grey;"> fai click su quello che preferisci per procedere...</a></h3><br>
+						<br><h2><a style="color:green;" href="registrazione-negozio.jsp">Procedi con la creazione!</a></h2>&nbsp;
+						<h3 style="font-weight:normal;"><a href="../index.jsp" style='font-size:1.0em;color:blue;'>vuoi crearlo al prossimo accesso...</a></h3><br><br><br>
+				</center>
                  </form>
         </div>
         <br><br><br>

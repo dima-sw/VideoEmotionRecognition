@@ -1,7 +1,14 @@
 package managernegozio;
 
+import java.io.File;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import dao.ClienteDAO;
 import dao.NegozioDAO;
@@ -16,6 +23,8 @@ import eccezione.NegozioNonEsistenteException;
 public class Negozio implements Serializable {
 
 	static NegozioDAO model= new NegozioDAO();
+	
+	
 
 	private String nomeNegozio;
 	private String usernameVenditore;
@@ -109,6 +118,31 @@ public class Negozio implements Serializable {
 			
 		}
 		
+
+		public String createCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
+			UPLOAD_DIRECTORY+="\\"+nomeNegozio;
+			if(!(new File(UPLOAD_DIRECTORY)).exists())
+				new File(UPLOAD_DIRECTORY).mkdir();
+			return UPLOAD_DIRECTORY;
+		}
+		
+		public String createPathLogo(List<FileItem> multiparts, String nomeNegozio, String UPLOAD_DIRECTORY) throws Exception {
+			
+			String urlLogo="";
+			
+			for(FileItem item : multiparts){
+                if(!item.isFormField()){
+                    String name = new File(item.getName()).getName();
+                    int index = name.indexOf(".");
+                    String estensione= name.substring(index);
+                    item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeNegozio+estensione));
+                    urlLogo="images/negozi/"+nomeNegozio+"/"+nomeNegozio+estensione;
+                    
+                    updateLogoNegozio(nomeNegozio,urlLogo);
+                }
+			}  
+			return urlLogo;
+		}
 		
 		public boolean updateLogoNegozio(String nomeNegozio,String urlLogo) throws SQLException {
 			return model.updateLogoNegozio(nomeNegozio, urlLogo);

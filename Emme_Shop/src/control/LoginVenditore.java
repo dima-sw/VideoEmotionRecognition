@@ -54,7 +54,8 @@ public class LoginVenditore extends HttpServlet {
 			request.getSession().setAttribute("utente", utente);
 					
 			Venditore venditore=(Venditore) utente;
-			address="./venditore/index-venditore.jsp";	
+			address="./venditore/index-venditore.jsp";
+			request.getSession().setAttribute("username-venditore",venditore.getUsername());
 					
 			Negozio negozio=modelnegozio.getNegozio(utente.getUsername());					
 			request.getSession().setAttribute("negozioBean", negozio);
@@ -70,18 +71,19 @@ public class LoginVenditore extends HttpServlet {
 			response.sendRedirect(address);
 		
 		}
+		catch(NegozioNonEsistenteException e) {
+			System.out.println("Errore:"+e.getMessage());
+			//carica la registrazione del negozio per il venditore se non esiste
+			
+			response.sendRedirect("./seller/registrazione-negozio.jsp");
+		}
 		catch (UtenteNonTrovatoException e) {
 			System.out.println("Error:" + e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
 			
 			response.sendRedirect("./index.jsp");
 		}
-		catch(NegozioNonEsistenteException e) {
-			System.out.println("Errore:"+e.getMessage());
-			//carica la registrazione del negozio per il venditore se non esiste
-			
-			response.sendRedirect("../seller/registrazione-negozio.jsp");
-		}
+		
 		catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:"+e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());

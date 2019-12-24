@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS emmeshop_db;
 USE emmeshop_db;
 
 
-CREATE TABLE IF NOT EXISTS amministratore (
+CREATE TABLE IF NOT EXISTS gestoreaccouting (
   username varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
   nome varchar(45) NOT NULL,
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS amministratore (
   PRIMARY KEY (username)
 );
 
-DELETE FROM amministratore;
-INSERT INTO amministratore (username, password, nome, cognome, email, sesso, telefono) VALUES
+DELETE FROM gestoreaccouting;
+INSERT INTO gestoreaccouting (username, password, nome, cognome, email, sesso, telefono) VALUES
 	('admin', 'admin', '', '', NULL, NULL, ''),
 	('admin1', 'admin1', '', '', NULL, NULL, '');
 

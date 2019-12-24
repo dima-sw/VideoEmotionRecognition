@@ -16,7 +16,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
-import dao.NegozioDAO;
+
 import managernegozio.Negozio;
 
 /**
@@ -27,6 +27,7 @@ public class Upload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Negozio model = new Negozio();
     
+	//stringhe tomcat
 	static String UPLOAD_DIRECTORY_CETRANGOLO ="C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5_Tomcat8.5\\webapps\\emme_Shop\\images\\negozi";
 	static String UPLOAD_DIRECTORY_SANTONASTASIO = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\emme_Shop\\images\\negozi";
     
@@ -48,32 +49,26 @@ public class Upload extends HttpServlet {
 		HttpSession session=request.getSession();
 		String nomeNegozio=(String) session.getAttribute("NomeNegozio");
 		String urlLogo="";
-		UPLOAD_DIRECTORY+="\\"+nomeNegozio;
-		if(!(new File(UPLOAD_DIRECTORY)).exists())
-			new File(UPLOAD_DIRECTORY).mkdir();
-
+		String directory="";
+		directory=model.createCartellaNegozio(nomeNegozio,UPLOAD_DIRECTORY);
+		
         //process only if its multipart content
         if(ServletFileUpload.isMultipartContent(request)){
         	 try {
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest( new ServletRequestContext(request));
                
-                for(FileItem item : multiparts){
-                    if(!item.isFormField()){
-                        String name = new File(item.getName()).getName();
-                        int index = name.indexOf(".");
-                        String estensione= name.substring(index);
-                        item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeNegozio+estensione));
-                        urlLogo="images/negozi/"+nomeNegozio+"/"+nomeNegozio+estensione;
-                        session.setAttribute("urlLogoNegozio", urlLogo);
-                        model.updateLogoNegozio(nomeNegozio,urlLogo);
-                    }
-                }
-                model.updateLogoNegozio(nomeNegozio,urlLogo);//a qui
+                urlLogo=model.createPathLogo(multiparts,nomeNegozio,directory);
+                session.setAttribute("urlLogoNegozio", urlLogo);
+                model.updateLogoNegozio(nomeNegozio,urlLogo);
+        	 
+                
+                
                 
                 
                //File uploaded successfully
                //request.setAttribute("message", "File Uploaded Successfully");
             } catch (Exception ex) {
+            	
                //request.setAttribute("message", "File Upload Failed due to " + ex);
             }          
           
