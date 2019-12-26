@@ -1,0 +1,39 @@
+body{
+	background-image: url(../images/4.jpg);
+	background-repeat: no-repeat;
+}
+
+.cointaner {
+	display: flex;
+	justify-content: center ;
+}
+
+.sub-container img{
+	margin-right: 5px;
+}
+
+a{
+	font-size: 25px;
+	color: black;
+	text-decoration: none;
+}
+
+
+
+h1 {
+	color: brown;
+	font-size: 150px;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+p {
+	color:black;
+	font-size: 70px;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.image img{
+	width: 700px;
+	height: 700px;
+}

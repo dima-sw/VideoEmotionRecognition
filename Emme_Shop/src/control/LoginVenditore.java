@@ -74,7 +74,6 @@ public class LoginVenditore extends HttpServlet {
 		catch(NegozioNonEsistenteException e) {
 			System.out.println("Errore:"+e.getMessage());
 			//carica la registrazione del negozio per il venditore se non esiste
-			
 			response.sendRedirect("./seller/registrazione-negozio.jsp");
 		}
 		catch (UtenteNonTrovatoException e) {
