@@ -79,15 +79,19 @@ public class LoginVenditore extends HttpServlet {
 		catch (UtenteNonTrovatoException e) {
 			System.out.println("Error:" + e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
+			request.getSession().setAttribute("redirecterror", "./index.jsp");
+			response.sendRedirect("./error-page.jsp");
 			
-			response.sendRedirect("./index.jsp");
+			//response.sendRedirect("./index.jsp");
 		}
 		
 		catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:"+e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
+			request.getSession().setAttribute("redirecterror", "./index.jsp");
+			response.sendRedirect("./error-page.jsp");
 			
-			response.sendRedirect("./index.jsp");
+			//response.sendRedirect("./index.jsp");
 		}
 		catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());

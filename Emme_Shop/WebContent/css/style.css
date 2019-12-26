@@ -20,20 +20,20 @@ a{
 
 
 
-h1 {
+h2 {
 	color: brown;
-	font-size: 150px;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+	font-size: 80px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+ }
 
 p {
 	color:black;
-	font-size: 70px;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+	font-size: 50px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    
 }
 
 .image img{
-	width: 700px;
-	height: 700px;
+	width: 400px;
+	height: 500px;
 }

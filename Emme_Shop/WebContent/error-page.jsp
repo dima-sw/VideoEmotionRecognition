@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <%!String error = ""; 
+String href="";
 %>
-
 <% 
-
 	error = (String) request.getSession().getAttribute("messaggioerrore"); 
-
+	href=(String) request.getSession().getAttribute("redirecterror");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,10 +18,11 @@
 <body>
 <div class="cointaner">
 <div class="sub-container">
-<h1>D'oh!</h1>
+<h2 id="title">D'oh!</h2>
 <p><%=error%></p>
 
-<a href="#"><img src="https://img.icons8.com/android/24/000000/jog-reverse.png">Riprova</a>
+<span><a href="<%=href%>"><img src="https://img.icons8.com/android/24/000000/jog-reverse.png">Riprova</a></span>
+
 </div>
 
 <div class="image">
