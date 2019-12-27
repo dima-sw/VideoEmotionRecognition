@@ -1,10 +1,19 @@
 package managernegozio;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import dao.ProdottoDAO;
+
 /**
  * 
  * la classe Prodotto gestisce le operazioni di modifica, cancellazione di un prodotto
  * */
 public class Prodotto {
+	
+	static ProdottoDAO model=new ProdottoDAO();
 	
 	public Prodotto() {
 		this.idProdotto=0;
@@ -25,6 +34,23 @@ public class Prodotto {
 		this.sconto = sconto;
 		this.descrizione = descrizione;
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return String path dell'id
+	 * @throws SQLException
+	 */
+	public String getPathByID(int id) throws SQLException{
+		
+		String path=model.getPathByID(id);
+		return path;
+	}
+
+	
+	
+	
+	
 	
     /**
      * 
