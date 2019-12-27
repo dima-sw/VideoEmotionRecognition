@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import eccezione.ParametroNonCorrettoException;
 import managernegozio.Negozio;
 
 /**
@@ -38,11 +39,17 @@ public class InserisciCategoria extends HttpServlet {
 			negozio = negozio.getNegozioByName(nomeNegozio);
 			request.getSession().setAttribute("negozio", negozio);
 			response.sendRedirect("./venditore/inserisci-categoria.jsp");
-		} catch (SQLException e) {
+	
+		} catch (ParametroNonCorrettoException e) {
+			System.out.println("Error:"+e.getMessage());
+			request.getSession().setAttribute("messaggioerrore", e.getMessage());
+			request.getSession().setAttribute("redirecterror", "./index.jsp");
+			response.sendRedirect("./error-page.jsp");
+		}
+		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		
 		

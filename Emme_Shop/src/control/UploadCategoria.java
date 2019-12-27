@@ -30,7 +30,7 @@ public class UploadCategoria extends HttpServlet {
 	static String UPLOAD_DIRECTORY_CETRANGOLO ="C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5_Tomcat8.5\\webapps\\emme_Shop\\images\\negozi";
 	static String UPLOAD_DIRECTORY_SANTONASTASIO = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\Emme_Shop\\images\\negozi";
     
-	static String UPLOAD_DIRECTORY=UPLOAD_DIRECTORY_SANTONASTASIO;
+	static String UPLOAD_DIRECTORY=UPLOAD_DIRECTORY_CETRANGOLO;
     /**
      * @see HttpServlet#HttpServlet()
      */

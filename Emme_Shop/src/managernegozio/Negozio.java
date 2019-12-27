@@ -13,10 +13,11 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import dao.ClienteDAO;
 import dao.NegozioDAO;
 import eccezione.NegozioNonEsistenteException;
+import eccezione.ParametroNonCorrettoException;
 
 /**
  * 
- * @author manlio
+ * @author cetra
  * la classe Negozio gestisce le operazioni di aggiunta,rimozione,modifca di un prodotto e categoria
  *
  */
@@ -154,8 +155,13 @@ public class Negozio implements Serializable {
 		 * @param nomeNegozio il nome del negozio
 		 * @return negozio
 		 * @throws SQLException
+		 * @throws ParametroNonCorrettoException 
 		 */
-		public Negozio getNegozioByName(String nomeNegozio) throws SQLException {
+		public Negozio getNegozioByName(String nomeNegozio) throws SQLException, ParametroNonCorrettoException {
+			if (nomeNegozio==null) {
+				throw new ParametroNonCorrettoException("nome negozio non esiste riprova ad accedere");
+					
+			}
 			return model.getNegozioByName(nomeNegozio);
 		}
 
