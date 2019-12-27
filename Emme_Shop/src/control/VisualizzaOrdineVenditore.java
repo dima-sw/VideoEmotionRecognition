@@ -52,6 +52,7 @@ public class VisualizzaOrdineVenditore extends HttpServlet {
 					ArrayRiferimento riferimenti=null;
 					riferimenti=(ArrayRiferimento) riferimento.getArrayRiferimento(negozio.getNomeNegozio());
 					
+					//System.out.println(riferimenti);
 					
 					request.getSession().setAttribute("negozio", negozio);
 					request.getSession().setAttribute("riferimenti", riferimenti);

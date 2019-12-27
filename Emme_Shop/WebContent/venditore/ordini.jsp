@@ -16,6 +16,7 @@
 	negozio= (Negozio)request.getSession().getAttribute("negozio");
 	
 	riferimenti= (ArrayRiferimento) request.getSession().getAttribute("riferimenti");
+	//System.out.println(riferimenti);
 	
 %>
 <!DOCTYPE html>

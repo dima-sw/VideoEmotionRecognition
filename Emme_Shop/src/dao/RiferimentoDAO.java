@@ -57,9 +57,9 @@ public class RiferimentoDAO {
 			ResultSet rs =  preparedStatement.executeQuery();
 			
 			riferimenti=new ArrayRiferimento();
-			
+			int i=0;
 			while(rs.next()) {
-				
+				i++;
 				Riferimento riferimento=new Riferimento();
 				riferimento.setId_prodotto(rs.getInt("ID_Prodotto"));
 				riferimento.setNumero_Fattura(rs.getInt("numero_Fattura"));
@@ -82,6 +82,8 @@ public class RiferimentoDAO {
 				riferimento.setFatturaRiferimento(fattura);
 				riferimenti.add(riferimento);
 			}
+			if (i==0)
+				return null;
 		} 
 			finally {
 			try {
@@ -92,6 +94,7 @@ public class RiferimentoDAO {
 					connection.close();
 			}
 		}
+		
 		return riferimenti;	
 	}
 	
