@@ -128,11 +128,11 @@
                    
                    <div class="category">
                           <div class="img">
-                            <a href='inserisci-categoria.jsp?negozio=nomeNeg'><img src="../images/plus.png"></a>
+                            <a href='../InserisciCategoria?negozio=<%=negozio.getNomeNegozio()%>'><img src="../images/plus.png"></a>
                           </div>
                           <div class='nomeCategoria'>
                             <span >
-                                <a href='inserisci-categoria.jsp?negozio=nomeNeg'><p></p>Inserisci nuova categoria</a>
+                                <a href="../InserisciCategoria?negozio=<%=negozio.getNomeNegozio()%>"><p></p>Inserisci nuova categoria</a>
                             </span>
                           </div>
                     </div>

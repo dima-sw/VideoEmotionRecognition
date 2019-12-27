@@ -81,4 +81,82 @@ public class CategoriaDAO {
 		return listaCategorie;
 	}
 	
+	public synchronized void addCategoria(Categoria categoria) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String insertCateg ="INSERT INTO " + CategoriaDAO.TABLE_CATEGORIA
+				               +"(nomeNeg,nomeCategoria,descrizione,path)"
+				               +"VALUES(?,?,?,?)";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(insertCateg);
+			
+			preparedStatement.setString(1,categoria.getNomeNegozio());
+			preparedStatement.setString(2,categoria.getNomeCategoria());
+
+			preparedStatement.setString(3,categoria.getDescrizione());
+			preparedStatement.setString(4,categoria.getPath());
+			preparedStatement.execute();
+			
+			
+			
+			connection.commit();
+
+		} finally {
+			try {
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+		
+	}
+
+	public synchronized boolean updatePathCategoria(String nomeNegozio,String nomeCategoria,String logo) throws SQLException {
+	 
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		boolean flag=false;
+		
+		String update = "UPDATE " + CategoriaDAO.TABLE_CATEGORIA
+				                 +" SET path= ? "
+				                 +" where nomeNeg= ? AND nomeCategoria=? ";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(update);
+			preparedStatement.setString(1,logo);
+			preparedStatement.setString(2,nomeNegozio);
+			preparedStatement.setString(3,nomeCategoria);
+			
+			preparedStatement.executeUpdate();
+			
+			connection.commit();
+
+			flag=true;
+			}
+
+		 finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+		return flag;
+}
+
+
+
+
+	
+	
+	
 }

@@ -147,6 +147,17 @@ public class Negozio implements Serializable {
 		public boolean updateLogoNegozio(String nomeNegozio,String urlLogo) throws SQLException {
 			return model.updateLogoNegozio(nomeNegozio, urlLogo);
 		}
+		
+		
+		/**
+		 * Restituire il negozio passato come parametro il nome del negozio
+		 * @param nomeNegozio il nome del negozio
+		 * @return negozio
+		 * @throws SQLException
+		 */
+		public Negozio getNegozioByName(String nomeNegozio) throws SQLException {
+			return model.getNegozioByName(nomeNegozio);
+		}
 
 		
 		

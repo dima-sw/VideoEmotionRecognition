@@ -161,6 +161,50 @@ public class NegozioDAO {
 			 }
 			return flag;
 	 }
+	
+	
+	public synchronized Negozio getNegozioByName(String negozio) throws SQLException {
+  	  
+  	  Connection connection = null;
+   	  PreparedStatement preparedStatement = null;
+   	  Negozio negozioBean = null;
+   	  
+		  String selectSQL = "SELECT * FROM " + NegozioDAO.TABLE_NEGOZIO+" WHERE nome=?";
+		  
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, negozio);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				
+				negozioBean = new Negozio();
+				negozioBean.setNomeNegozio(rs.getString("nome"));
+				negozioBean.setUsernameVenditore(rs.getString("usernameVenditore"));
+				negozioBean.setDesign(rs.getString("design"));
+				negozioBean.setColore(rs.getString("colore"));
+				negozioBean.setPartitaIva(rs.getString("Piva"));
+				negozioBean.setDataIscrizione(rs.getString("dataIscrizione"));
+				negozioBean.setVia(rs.getString("via"));
+				negozioBean.setCitta(rs.getString("città"));
+				negozioBean.setCap(rs.getString("cap"));
+				negozioBean.setLogo(rs.getString("logo"));
+				
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return negozioBean;
+	}
 
 	
 }
