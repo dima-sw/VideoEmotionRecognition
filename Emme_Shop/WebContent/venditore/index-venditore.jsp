@@ -106,9 +106,9 @@
 				    %>
                     <div class="categorySeller" >
                           <div class="img">
-                            <a href='index-venditore-prodotti.jsp?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img title="<%= bean.getDescrizione() %>" src="../<%= bean.getPath() %>"></a>
+                            <a href='../VisualizzaProdotti?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img title="<%= bean.getDescrizione() %>" src="../<%= bean.getPath() %>"></a>
                           </div>
-                          	<a href='index-venditore-prodotti.jsp?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'>
+                          	<a href='../VisualizzaProdotti?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'>
                             	<div class='nomeCategoria'>
 	                            	<span >
 	                                	<%= bean.getNomeCategoria() %>
@@ -116,7 +116,7 @@
 	                       		</div>
                             </a>
                           <div class="mod">
-                              <a href='modifica-categoria.jsp?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img src='../images/modify.png'></a>
+                              <a href='../ModificaCategoria?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img src='../images/modify.png'></a>
                           </div>
                           <div class='del'>
                             <span>

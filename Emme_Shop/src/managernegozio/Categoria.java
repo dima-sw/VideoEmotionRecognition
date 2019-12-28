@@ -120,6 +120,18 @@ private static final long serialVersionUID = 1L;
 		return model.updatePathCategoria(nomeNegozio,nomeCategoria, urlLogo);
 	}
 	
+	
+	public Categoria getCategoria(String nomeNegozio,String nomeCategoria) throws SQLException {
+		return model.getCategoria(nomeNegozio, nomeCategoria);
+	}
+	
+	
+	public boolean updateDescrizioneCategoria(String nomeNegozio,String nomeCategoria,String descrizione) throws SQLException {
+		return model.updateDescrizioneCategoria(nomeNegozio, nomeCategoria, descrizione);
+	}
+	
+	
+	
 		
 	public String getNomeNegozio() {
 		return nomeNegozio;

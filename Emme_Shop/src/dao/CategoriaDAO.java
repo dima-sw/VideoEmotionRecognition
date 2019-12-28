@@ -152,6 +152,94 @@ public class CategoriaDAO {
 		 }
 		return flag;
 }
+	
+	public synchronized Categoria getCategoria(String nomeNegozio,String nomeCategoria) throws SQLException {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		Categoria bean=new Categoria();
+		
+		String categ ="SELECT * FROM categoria"
+	               +" WHERE nomeNeg=? AND nomeCategoria=? ";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(categ);
+			
+			preparedStatement.setString(1,nomeNegozio);
+			preparedStatement.setString(2,nomeCategoria);
+			ResultSet rs=preparedStatement.executeQuery();
+			
+			while(rs.next())
+			{
+			
+				String negozio=rs.getString("nomeNeg");
+				String categoria=rs.getString("nomeCategoria");
+				String descrizione=rs.getString("descrizione");
+				String path=rs.getString("path");
+				bean.setNomeNegozio(negozio);
+				bean.setNomeCategoria(categoria);
+				bean.setDescrizione(descrizione);
+				bean.setPath(path);
+			}
+			
+			connection.commit();
+
+		} finally {
+			try {
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+		
+		return bean;
+		
+	}
+	
+	
+	public synchronized boolean updateDescrizioneCategoria(String nomeNegozio, String nomeCategoria, String descrizione) throws SQLException
+	{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		boolean flag=false;
+		
+		String update = "UPDATE " + CategoriaDAO.TABLE_CATEGORIA
+				                 +" SET descrizione= ? "
+				                 +" where nomeNeg= ? AND nomeCategoria=? ";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(update);
+			preparedStatement.setString(1,descrizione);
+			preparedStatement.setString(2,nomeNegozio);
+			preparedStatement.setString(3,nomeCategoria);
+			
+			preparedStatement.executeUpdate();
+			
+			connection.commit();
+
+			flag=true;
+			}
+
+		 finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+		return flag;
+		
+	
+	}
+
+
 
 
 

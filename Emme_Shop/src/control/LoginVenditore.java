@@ -59,7 +59,7 @@ public class LoginVenditore extends HttpServlet {
 					
 			Negozio negozio=modelnegozio.getNegozio(utente.getUsername());					
 			request.getSession().setAttribute("negozioBean", negozio);
-			request.getSession().setAttribute("negozioNome", negozio.getNomeNegozio());		
+			request.getSession().setAttribute("", negozio.getNomeNegozio());		
 					
 					
 			Collection<Categoria>  categorie=null;

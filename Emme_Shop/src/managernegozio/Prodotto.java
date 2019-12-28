@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import dao.ProdottoDAO;
 
@@ -16,6 +17,9 @@ public class Prodotto {
 	static ProdottoDAO model=new ProdottoDAO();
 	
 	public Prodotto() {
+		this.nomeNegozio = "";
+		this.nomeCategoria = "";
+		this.nome = "";
 		this.idProdotto=0;
 		this.iva = 0;
 		this.path = " ";
@@ -25,7 +29,10 @@ public class Prodotto {
 		this.descrizione = "";
 	}
 	
-	public Prodotto(int idProdotto, int iva, String path, int prezzo, int qta, int sconto, String descrizione) {
+	public Prodotto(int idProdotto,String nomeNegozio,String nomeCategoria,String nome,int iva, String path, float prezzo, int qta, int sconto, String descrizione) {
+		this.nomeNegozio = nomeNegozio;
+		this.nomeCategoria = nomeCategoria;
+		this.nome = nome;
 		this.idProdotto = idProdotto;
 		this.iva = iva;
 		this.path = path;
@@ -46,10 +53,10 @@ public class Prodotto {
 		String path=model.getPathByID(id);
 		return path;
 	}
-
 	
-	
-	
+	public Collection<Prodotto> getAllProductBySellerCategory(String venditore,String categoria) throws SQLException{
+		return model.getAllProductBySellerCategory(venditore, categoria);
+	}
 	
 	
     /**
@@ -101,9 +108,9 @@ public class Prodotto {
 	
     /**
      * 
-     * @return int
+     * @return float
      */
-	public int getPrezzo() {
+	public float getPrezzo() {
 		return prezzo;
 	}
 	
@@ -111,7 +118,7 @@ public class Prodotto {
 	 * questo metodo setta il prezzo di un prodotto
 	 * @param prezzo è il prezzo da assegnare
 	 */
-	public void setPrezzo(int prezzo) {
+	public void setPrezzo(float prezzo) {
 		this.prezzo = prezzo;
 	}
 	
@@ -119,7 +126,7 @@ public class Prodotto {
      * 
      * @return int
      */
-	public int getQta() {
+	public int getQuantita() {
 		return qta;
 	}
 	
@@ -127,7 +134,7 @@ public class Prodotto {
 	 * questo metodo setta la quantità di un prodotto
 	 * @param qtà è la quantità da assegnare
 	 */
-	public void setQta(int qta) {
+	public void setQuantita(int qta) {
 		this.qta = qta;
 	}
 	
@@ -163,10 +170,60 @@ public class Prodotto {
 		this.descrizione = descrizione;
 	}
 	
+		/**
+	 * @return the nomeNegozio
+	 */
+	public String getNomeNegozio() {
+		return nomeNegozio;
+	}
+
+	/**
+	 * @param nomeNegozio the nomeNegozio to set
+	 */
+	public void setNomeNegozio(String nomeNegozio) {
+		this.nomeNegozio = nomeNegozio;
+	}
+
+	/**
+	 * @return the nomeCategoria
+	 */
+	public String getNomeCategoria() {
+		return nomeCategoria;
+	}
+
+	/**
+	 * @param nomeCategoria the nomeCategoria to set
+	 */
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
+	}
+	
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
+
+	
+	
+
+		private String nomeNegozio;
+		private String nomeCategoria;
 		private int idProdotto;    
     	private int iva;           
-   	private String path;       
-    	private int prezzo;        
+    	private String nome;
+		private String path;       
+    	private float prezzo;        
     	private int qta;           
     	private int sconto;        
     	private String descrizione;

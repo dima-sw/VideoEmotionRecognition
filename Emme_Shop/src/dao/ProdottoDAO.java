@@ -4,11 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import managernegozio.Prodotto;
+
 
 public class ProdottoDAO {
 	
@@ -68,6 +73,57 @@ public class ProdottoDAO {
 		}
 		return path;
 	}
+	
+	
+	public synchronized Collection<Prodotto> getAllProductBySellerCategory(String venditore,String categoria) throws SQLException {
+  	  
+  	  Connection connection = null;
+   	  PreparedStatement preparedStatement = null;
+   	  
+		  Collection<Prodotto> listaProdotti = new LinkedList<Prodotto>();
+		  String selectSQL = "SELECT prodotto.* FROM prodotto,negozio WHERE Nome_Negozio=negozio.nome AND usernameVenditore=? AND Nome_Categoria=?";
+		
+		
+		  
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1,venditore);
+			preparedStatement.setString(2,categoria);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Prodotto prodottoBean = new Prodotto();
+
+				prodottoBean.setNomeNegozio(rs.getString("Nome_Negozio"));
+				prodottoBean.setDescrizione(rs.getString("descrizione"));
+				prodottoBean.setIdProdotto(rs.getInt("IdProdotto"));
+				prodottoBean.setIva(rs.getInt("iva"));
+				prodottoBean.setNome(rs.getString("nome"));
+				prodottoBean.setNomeCategoria(rs.getString("Nome_Categoria"));
+				prodottoBean.setPath(rs.getString("path"));
+				prodottoBean.setPrezzo(rs.getFloat("prezzo"));
+				prodottoBean.setQuantita(rs.getInt("qta"));
+				prodottoBean.setSconto(rs.getInt("sconto"));
+				
+				listaProdotti.add(prodottoBean);
+				
+				
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return listaProdotti;
+	}
+
 
 
 }
