@@ -4,7 +4,7 @@
 
    <%
    		String urlLogo=(String)  session.getAttribute("urlLogoCategoria");
-        if(urlLogo==null){
+        if(urlLogo.equalsIgnoreCase("images/favicon.ico")){
         	urlLogo="images/favicon.ico";
         }
    %>
@@ -56,7 +56,7 @@
 				                <input type="submit" value="Carica Immagine" class="acquista-btn"/>
 				            </form>  
 				            
-				            <br><br>oppure<br><br><a href='index-venditore.jsp'>Completa Inserimento...</a>
+				            <br><br>oppure<br><br><a href='../LoginVenditore'>Completa Inserimento...</a>
              </div>
                 </form>
                 

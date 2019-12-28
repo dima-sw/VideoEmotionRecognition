@@ -18,7 +18,7 @@ import managernegozio.Negozio;
 @WebServlet("/InserisciCategoria")
 public class InserisciCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Negozio negozio=new Negozio();
+	static Negozio mnegozio=new Negozio();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,14 +36,15 @@ public class InserisciCategoria extends HttpServlet {
 		String nomeNegozio = request.getParameter("negozio");
 		request.getSession().setAttribute("negozioNome", nomeNegozio);
 		try {
-			negozio = negozio.getNegozioByName(nomeNegozio);
+			Negozio negozio =(Negozio) mnegozio.getNegozioByName(nomeNegozio);
 			request.getSession().setAttribute("negozio", negozio);
 			response.sendRedirect("./venditore/inserisci-categoria.jsp");
+			
 	
 		} catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:"+e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
-			request.getSession().setAttribute("redirecterror", "./index.jsp");
+			request.getSession().setAttribute("redirecterror", "./venditore/index-venditore");
 			response.sendRedirect("./error-page.jsp");
 		}
 		catch (SQLException e) {

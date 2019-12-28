@@ -44,7 +44,7 @@
 				</center>
                  </form>
         </div>
-        <br><br><br>
+        <br>
         <%@ include file='../WEB-INF/fragment/footer.jsp' %>
         <div onclick='topFunction()' id='topbutton' class='gotop'><img src="../images/top.png"></div>
         </div>

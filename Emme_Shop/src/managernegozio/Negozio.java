@@ -119,7 +119,12 @@ public class Negozio implements Serializable {
 			
 		}
 		
-
+		/**
+		 * Crea la cartella negozio se non esiste altrimenti la apre e ritorna il path
+		 * @param nomeNegozio
+		 * @param UPLOAD_DIRECTORY
+		 * @return String UPLOAD_DIRECTORY path della cartella
+		 */
 		public String createCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
 			UPLOAD_DIRECTORY+="\\"+nomeNegozio;
 			if(!(new File(UPLOAD_DIRECTORY)).exists())

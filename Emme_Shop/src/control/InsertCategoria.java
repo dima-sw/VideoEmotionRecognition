@@ -18,7 +18,7 @@ import managernegozio.Negozio;
  */
 @WebServlet("/InsertCategoria")
 public class InsertCategoria extends HttpServlet {
-	static Categoria categoria= new Categoria();
+	static Categoria mcategoria= new Categoria();
 	static Negozio negozio = new Negozio();
 
 	private static final long serialVersionUID = 1L;
@@ -37,16 +37,22 @@ public class InsertCategoria extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String address="";
+		String urlLogoCategoria="images/favicon.ico";
 		try {
+			
 			HttpSession session=request.getSession();
-			session.setAttribute("urlLogoCategoria", "images/favicon.ico");
+			session.setAttribute("urlLogoCategoria",urlLogoCategoria );
           
-			Negozio neg=(Negozio) session.getAttribute("negozioBean");
+			Negozio neg=(Negozio) session.getAttribute("negozio");
 			String negozio=(String) session.getAttribute("negozioNome");
 			
-			categoria.addCategoria(request.getParameter("nomeNegozio"), request.getParameter("nomeCategoria"), 
-					                "images/favicon.ico", request.getParameter("descCategoria"));
+			String nomeNegozio=request.getParameter("nomeNegozio");
+			String nomeCategoria=request.getParameter("nomeCategoria");
+			String descCategoria=request.getParameter("descCategoria");
+			
+			Categoria categoria=mcategoria.addCategoria(nomeNegozio,nomeCategoria,urlLogoCategoria,descCategoria);
 			request.getSession().setAttribute("nomeCategoriaImage",categoria.getNomeCategoria());
+			
 			address="venditore/uploadImageCategoria.jsp";
 			response.sendRedirect(address);
 			

@@ -21,7 +21,7 @@ public class Categoria {
 private static final long serialVersionUID = 1L;
 	
 	static CategoriaDAO model= new CategoriaDAO();
-	
+	static Negozio negozio=new Negozio();
 	
 	private String nomeNegozio;
 	private String nomeCategoria;
@@ -68,19 +68,36 @@ private static final long serialVersionUID = 1L;
 	 * @throws SQLException
 	 */
 	public Categoria addCategoria(String nomeNegozio,String nomeCategoria,String path,String descrizione) throws SQLException {
+		
 		Categoria categoria = new Categoria(nomeNegozio,nomeCategoria,path,descrizione);
 		model.addCategoria(categoria);
 		return categoria;
 	}
 	
-	public String createCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
-		UPLOAD_DIRECTORY+="\\"+nomeNegozio;
-		if(!(new File(UPLOAD_DIRECTORY)).exists())
-			new File(UPLOAD_DIRECTORY).mkdir();
-		return UPLOAD_DIRECTORY;
+	/**
+	 * Apre la cartella del negozio per salvare image della categoria
+	 * @param nomeNegozio
+	 * @param UPLOAD_DIRECTORY
+	 * @return
+	 */
+	public String openCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
+		
+		String path=negozio.createCartellaNegozio(nomeNegozio, UPLOAD_DIRECTORY);
+		//if(path.equals(UPLOAD_DIRECTORY))
+			//return null;
+		return path;
 	}
 	
-	public String createPathLogo(List<FileItem> multiparts, String nomeNegozio,String nomeCategoria,String UPLOAD_DIRECTORY) throws Exception {
+	/**
+	 * Crea il path della Categoria image
+	 * @param multiparts
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @param UPLOAD_DIRECTORY
+	 * @return
+	 * @throws Exception
+	 */
+	public String createPathCategoriaImage(List<FileItem> multiparts, String nomeNegozio,String nomeCategoriaImage,String UPLOAD_DIRECTORY) throws Exception {
 		
 		String urlLogo="";
 		
@@ -89,23 +106,21 @@ private static final long serialVersionUID = 1L;
                 String name = new File(item.getName()).getName();
                 int index = name.indexOf(".");
                 String estensione= name.substring(index);
-                item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeNegozio+estensione));
-                urlLogo="images/negozi/"+nomeNegozio+"/"+nomeCategoria+estensione;
-                updateLogoCategoria(nomeNegozio,nomeCategoria,urlLogo);
+                item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeCategoriaImage+estensione));
+                urlLogo="images/negozi/"+nomeNegozio+"/"+nomeCategoriaImage+estensione;
+                
+                updatePathCategoria(nomeNegozio,nomeCategoriaImage,urlLogo);
             }
 		}  
 		return urlLogo;
 	}
 	
-	public boolean updateLogoCategoria(String nomeNegozio,String nomeCategoria,String urlLogo) throws SQLException {
+	
+	public boolean updatePathCategoria(String nomeNegozio,String nomeCategoria,String urlLogo) throws SQLException {
 		return model.updatePathCategoria(nomeNegozio,nomeCategoria, urlLogo);
 	}
 	
-	
-	
-	
-	
-	
+		
 	public String getNomeNegozio() {
 		return nomeNegozio;
 	}
