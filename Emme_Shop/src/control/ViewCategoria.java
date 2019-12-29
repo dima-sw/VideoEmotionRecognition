@@ -19,20 +19,20 @@ import managernegozio.Categoria;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class LoginVenditore
+ * Servlet implementation class ViewCategoria
  */
-@WebServlet("/LoginVenditore")
-public class LoginVenditore extends HttpServlet {
+@WebServlet("/ViewCategoria")
+public class ViewCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private static Venditore model=new Venditore();
-    private static Negozio modelnegozio=new Negozio();
-    private static Categoria modelcat=new Categoria();
+	private static Negozio modelneg=new Negozio();
+	private static Categoria modelcat=new Categoria();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginVenditore() {
+    public ViewCategoria() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -40,51 +40,26 @@ public class LoginVenditore extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Utente utente=null;
-		
+		String address="./venditore/index-venditore.jsp";
 		try {
-			String address="";
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
 			
-			utente = model.checkLogin(username, password);
+			Venditore utente=(Venditore)request.getSession().getAttribute("utente");
 			
-			request.getSession().setAttribute("venditore-loggato","n");	
-			request.getSession().setAttribute("username", "");
-			request.getSession().setAttribute("utente", utente);
-					
-			Venditore venditore=(Venditore) utente;
-			address="./venditore/index-venditore.jsp";
-			request.getSession().setAttribute("username-venditore",venditore.getUsername());
-					
-			Negozio negozio=modelnegozio.getNegozio(utente.getUsername());					
+			Negozio negozio=modelneg.getNegozio(utente.getUsername());
 			request.getSession().setAttribute("negozioBean", negozio);
-			request.getSession().setAttribute("negozioNome", negozio.getNomeNegozio());		
-					
-					
-			Collection<Categoria>  categorie=null;
-					
-			categorie= modelcat.getAllCategoryBySeller(venditore.getUsername());
+			request.getSession().setAttribute("", negozio.getNomeNegozio());
+			
+			Collection<Categoria> categorie=null;
+			categorie=modelcat.getAllCategoryBySeller(utente.getUsername());
 			request.getSession().setAttribute("categorie", categorie);
-				
 			
 			response.sendRedirect(address);
-		
-		}
-		catch(NegozioNonEsistenteException e) {
+			
+		} catch(NegozioNonEsistenteException e) {
 			System.out.println("Errore:"+e.getMessage());
 			//carica la registrazione del negozio per il venditore se non esiste
 			response.sendRedirect("./seller/registrazione-negozio.jsp");
 		}
-		catch (UtenteNonTrovatoException e) {
-			System.out.println("Error:" + e.getMessage());
-			request.getSession().setAttribute("messaggioerrore", e.getMessage());
-			request.getSession().setAttribute("redirecterror", "./index.jsp");
-			response.sendRedirect("./error-page.jsp");
-			
-			//response.sendRedirect("./index.jsp");
-		}
-		
 		catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:"+e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
@@ -96,7 +71,7 @@ public class LoginVenditore extends HttpServlet {
 		catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 			response.sendRedirect("./index.jsp");//usare#posizione nella pagina come accedi
-		}	
+		}
 	}
 
 	/**

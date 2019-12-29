@@ -32,7 +32,7 @@ public class ModificaCategoria extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nomeNegozio=request.getParameter("negozio");
+		String nomeNegozio=request.getParameter("negozioNome");
 		String nomeCategoria = request.getParameter("categoria");
 		request.getSession().setAttribute("negozioNome", nomeNegozio);
 		

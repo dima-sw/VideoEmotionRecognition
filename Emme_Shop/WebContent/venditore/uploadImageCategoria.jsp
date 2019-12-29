@@ -56,7 +56,7 @@
 				                <input type="submit" value="Carica Immagine" class="acquista-btn"/>
 				            </form>  
 				            
-				            <br><br>oppure<br><br><a href='../LoginVenditore'>Completa Inserimento...</a>
+				            <br><br>oppure<br><br><a href='../ViewCategoria'>Completa Inserimento...</a>
              </div>
                 </form>
                 

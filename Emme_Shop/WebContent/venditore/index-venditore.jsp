@@ -15,6 +15,7 @@
 	if (venditore!=null){//controllo inutile perchè gia fatto in precedenza
 		session.setAttribute("username-venditore",venditore.getUsername());
 		negozio=(Negozio) request.getSession().getAttribute("negozioBean");
+		String nomeNegozio=(String)session.getAttribute("negozioNome");
 	}
 	
 	Collection<Categoria>  categorie=null;
