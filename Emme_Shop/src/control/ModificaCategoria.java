@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import eccezione.ParametroNonCorrettoException;
 import managernegozio.Categoria;
+import managernegozio.Negozio;
 
 /**
  * Servlet implementation class ModificaCategoria
@@ -18,6 +20,7 @@ import managernegozio.Categoria;
 public class ModificaCategoria extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Categoria modCat = new Categoria();
+	static Negozio modNeg=new Negozio();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,15 +35,17 @@ public class ModificaCategoria extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nomeNegozio=request.getParameter("negozioNome");
+		String nomeNegozio=request.getParameter("negozio");
 		String nomeCategoria = request.getParameter("categoria");
 		request.getSession().setAttribute("negozioNome", nomeNegozio);
 		
 		try {
 			Categoria categ = modCat.getCategoria(nomeNegozio, nomeCategoria);
+			Negozio negozio=modNeg.getNegozioByName(nomeNegozio);
 			request.getSession().setAttribute("categoriaNegozio", categ);
+			request.getSession().setAttribute("negozioBean", negozio);
 			response.sendRedirect("./venditore/modifica-categoria.jsp");
-		} catch (SQLException e) {
+		} catch (SQLException | ParametroNonCorrettoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

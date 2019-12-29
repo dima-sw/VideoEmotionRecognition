@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import eccezione.NegozioNonEsistenteException;
+import eccezione.ParametroNonCorrettoException;
 import managernegozio.Negozio;
 import managernegozio.Prodotto;
 
@@ -46,17 +47,15 @@ public class VisualizzaProdotti extends HttpServlet {
 		try {
 			prodotti = modelprod.getAllProductBySellerCategory(usernameVenditore, nomeCategoria);
 			request.getSession().setAttribute("prodotti", prodotti);
-			Negozio negozio = modelNeg.getNegozio(usernameVenditore);
+			Negozio negozio = modelNeg.getNegozioByName(nomeNegozio);
 			request.getSession().setAttribute("negozioBean", negozio);
 			response.sendRedirect("./venditore/index-venditore-prodotti.jsp");
-		} catch (SQLException e) {
+		}
+		 catch (ParametroNonCorrettoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NegozioNonEsistenteException e) { //reindirizzare in maniera diversa
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Errore:"+e.getMessage());
-			//carica la registrazione del negozio per il venditore se non esiste
-			response.sendRedirect("./seller/registrazione-negozio.jsp");
 			e.printStackTrace();
 		}
 		

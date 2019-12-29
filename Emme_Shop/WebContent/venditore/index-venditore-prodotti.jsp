@@ -68,12 +68,12 @@
             <div id='mySidenav' class="sidenav">
               <ul >
                 
-                <li  onclick="window.open('ordini.jsp','_self')">
+                <li  onclick="window.open('../VisualizzaOrdineVenditore','_self')">
                     Controlla ordini
                 </li>
                
                 
-                <li  onclick="window.open('index-venditore.jsp','_self')">
+                <li  onclick="window.open('../ViewCategoria','_self')">
                     Categorie
                 </li>
               </ul>    
