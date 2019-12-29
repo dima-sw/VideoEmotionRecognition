@@ -38,6 +38,14 @@
         <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    	<script type="text/javascript">
+
+			function abilita_submit ()
+			{
+				document.forms.regForm1.btn_submit.disabled = false;
+			}
+
+		</script>
     </head>
     <body onresize='resize()'  id='home' > 
     
@@ -52,8 +60,8 @@
                        <br><br>
                        <h3> Cambia immagine categoria! </h3>
 				            <form action="UploadCategoria" method="post" enctype="multipart/form-data">
-				               <input type="file" name="file" /><br><br><br>
-				                <input type="submit" value="Carica Immagine" class="acquista-btn"/>
+				               <input type="file" name="file" onchange="abilita_submit()" /><br><br><br>
+				                <input type="submit" value="Carica Immagine" name="btn_submit" class="acquista-btn" disabled="disabled"/>
 				            </form>  
 				            
 				            <br><br>oppure<br><br><a href='../ViewCategoria'>Completa Inserimento...</a>
