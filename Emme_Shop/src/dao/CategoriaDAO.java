@@ -241,6 +241,39 @@ public class CategoriaDAO {
 
 
 
+public  synchronized boolean deleteCategory(String nomeNegozio, String nomeCategoria ) throws SQLException {
+	
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	
+	
+
+	String deleteSQL = "DELETE FROM categoria  WHERE nomeNeg = ? AND nomeCategoria = ? ";
+	//System.out.println(nomeNegozio+" "+nomeCategoria);
+	try {
+		
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(deleteSQL);
+		preparedStatement.setString(1,nomeNegozio);
+		preparedStatement.setString(2,nomeCategoria);
+
+		preparedStatement.executeUpdate();
+
+			connection.commit();
+
+	} finally {
+		try {
+			if (preparedStatement != null)
+				preparedStatement.close();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+	}
+	return true;
+}
+
+
 
 
 

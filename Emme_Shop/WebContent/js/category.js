@@ -4,8 +4,22 @@ function deleteCat(neg,cat){
    			       	     {
    			       		  negozio:neg,
    			       		  categoria:cat
-   			         	 } , function(result){
+   			       		  
+   			         	 }  , function(result){
+   			         		
+   			         		alert("Categoria Eliminata");
+   		  			       	 
+   			  			      location.reload();
+   			  			    	  
+   			  			      
 		   			       		   
    			       	  });
-   		
-   				}
+
+}
+
+
+ 	 
+
+  			      
+  			
+   			       	 

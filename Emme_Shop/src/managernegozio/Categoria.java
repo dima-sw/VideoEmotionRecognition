@@ -116,6 +116,15 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	
+	public boolean deleteCategory(String nomeNegozio, String nomeCategoria) throws ParametroNonCorrettoException, SQLException{
+		if(nomeNegozio==null || nomeCategoria==null) {
+			throw new ParametroNonCorrettoException("Nome negozio o categoria non esiste!!!");
+		}
+		model.deleteCategory(nomeNegozio, nomeCategoria);
+		
+		return true;
+	}
+	
 	public boolean updatePathCategoria(String nomeNegozio,String nomeCategoria,String urlLogo) throws SQLException {
 		return model.updatePathCategoria(nomeNegozio,nomeCategoria, urlLogo);
 	}

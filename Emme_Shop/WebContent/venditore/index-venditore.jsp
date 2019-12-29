@@ -121,7 +121,7 @@
                           </div>
                           <div class='del'>
                             <span>
-                              <a href=''><img onclick="deleteCat('<%= bean.getNomeNegozio() %>','<%= bean.getNomeCategoria() %>')" style="cursor:pointer;" src='../images/delete.png'></a>
+                              <a href='../RemoveCat?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img  style="cursor:pointer;" src='../images/delete.png'></a>
                             </span>
                           </div>
                     </div>
