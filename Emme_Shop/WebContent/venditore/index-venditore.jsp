@@ -121,8 +121,8 @@
                           </div>
                           <div class='del'>
                             <span>
-                          		<a href='../RemoveCat?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img  style="cursor:pointer;" src='../images/delete.png'></a>
-      
+                          		 <a href='../RemoveCat?negozio=<%= bean.getNomeNegozio() %>&categoria=<%= bean.getNomeCategoria() %>'><img  style="cursor:pointer;" src='../images/delete.png'></a>
+                          		
                           	</span>
                           </div>
                     </div>
@@ -134,8 +134,7 @@
                           </div>
                           <div class='nomeCategoria'>
                             <span >
-                            
-                                <a href="../InserisciCategoria?negozio=<%=negozio.getNomeNegozio()%>"><p></p>Inserisci nuova categoria</a>
+                            	<a href="../InserisciCategoria?negozio=<%=negozio.getNomeNegozio()%>"><p></p>Inserisci nuova categoria</a>
                             </span>
                           </div>
                     </div>

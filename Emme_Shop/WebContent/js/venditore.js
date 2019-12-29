@@ -1,13 +1,23 @@
 function deleteVend(usernameV){
-   					
-   			       	 $.post("../RemoveVend",
-   			       	     {
-   			       		  id:usernameV
-   			         	 } , function(result){
-		   			       		   
-   			       	  });
+	  var txt;
+	  var r = confirm("Sei sicuro di voler cancellare?");
+	  if (r === true) {
+		 
+		  $.post("../RemoveVend",
+		       	     {
+		       		  id:usernameV
+		         	 } , function(result){
+	   			       		   
+		       	  });
+		  
+	  } else {
+		  window.locatio.reload();
+	  }
+	  
+	}
+   			       	 
    		
-   				}
+   				
 
 
 //conferma cancellazione della categoria
