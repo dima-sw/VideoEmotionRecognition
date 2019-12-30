@@ -5,13 +5,14 @@
 %>
 
 <%! 
-    String categoria = "";
+    String categoria = null;
     Negozio neg=null;
     Prodotto prodotto=null;
 %>
 
 <%
-	categoria =(String) request.getSession().getAttribute("nomeCategoria");
+	categoria =(String) request.getSession().getAttribute("categoria");
+	
     neg = (Negozio) request.getSession().getAttribute("negozioBean");
     prodotto = (Prodotto) request.getSession().getAttribute("prodottoBean");
     

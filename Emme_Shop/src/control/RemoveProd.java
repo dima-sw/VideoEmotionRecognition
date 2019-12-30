@@ -35,7 +35,7 @@ public class RemoveProd extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String address="./venditore/index-venditore-prodotti.jsp";
-		int id =Integer.parseInt(request.getParameter("id"));
+		int id =Integer.parseInt(request.getParameter("ID"));
 		Collection<Prodotto> prodotti = null;
 		String usernameVenditore = (String) request.getSession().getAttribute("username-venditore");
 		String nomeCategoria = (String) request.getSession().getAttribute("categoria");

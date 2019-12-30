@@ -55,7 +55,7 @@
 <br><br><br>
             <div id='vendi' style='padding-top:10px;'>
               	<form id="regForm1" action="../uploadProdotto" method="POST"  enctype="multipart/form-data"  style='margin:0 auto;'> <!--Fase di realizzazione-->
-                  <h2><center>Vendi con noi</center></h2><!-- Deve comparire in ogni statement -->
+                  <h2><center>Inserisci un'immagine per identificare il prodotto</center></h2><!-- Deve comparire in ogni statement -->
                   
                     <div class="tab1"> 
                     	<img src="../<%=urlLogo %>" style="max-width:300px; width:50%;" >

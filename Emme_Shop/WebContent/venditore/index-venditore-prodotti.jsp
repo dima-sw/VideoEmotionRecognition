@@ -113,11 +113,12 @@
                               </span>
                           </div>
                           <div class="mod">
-                              <a href='../ModificaProdotto?ID=<%= bean.getIdProdotto() %>&nomeNegozio=<%= bean.getNomeNegozio() %>&nomeCategoria=<%= bean.getNomeCategoria() %>'><img src='../images/modify.png'></a>
+                              <a href='../ModificaProdotto?ID=<%= bean.getIdProdotto() %>&nomeNegozio=<%= bean.getNomeNegozio() %>&nomeCategoria=<%= categoria %>'><img src='../images/modify.png'></a>
                           </div>
                           <div class='del'>
                             <span>
-                              <a href=''><img onclick="deleteProd('<%= bean.getIdProdotto() %>')" style="cursor:pointer;"  src='../images/delete.png'></a>
+                             <a href='../RemoveProd?ID=<%= bean.getIdProdotto() %>'><img style="cursor:pointer;"  src='../images/delete.png'></a>
+                         
                             </span>
                           </div>
                           
@@ -133,7 +134,7 @@
                           </div>
                           <div class='nomeCategoria'>
                             <span >
-                                <a href='../InserisciProdotto?negozio=nomeNeg&categoria=nomeCategoria'><p></p>Inserisci nuovo prodotto</a>
+                                <a href='../InserisciProdotto?negozio=<%=negozioBean.getNomeNegozio()  %>&categoria=<%=categoria%>'><p></p>Inserisci nuovo prodotto</a>
                             </span>
                           </div>
                     </div>

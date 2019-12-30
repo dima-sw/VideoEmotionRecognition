@@ -37,7 +37,9 @@ public class ModificaProdotto extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("ID"));
 		String nomeNegozio = request.getParameter("nomeNegozio");
 		String nomeCategoria = request.getParameter("nomeCategoria");
+		//System.out.println(nomeCategoria);
 		request.setAttribute("categoria", nomeCategoria);
+		request.setAttribute("nomeCategoria", nomeCategoria);
 		
 		try {
 			Prodotto prodotto = modProd.getProductById(id);
