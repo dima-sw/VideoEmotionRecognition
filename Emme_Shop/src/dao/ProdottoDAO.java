@@ -240,6 +240,132 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 		return flag;
 }
 
+	
+	
+public  synchronized boolean deleteProduct (int id ) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		int result = 0;
+
+		String deleteSQL = "DELETE FROM prodotto WHERE IdProdotto = ? ";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setInt(1,id);
+
+			result = preparedStatement.executeUpdate();
+
+			
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return (result != 0);
+	}
+
+public synchronized Prodotto getProductById(int idProdotto) throws SQLException {
+	  
+	  Connection connection = null;
+ 	  PreparedStatement preparedStatement = null;
+ 	  
+ 	  
+ 	  Prodotto prodottoBean=null;
+		  
+		  String selectSQL = "SELECT * FROM prodotto WHERE IdProdotto=?";
+		  
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1,idProdotto);
+			
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				prodottoBean = new Prodotto();
+
+				prodottoBean.setNomeNegozio(rs.getString("Nome_Negozio"));
+				prodottoBean.setDescrizione(rs.getString("descrizione"));
+				prodottoBean.setIdProdotto(rs.getInt("IdProdotto"));
+				prodottoBean.setIva(rs.getInt("iva"));
+				prodottoBean.setNome(rs.getString("nome"));
+				prodottoBean.setNomeCategoria(rs.getString("Nome_Categoria"));
+				prodottoBean.setPath(rs.getString("path"));
+				prodottoBean.setPrezzo(rs.getFloat("prezzo"));
+				prodottoBean.setQuantita(rs.getInt("qta"));
+				prodottoBean.setSconto(rs.getInt("sconto"));
+			}
+
+			connection.commit();
+			
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return prodottoBean;
+	}
+
+
+public synchronized boolean updateProdotto(Prodotto bean) throws SQLException {
+	 
+	 Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		boolean flag=false;
+		
+		String update = "UPDATE " + ProdottoDAO.TABLE_PRODOTTO
+				                 +" SET iva= ? ,path= ? ,prezzo= ? , nome= ?, qta= ? , sconto= ?, descrizione= ?  "
+				                 +" where IdProdotto= ? ";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(update);
+			
+			preparedStatement.setInt(1,bean.getIva());
+			preparedStatement.setString(2,bean.getPath());
+			preparedStatement.setFloat(3,bean.getPrezzo());
+			preparedStatement.setString(4,bean.getNome());
+			preparedStatement.setInt(5,bean.getQuantita());
+			preparedStatement.setInt(6,bean.getSconto());
+			preparedStatement.setString(7,bean.getDescrizione());
+			preparedStatement.setInt(8,bean.getIdProdotto());
+			
+			
+			preparedStatement.executeUpdate();
+			
+			connection.commit();
+
+			flag=true;
+			}
+
+		 finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+		return flag;
+}
+
+
+
+
 
 
 

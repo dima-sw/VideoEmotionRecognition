@@ -113,7 +113,7 @@
                               </span>
                           </div>
                           <div class="mod">
-                              <a href='modifica-prodotto.jsp?ID=<%= bean.getIdProdotto() %>&nomeNegozio=<%= bean.getNomeNegozio() %>&nomeCategoria=<%= bean.getNomeCategoria() %>'><img src='../images/modify.png'></a>
+                              <a href='../ModificaProdotto?ID=<%= bean.getIdProdotto() %>&nomeNegozio=<%= bean.getNomeNegozio() %>&nomeCategoria=<%= bean.getNomeCategoria() %>'><img src='../images/modify.png'></a>
                           </div>
                           <div class='del'>
                             <span>

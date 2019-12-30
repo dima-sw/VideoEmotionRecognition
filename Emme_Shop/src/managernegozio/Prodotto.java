@@ -149,6 +149,19 @@ public class Prodotto {
 		return true;
 	}
 	
+	public   boolean deleteProduct (int id ) throws SQLException {
+		return model.deleteProduct(id);
+	}
+	
+	public Prodotto getProductById(int idProdotto) throws SQLException {
+		return model.getProductById(idProdotto);
+	}
+	
+	public boolean updateProdotto(Prodotto bean) throws SQLException {
+		return model.updateProdotto(bean);
+	}
+	
+	
 	
     /**
      * 
