@@ -30,6 +30,7 @@ public class Prodotto {
 	private int qta;           
 	private int sconto;        
 	private String descrizione;
+	private int prova = 0;
 	
 	public Prodotto() {
 		this.nomeNegozio = "";
