@@ -54,6 +54,7 @@ public class UploadCategoria extends HttpServlet {
         if(ServletFileUpload.isMultipartContent(request)){
         	 try {
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest( new ServletRequestContext(request));
+                
                 urlLogo=model.createPathCategoriaImage(multiparts,nomeNegozio,nomeCategoriaImage,directory);
                 session.setAttribute("urlLogoCategoria", urlLogo);
                 model.updatePathCategoria(nomeNegozio, nomeCategoriaImage, urlLogo);                

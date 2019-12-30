@@ -129,11 +129,11 @@
                     <% } }%>
                     <div class="category">
                           <div class="img">
-                            <a href='inserisci-prodotto.jsp?negozio=nomeNeg&categoria=<%=categoria %>'><img src="../images/plus.png"></a>
+                            <a href='../InserisciProdotto?negozio=nomeNeg&categoria=<%=categoria %>'><img src="../images/plus.png"></a>
                           </div>
                           <div class='nomeCategoria'>
                             <span >
-                                <a href='inserisci-prodotto.jsp?negozio=nomeNeg&categoria=nomeCategoria'><p></p>Inserisci nuovo prodotto</a>
+                                <a href='../InserisciProdotto?negozio=nomeNeg&categoria=nomeCategoria'><p></p>Inserisci nuovo prodotto</a>
                             </span>
                           </div>
                     </div>

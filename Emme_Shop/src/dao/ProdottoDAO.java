@@ -12,8 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import managernegozio.Prodotto;
+import com.mysql.jdbc.Statement;
 
+import managernegozio.Prodotto;
 
 public class ProdottoDAO {
 	
@@ -123,6 +124,123 @@ public class ProdottoDAO {
 		}
 		return listaProdotti;
 	}
+	
+/**
+ * Aggiunge un prodotto alla categoria specificata
+ * @param prodotto
+ * @return Prodotto aggiunto
+ * @throws SQLException
+ */
+public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String insertProdotto = "INSERT INTO " + TABLE_PRODOTTO
+				               +" (Nome_Negozio,Nome_Categoria,iva,path,prezzo,nome,qta,sconto,descrizione)"
+				               +" VALUES(?,?,?,?,?,?,?,?,?)";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(insertProdotto,Statement.RETURN_GENERATED_KEYS);
+			
+			preparedStatement.setString(1,prodotto.getNomeNegozio());
+			preparedStatement.setString(2,prodotto.getNomeCategoria());
+			preparedStatement.setInt(3,prodotto.getIva());
+			preparedStatement.setString(4,prodotto.getPath());
+			preparedStatement.setFloat(5,prodotto.getPrezzo());
+			preparedStatement.setString(6,prodotto.getNome());
+			preparedStatement.setInt(7,prodotto.getQuantita());
+			preparedStatement.setInt(8,prodotto.getSconto());
+			preparedStatement.setString(9,prodotto.getDescrizione());
+			
+			
+			/* controlliamo se il negozio ha quella particolare categoria di prodotto
+			 * se isCategoria ritorna false allora non c'è l'ha e 
+			 *  quindi aggiungiamo la categoria a quel negozio nella tabella Categoria 
+			 *  con il metodo addCategoria */
+			/*if(!isCategoria(prodotto.getNomeNegozio(),prodotto.getNomeCategoria())) {
+				/* creiamo il bean categoria */
+				/*CategoriaBean categ = new CategoriaBean();
+				categ.setNomeNegozio(prodotto.getNomeNegozio());
+				categ.setNomeCategoria(prodotto.getNomeCategoria());
+				categ.setDescrizione(prodotto.getDescrizione());*/
+				/*Aggiungiamo il bean categoria  alla tabella categoria  */
+			    /*addCategoria(categ);
+			}*/
+			
+			preparedStatement.execute();
+			int last_inserted_id=0;
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+            if(rs.next())
+            	 last_inserted_id = rs.getInt(1);
+            
+            prodotto.setIdProdotto( last_inserted_id);
+			connection.commit();
+
+		} finally {
+			try {
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} finally {
+				if(connection!=null)
+					connection.close();
+			}
+		}
+
+		
+		return prodotto;
+		
+	}
+
+/**
+ * Ritorna true o false a seconda se il path è stato modificato
+ * @param nomeNegozio
+ * @param nomeCategoria
+ * @param id
+ * @param logo
+ * @return boolean
+ * @throws SQLException
+ */
+	public synchronized boolean updatePathProdotto(String nomeNegozio,String nomeCategoria,int id,String logo) throws SQLException {
+	 
+	 Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		boolean flag=false;
+		
+		
+		String update = "UPDATE " + TABLE_PRODOTTO
+				                 +" SET path= ? "
+				                 +" where Nome_Negozio= ? AND Nome_Categoria=? AND IdProdotto=?";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(update);
+			preparedStatement.setString(1,logo);
+			preparedStatement.setString(2,nomeNegozio);
+			preparedStatement.setString(3,nomeCategoria);
+			preparedStatement.setInt(4,id);
+			
+			preparedStatement.executeUpdate();
+			
+			connection.commit();
+
+			flag=true;
+			}
+
+		 finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		 }
+		return flag;
+}
+
+
 
 
 

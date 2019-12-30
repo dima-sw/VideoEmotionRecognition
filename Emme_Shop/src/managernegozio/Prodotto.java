@@ -1,12 +1,17 @@
 package managernegozio;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
 
 import dao.ProdottoDAO;
+import eccezione.ParametroNonCorrettoException;
 
 /**
  * 
@@ -15,6 +20,18 @@ import dao.ProdottoDAO;
 public class Prodotto {
 	
 	static ProdottoDAO model=new ProdottoDAO();
+	static Categoria categoria=new Categoria();
+	
+	private String nomeNegozio;
+	private String nomeCategoria;
+	private int idProdotto;    
+	private int iva;           
+	private String nome;
+	private String path;       
+	private float prezzo;        
+	private int qta;           
+	private int sconto;        
+	private String descrizione;
 	
 	public Prodotto() {
 		this.nomeNegozio = "";
@@ -53,9 +70,83 @@ public class Prodotto {
 		String path=model.getPathByID(id);
 		return path;
 	}
+	/**
+	 * restituisce tutti i prodotti relativa a quella categoria di quel venditore.
+	 * @param venditore
+	 * @param categoria
+	 * @return Collection<Prodotto> può essere anche vuota
+	 * @throws SQLException
+	 * @throws ParametroNonCorrettoException 
+	 */
+	public Collection<Prodotto> getAllProductBySellerCategory(String venditore,String categoria) throws SQLException, ParametroNonCorrettoException{
+		if (venditore==null || categoria==null) {
+			throw new ParametroNonCorrettoException("Venditore o categoria non esiste!!! riprova");
+		}
+		Collection<Prodotto> prodotti=model.getAllProductBySellerCategory(venditore, categoria);
+		return prodotti;
+	}
 	
-	public Collection<Prodotto> getAllProductBySellerCategory(String venditore,String categoria) throws SQLException{
-		return model.getAllProductBySellerCategory(venditore, categoria);
+	public Prodotto addProdotto(Prodotto prodotto) throws SQLException, ParametroNonCorrettoException {
+		if (prodotto==null) {
+			throw new ParametroNonCorrettoException("Prodotto inserito non valido!!");
+		}
+		Prodotto prod=model.addProdotto(prodotto);
+		
+		return prod;
+	}
+	
+	
+	public String openCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
+		
+		String path=categoria.openCartellaNegozio(nomeNegozio, UPLOAD_DIRECTORY);
+		//if(path.equals(UPLOAD_DIRECTORY))
+			//return null;
+		return path;
+	}
+	
+	/**
+	 *  Crea il path del image prodotto
+	 * @param multiparts
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @param nomeProdottoImage   id del prodotto
+	 * @param UPLOAD_DIRECTORY
+	 * @return String path del logo
+	 * @throws Exception
+	 */
+	public String createPathProdottoImage(List<FileItem> multiparts, String nomeNegozio,String nomeCategoria,int nomeProdottoImage,String UPLOAD_DIRECTORY) throws Exception {
+		
+		String urlLogo="";
+		
+		  for(FileItem item : multiparts){
+              if(!item.isFormField()){
+                  String name = new File(item.getName()).getName();
+                  int index = name.indexOf(".");
+                  String estensione= name.substring(index);
+                  item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeProdottoImage+estensione));
+                  urlLogo="images/negozi/"+nomeNegozio+"/"+nomeProdottoImage+estensione;
+                  
+                  updatePathProdotto(nomeNegozio,nomeCategoria,nomeProdottoImage,urlLogo);
+                 
+              }
+		}  
+		return urlLogo;
+	}
+	
+	/**
+	 * Modifica il path dell'image del prodotto
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @param id
+	 * @param logo
+	 * @return boolean 
+	 * @throws SQLException
+	 */
+	public boolean updatePathProdotto(String nomeNegozio, String nomeCategoria, int id, String logo) throws SQLException {
+		
+		model.updatePathProdotto(nomeNegozio, nomeCategoria, id, logo);
+		
+		return true;
 	}
 	
 	
@@ -217,14 +308,5 @@ public class Prodotto {
 	
 	
 
-		private String nomeNegozio;
-		private String nomeCategoria;
-		private int idProdotto;    
-    	private int iva;           
-    	private String nome;
-		private String path;       
-    	private float prezzo;        
-    	private int qta;           
-    	private int sconto;        
-    	private String descrizione;
+		
 }

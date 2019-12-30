@@ -8,3 +8,8 @@ function deleteShop(nomeN){
    			       	  });
    		
    				}
+
+function abilita_submit ()
+{
+	document.forms.regForm1.btn_submit.disabled = false;
+}

@@ -44,7 +44,7 @@ public class InserisciCategoria extends HttpServlet {
 		} catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:"+e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
-			request.getSession().setAttribute("redirecterror", "./venditore/index-venditore");
+			request.getSession().setAttribute("redirecterror", "./venditore/index-venditore.jsp");
 			response.sendRedirect("./error-page.jsp");
 		}
 		catch (SQLException e) {
