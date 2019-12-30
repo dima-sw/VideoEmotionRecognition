@@ -7,7 +7,7 @@
 
 		String cat= (String)session.getAttribute("nomeProdottoCat");
 		
-        if(urlLogo==null){
+		if(urlLogo.equalsIgnoreCase("images/favicon.ico")){
         	urlLogo="images/favicon.ico";
         }
         session.setAttribute("categoria", cat);
@@ -62,7 +62,7 @@
                      
                        <br><br>
                        <h3> Cambia immagine prodotto! </h3>
-				            <form action="../uploadProdotto" method="post" enctype="multipart/form-data">
+				            <form action="UploadProdotto" method="post" enctype="multipart/form-data">
 				                <input type="file" name="file" onchange="abilita_submit()" /><br><br><br>
 				                <input type="submit" value="Carica Immagine" name="btn_submit" class="acquista-btn" disabled="disabled"/>
 				            </form>  

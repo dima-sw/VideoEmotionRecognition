@@ -129,7 +129,7 @@
                     <% } }%>
                     <div class="category">
                           <div class="img">
-                            <a href='../InserisciProdotto?negozio=nomeNeg&categoria=<%=categoria %>'><img src="../images/plus.png"></a>
+                            <a href='../InserisciProdotto?negozio=<%=negozioBean.getNomeNegozio() %>&categoria=<%=categoria %>'><img src="../images/plus.png"></a>
                           </div>
                           <div class='nomeCategoria'>
                             <span >
