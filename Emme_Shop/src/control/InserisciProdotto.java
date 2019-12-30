@@ -33,9 +33,9 @@ public class InserisciProdotto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String nomeNegozio=(String) request.getSession().getAttribute("negozio");
+		String nomeNegozio=(String) request.getParameter("negozio");
 		request.getSession().setAttribute("negozioNome", nomeNegozio);
-		String nomeCategoria=(String)request.getSession().getAttribute("categoria");
+		String nomeCategoria=(String)request.getParameter("categoria");
 		request.getSession().setAttribute("categoriaNome", nomeCategoria);
 		
 		try {

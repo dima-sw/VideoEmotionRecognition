@@ -44,15 +44,6 @@ public class UploadProdotto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  
 		HttpSession session=request.getSession();
     	String nomeNegozio=(String) session.getAttribute("negozioNome");
     	String cat=(String) session.getAttribute("nomeProdottoCat");
@@ -60,7 +51,7 @@ public class UploadProdotto extends HttpServlet {
     	
 		
 		String urlLogo="";
-		String directory=model.openCartellaNegozio(nomeNegozio, urlLogo);
+		String directory=model.openCartellaNegozio(nomeNegozio, UPLOAD_DIRECTORY);
 		
         //process only if its multipart content
         if(ServletFileUpload.isMultipartContent(request)){
@@ -87,5 +78,14 @@ public class UploadProdotto extends HttpServlet {
        
         response.sendRedirect("./venditore/uploadImageProdotto.jsp");
 	}
+	
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		  
+		doGet(request, response);
+
+}
 }

@@ -1,9 +1,7 @@
 package managernegozio;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -97,7 +95,11 @@ public class Prodotto {
 	
 	
 	public String openCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
-		
+		/*
+		UPLOAD_DIRECTORY+="\\"+nomeNegozio;
+		if(!(new File(UPLOAD_DIRECTORY)).exists())
+			new File(UPLOAD_DIRECTORY).mkdir();
+		return UPLOAD_DIRECTORY;*/
 		String path=categoria.openCartellaNegozio(nomeNegozio, UPLOAD_DIRECTORY);
 		//if(path.equals(UPLOAD_DIRECTORY))
 			//return null;
@@ -118,15 +120,15 @@ public class Prodotto {
 		
 		String urlLogo="";
 		
-		  for(FileItem item : multiparts){
-              if(!item.isFormField()){
-                  String name = new File(item.getName()).getName();
-                  int index = name.indexOf(".");
-                  String estensione= name.substring(index);
-                  item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeProdottoImage+estensione));
-                  urlLogo="images/negozi/"+nomeNegozio+"/"+nomeProdottoImage+estensione;
-                  
-                  updatePathProdotto(nomeNegozio,nomeCategoria,nomeProdottoImage,urlLogo);
+		 for(FileItem item : multiparts){
+             if(!item.isFormField()){
+                 String name = new File(item.getName()).getName();
+                 int index = name.indexOf(".");
+                 String estensione= name.substring(index);
+                 item.write( new File(UPLOAD_DIRECTORY + File.separator + nomeProdottoImage+estensione));
+                 urlLogo="images/negozi/"+nomeNegozio+"/"+nomeProdottoImage+estensione;
+                 
+                 updatePathProdotto(nomeNegozio,nomeCategoria,nomeProdottoImage,urlLogo);
                  
               }
 		}  
