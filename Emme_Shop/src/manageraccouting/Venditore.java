@@ -2,7 +2,6 @@ package manageraccouting;
 
 import java.sql.SQLException;
 
-import dao.VenditoreDAO;
 import eccezione.ParametroNonCorrettoException;
 import eccezione.UtenteNonTrovatoException;
 

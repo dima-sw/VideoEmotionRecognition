@@ -10,10 +10,9 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
-import dao.ClienteDAO;
-import dao.NegozioDAO;
 import eccezione.NegozioNonEsistenteException;
 import eccezione.ParametroNonCorrettoException;
+import manageraccouting.ClienteDAO;
 
 /**
  * 

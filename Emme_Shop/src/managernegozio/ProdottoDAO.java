@@ -1,4 +1,4 @@
-package dao;
+package managernegozio;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +13,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.mysql.jdbc.Statement;
-
-import managernegozio.Prodotto;
 
 public class ProdottoDAO {
 	

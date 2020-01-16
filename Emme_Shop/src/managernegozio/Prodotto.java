@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 
-import dao.ProdottoDAO;
 import eccezione.ParametroNonCorrettoException;
 
 /**

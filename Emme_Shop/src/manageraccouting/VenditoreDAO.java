@@ -1,4 +1,4 @@
-package dao;
+package manageraccouting;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import manageraccouting.Utente;
-import manageraccouting.Venditore;
 
 
 public class VenditoreDAO {

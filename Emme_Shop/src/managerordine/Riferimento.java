@@ -2,7 +2,6 @@ package managerordine;
 
 import java.sql.SQLException;
 
-import dao.RiferimentoDAO;
 import eccezione.ParametroNonCorrettoException;
 
 public class Riferimento {
