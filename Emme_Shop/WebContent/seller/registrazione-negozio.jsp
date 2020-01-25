@@ -127,7 +127,7 @@
 									    </td>
 									    <td>        
 			                    		    <div class="tooltip"><img class="imageInfo" src="../images/info.png" width="20px" >	
-			  									<span class="tooltiptext">Camppo Città <br>formato: lettere e cifre <br> senza limiti.<br>Esempio: Casagiove</span>
+			  									<span class="tooltiptext">Campo Città <br>formato: lettere e cifre <br> senza limiti.<br>Esempio: Casagiove</span>
 											</div>  
 										</td>
 									</tr>
