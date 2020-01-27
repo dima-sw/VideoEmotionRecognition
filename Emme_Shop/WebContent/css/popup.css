@@ -2,8 +2,8 @@
     z-index: 10;
     border-radius: 3px;
     position: fixed;
-    padding: 18px 10px;
     display: none;
+    padding: 18px 10px;
     top: 45%;
     left: 50%;
     width: 250px;
@@ -17,7 +17,6 @@
     
 box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
 }
-
 #back {
     z-index: 9;
     position: fixed;
@@ -26,6 +25,7 @@ box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
     height: 100%;
     background-image: url(images/trasparente.png);
 }
+
 #btnA {
     text-transform: uppercase;
     position: relative;
