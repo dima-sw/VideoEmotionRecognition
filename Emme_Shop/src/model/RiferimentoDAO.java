@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ import managerordine.ArrayRiferimento;
 import managerordine.Fattura;
 import managerordine.Riferimento;
 
-public class RiferimentoDAO {
+public class RiferimentoDAO implements Serializable {
 	
 	private static DataSource ds;
 	private static final String TABLE_RIFERIMENTO="riferimento";

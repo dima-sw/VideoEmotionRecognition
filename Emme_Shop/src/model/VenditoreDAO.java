@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ import manageraccouting.Utente;
 import manageraccouting.Venditore;
 
 
-public class VenditoreDAO {
+public class VenditoreDAO implements Serializable {
 	
 	private static DataSource ds;
 	private static final String TABLE_VENDITORE = "venditore";
@@ -88,6 +89,7 @@ public class VenditoreDAO {
 	 */
 	public synchronized void addVenditore(Venditore venditore)throws SQLException{
 
+		
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
 
@@ -123,6 +125,46 @@ public class VenditoreDAO {
 			}
 		}
 	}
+	
+
+
+
+
+
+
+public  synchronized void deleteVenditore(String username) throws SQLException {
+	
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+
+	String deleteSQL = "DELETE FROM venditore  WHERE username = ? ";
+	//System.out.println(nomeNegozio+" "+nomeCategoria);
+	try {
+		
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(deleteSQL);
+		preparedStatement.setString(1,username);
+
+		 preparedStatement.executeUpdate();
+
+			connection.commit();
+
+	} finally {
+		try {
+			if (preparedStatement != null)
+				preparedStatement.close();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+	}
+}
+
+
+
+
+
+	
 	
 	
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import com.mysql.jdbc.Statement;
 
 import managernegozio.Prodotto;
 
-public class ProdottoDAO {
+public class ProdottoDAO implements Serializable {
 	
 	private static DataSource ds;
 	private static final String TABLE_PRODOTTO="prodotto";

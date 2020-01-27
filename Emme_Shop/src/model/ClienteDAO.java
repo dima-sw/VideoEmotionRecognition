@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import javax.sql.DataSource;
 import manageraccouting.Cliente;
 import manageraccouting.Utente;
 
-public class ClienteDAO {
+public class ClienteDAO implements Serializable{
 
 
 	private static DataSource ds;

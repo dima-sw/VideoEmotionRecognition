@@ -1,6 +1,7 @@
 package model;
 
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import javax.sql.DataSource;
 import managernegozio.Negozio;
 
 
-public class NegozioDAO {
+public class NegozioDAO implements Serializable {
 
 	private static DataSource ds;
 	private static final String TABLE_NEGOZIO="negozio";

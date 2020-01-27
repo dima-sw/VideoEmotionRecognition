@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import javax.sql.DataSource;
 import manageraccouting.GestoreAccouting;
 import manageraccouting.Utente;
 
-public class GestoreAccoutingDAO {
+public class GestoreAccoutingDAO implements Serializable {
 
 	private static DataSource ds;
 	private static final String TABLE_GESTOREACCOUTING = "gestoreaccouting";
