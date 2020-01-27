@@ -1,0 +1,127 @@
+.footer span{
+    display: inline-table;
+    width:75%;
+    
+    padding-left: 20px;
+}
+
+.footer span img{
+    display: table-cell;
+    width:60px;
+    background-color: #0AAF36;
+    border:1px solid #0AAF36;
+    border-radius:3px;
+    margin-right: 10px;
+    transition: 2s;
+}
+/*
+.footer span img:hover{
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+*/
+.footer span ul{
+    vertical-align: top;
+    font-size: 0.8em;
+    text-align: left;
+    border-left:0px solid white;
+    display: table-cell;
+    padding: 0;
+    padding-left:1em;
+    list-style: none;
+}
+.footer li{
+    padding: 0;
+    margin:0;
+    display: inline-table;
+    width:100%;
+}
+.footer li:hover{
+    cursor:pointer;
+}
+.footer li i{
+    text-align: center;
+    display: table-cell;
+    width:8%;
+    margin-left:1em;
+}
+.footer li a {
+    display: table-cell;
+    color: #cecece;
+    font-size: 120%;
+    font-weight: 500;
+    text-decoration: none;
+    max-width:90%;
+    padding-right:0.3em;
+}
+.footer .social{
+    float:right;
+    padding-left:2px;
+    padding-right: 7px;
+    text-align: right;
+    width:18%;
+}
+.footer .social i{
+    padding:2px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:600px){
+    .footer span img{
+        display:none;
+    }
+    .footer li i{
+        width:12%;
+        margin-left:1em;
+    }
+    .footer li a {
+        font-size: 100%;
+        width:86%;
+        margin-left:0.5em;
+        padding-left:0.5em;
+    }
+    .footer .social{
+        padding:1px;
+    }
+}
+
+@media screen and (max-width:390px){
+    .footer li  {
+        width:70%;
+        font-size: 88%;
+     }
+     .footer .social i{
+         padding: 2px;
+         font-size:13px;
+     }
+}
+@media screen and (max-width:320px){
+    .footer li a {
+        width:60%;
+        font-size: 85%;
+     }
+}
+
+@media screen and (max-width:300px){
+    .footer span img{
+        width:38px;
+    }
+    .footer span ul{
+        border:0;
+    }
+    .footer li{
+        width:100%;
+        border-bottom:1px solid white;
+        padding-top:5px;
+        padding-bottom:5px;
+    }
+    .footer li a{
+        font-size:88%;
+    }
+    .footer .social {
+        display: none;
+    }
+}

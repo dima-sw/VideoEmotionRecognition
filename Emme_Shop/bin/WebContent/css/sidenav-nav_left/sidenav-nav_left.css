@@ -1,0 +1,125 @@
+.sidenav {
+    text-align: left;
+    height: auto;
+    width: 20%;
+    position: fixed;
+    z-index: 3;
+    top: 80px;
+    left: 0;
+    bottom:5px;
+    /*background-color: #f7fae9;*/
+    overflow-x: hidden;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.sidenav ::after{
+    align-items: center;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    width: 100%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.sidenav ul{
+    list-style: none;
+    padding: 1em;
+    width:100%;
+}
+.sidenav li{
+    display: inline-table;
+    vertical-align: bottom;
+    
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width:100%;
+}
+.sidenav li:hover{
+    cursor:pointer;
+    background-color: #e7e7e7;
+}
+.sidenav i{
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 0.5em;
+    display: table-cell;
+    width:15%;
+}
+.sidenav a {
+    display: table-cell;
+    color: #424040;
+    font-size: 120%;
+    font-weight: 500;
+    text-decoration: none;
+    width:80%;
+    padding-right:1em;
+}
+
+.sidenav-blank{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+} 
+
+.sidenav p:hover{
+    cursor: pointer;
+}
+.sidenav p{
+    padding: 0;
+    margin:0;
+    display:none;
+}
+
+
+@media screen and (max-width:1000px){
+    .sidenav i{
+        display: none;
+    }
+    .sidenav a{
+        padding-left: 1em;
+    }
+}
+@media screen and (max-width:900px){
+    .sidenav a{
+        font-size: 100%;
+    }
+}
+@media screen and (max-width:600px){
+    .sidenav{
+        border-top: 1px solid white;
+        height: 0;
+        top:80px;
+        width:100%;
+        background-color: #e7e7e7;/* #f7fae4ec;*/
+    }
+    .sidenav ul{
+        list-style: none;
+        padding: 0;
+        width:100%;
+    }
+    .sidenav li{
+        display: table;
+        width:100%;
+    }
+    .sidenav i{
+        display: table-cell;
+        float: right;
+        padding-left:1em;
+        width:18%;
+    }
+    .sidenav a{
+        margin-left: 5px;
+        padding-left: 5px;
+        display: table-cell;
+        text-align: left;
+        color:#111111e7;
+        font-size: 1.5em;
+        width:80%;
+    }
+}
