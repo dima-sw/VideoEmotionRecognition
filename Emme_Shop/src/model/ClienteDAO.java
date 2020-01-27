@@ -17,10 +17,10 @@ import manageraccouting.Utente;
 public class ClienteDAO implements Serializable{
 
 
-	private static DataSource ds;
+	//private static DataSource ds;
 	private static final String TABLE_CLIENTE = "cliente";
 	
-	static {
+	/*static {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -32,7 +32,7 @@ public class ClienteDAO implements Serializable{
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-	}
+	}*/
 	
 		
 	/**
@@ -51,7 +51,8 @@ public class ClienteDAO implements Serializable{
 			String selectSQL = "SELECT * FROM " + ClienteDAO.TABLE_CLIENTE + " WHERE username = ? AND password = ?";
 
 			try {
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
+				connection = DriverManagerConnectionPool.getDbConnection();
 				preparedStatement = connection.prepareStatement(selectSQL);
 				preparedStatement.setString(1, username);
 				preparedStatement.setString(2, password);
@@ -73,7 +74,9 @@ public class ClienteDAO implements Serializable{
 						preparedStatement.close();
 				} finally {
 					if (connection != null)
-						connection.close();
+						//connection.close();
+						DriverManagerConnectionPool.releaseConnection(connection);
+					
 				}
 			}
 			

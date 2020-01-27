@@ -21,7 +21,7 @@ public class RiferimentoDAO implements Serializable {
 	private static final String TABLE_RIFERIMENTO="riferimento";
 	
 	
-	static {
+	/*static {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -33,7 +33,7 @@ public class RiferimentoDAO implements Serializable {
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-	}
+	}*/
 	
 	
 	/**
@@ -51,7 +51,9 @@ public class RiferimentoDAO implements Serializable {
 		String viewOrdineCliente = " SELECT * from riferimento,fattura  WHERE numeroFattura=numero_Fattura AND Nome_Negozio = ?  ORDER BY dataOrdine DESC";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
+		
 			preparedStatement = connection.prepareStatement(viewOrdineCliente);
 			preparedStatement.setString(1,nomeNegozio);
 			
@@ -92,7 +94,9 @@ public class RiferimentoDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		

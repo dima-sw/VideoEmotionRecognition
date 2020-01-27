@@ -30,17 +30,16 @@ class VenditoreDAOTest extends TestCase{
 		
 		@Test
 		 void testCheckLoginSeller() throws Exception{
-			
+			try {
 			Venditore vend= new Venditore("Mario","Password0#","Mario","Cetrangolo","cetrangolomario98@gmail.com","F","3415578614","Umberto1","Salerno","85100");
 			
 			model.addVenditore(vend);
-			System.out.println((Venditore) model.checkLoginSeller(vend.getUsername(),vend.getPassword()));
-			System.out.println(vend);
-			assertEquals((Venditore) model.checkLoginSeller(vend.getUsername(),vend.getPassword()), vend);
+			Venditore ret=(Venditore) model.checkLoginSeller(vend.getUsername(),vend.getPassword());
+			assertEquals(ret.getUsername(), vend.getUsername());
+			}finally {
+			model.deleteVenditore("Mario");
 			
-			model.deleteVenditore(vend.getUsername());
-			
-			
+			}
 		}
 		
 		

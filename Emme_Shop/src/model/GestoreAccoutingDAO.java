@@ -13,7 +13,7 @@ import manageraccouting.Utente;
 
 public class GestoreAccoutingDAO implements Serializable {
 
-	private static DataSource ds;
+	//private static DataSource ds;
 	private static final String TABLE_GESTOREACCOUTING = "gestoreaccouting";
 	
 	
@@ -28,7 +28,8 @@ public class GestoreAccoutingDAO implements Serializable {
 		String selectSQL = "SELECT username,password FROM " + GestoreAccoutingDAO.TABLE_GESTOREACCOUTING + " WHERE username = ? AND password = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, password);
@@ -47,7 +48,9 @@ public class GestoreAccoutingDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		

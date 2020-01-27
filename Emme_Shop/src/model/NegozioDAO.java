@@ -16,10 +16,10 @@ import managernegozio.Negozio;
 
 public class NegozioDAO implements Serializable {
 
-	private static DataSource ds;
+	//private static DataSource ds;
 	private static final String TABLE_NEGOZIO="negozio";
 	
-	
+	/*
 	static {
 		try {
 			Context initCtx = new InitialContext();
@@ -32,7 +32,7 @@ public class NegozioDAO implements Serializable {
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-	}
+	}*/
 	
 	/**
 	 * 
@@ -49,7 +49,8 @@ public class NegozioDAO implements Serializable {
 		  String selectSQL = "SELECT * FROM " + NegozioDAO.TABLE_NEGOZIO+" WHERE usernameVenditore=?";
 		  
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, usernameVenditore);
 			
@@ -76,7 +77,9 @@ public class NegozioDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+				//	connection.close();
+				DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		return negozio;
@@ -99,7 +102,8 @@ public class NegozioDAO implements Serializable {
 
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(insertNegozio);
 			
 			preparedStatement.setString(1,negozio.getNomeNegozio());
@@ -124,7 +128,9 @@ public class NegozioDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if(connection!=null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 	}
@@ -140,7 +146,8 @@ public class NegozioDAO implements Serializable {
 					                 +" where nome= ? ";
 			
 			try {
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
+				connection = DriverManagerConnectionPool.getDbConnection();
 				preparedStatement = connection.prepareStatement(update);
 				preparedStatement.setString(1,logo);
 				preparedStatement.setString(2,nomeNegozio);
@@ -158,7 +165,9 @@ public class NegozioDAO implements Serializable {
 						preparedStatement.close();
 				} finally {
 					if (connection != null)
-						connection.close();
+					//	connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+					
 				}
 			 }
 			return flag;
@@ -174,7 +183,8 @@ public class NegozioDAO implements Serializable {
 		  String selectSQL = "SELECT * FROM " + NegozioDAO.TABLE_NEGOZIO+" WHERE nome=?";
 		  
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, negozio);
 			
@@ -202,7 +212,9 @@ public class NegozioDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		return negozioBean;

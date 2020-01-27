@@ -17,10 +17,10 @@ import managernegozio.Categoria;
 
 public class CategoriaDAO implements Serializable {
 
-	private static DataSource ds;
+//	private static DataSource ds;
 	private static final String TABLE_CATEGORIA = "categoria";
 	
-	static {
+	/*static {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -32,7 +32,7 @@ public class CategoriaDAO implements Serializable {
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-	}
+	}*/
 
 	/**
 	 * 
@@ -50,7 +50,8 @@ public class CategoriaDAO implements Serializable {
 		  String selectSQL = "SELECT categoria.* FROM categoria,negozio WHERE nomeNeg=nome AND usernameVenditore=?";
 		  
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1,venditore);
 			
@@ -76,7 +77,9 @@ public class CategoriaDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		return listaCategorie;
@@ -92,7 +95,8 @@ public class CategoriaDAO implements Serializable {
 				               +"VALUES(?,?,?,?)";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(insertCateg);
 			
 			preparedStatement.setString(1,categoria.getNomeNegozio());
@@ -112,7 +116,9 @@ public class CategoriaDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if(connection!=null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		
@@ -129,7 +135,8 @@ public class CategoriaDAO implements Serializable {
 				                 +" where nomeNeg= ? AND nomeCategoria=? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(update);
 			preparedStatement.setString(1,logo);
 			preparedStatement.setString(2,nomeNegozio);
@@ -148,7 +155,9 @@ public class CategoriaDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		 }
 		return flag;
@@ -165,7 +174,8 @@ public class CategoriaDAO implements Serializable {
 	               +" WHERE nomeNeg=? AND nomeCategoria=? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(categ);
 			
 			preparedStatement.setString(1,nomeNegozio);
@@ -193,7 +203,9 @@ public class CategoriaDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if(connection!=null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		
@@ -213,7 +225,8 @@ public class CategoriaDAO implements Serializable {
 				                 +" where nomeNeg= ? AND nomeCategoria=? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(update);
 			preparedStatement.setString(1,descrizione);
 			preparedStatement.setString(2,nomeNegozio);
@@ -232,7 +245,9 @@ public class CategoriaDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		 }
 		return flag;
@@ -253,7 +268,8 @@ public  synchronized boolean deleteCategory(String nomeNegozio, String nomeCateg
 	//System.out.println(nomeNegozio+" "+nomeCategoria);
 	try {
 		
-		connection = ds.getConnection();
+		//connection = ds.getConnection();
+		connection = DriverManagerConnectionPool.getDbConnection();
 		preparedStatement = connection.prepareStatement(deleteSQL);
 		preparedStatement.setString(1,nomeNegozio);
 		preparedStatement.setString(2,nomeCategoria);
@@ -268,7 +284,9 @@ public  synchronized boolean deleteCategory(String nomeNegozio, String nomeCateg
 				preparedStatement.close();
 		} finally {
 			if (connection != null)
-				connection.close();
+				//connection.close();
+				DriverManagerConnectionPool.releaseConnection(connection);
+			
 		}
 	}
 	return true;

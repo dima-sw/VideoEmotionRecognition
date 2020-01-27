@@ -19,10 +19,10 @@ import managernegozio.Prodotto;
 
 public class ProdottoDAO implements Serializable {
 	
-	private static DataSource ds;
+	//private static DataSource ds;
 	private static final String TABLE_PRODOTTO="prodotto";
 	
-	
+	/*
 	static {
 		try {
 			Context initCtx = new InitialContext();
@@ -35,7 +35,7 @@ public class ProdottoDAO implements Serializable {
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-	}
+	}*/
 	
 	/**
 	 * 
@@ -51,7 +51,8 @@ public class ProdottoDAO implements Serializable {
 		String viewOrdineCliente = " SELECT path from prodotto  WHERE IdProdotto = ?";
 		String path="";
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(viewOrdineCliente);
 			preparedStatement.setInt(1,id);
 			
@@ -70,7 +71,8 @@ public class ProdottoDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				//connection.close();
 			}
 		}
 		return path;
@@ -88,7 +90,8 @@ public class ProdottoDAO implements Serializable {
 		
 		  
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1,venditore);
 			preparedStatement.setString(2,categoria);
@@ -120,7 +123,8 @@ public class ProdottoDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				//connection.close();
 			}
 		}
 		return listaProdotti;
@@ -142,7 +146,8 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 				               +" VALUES(?,?,?,?,?,?,?,?,?)";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(insertProdotto,Statement.RETURN_GENERATED_KEYS);
 			
 			preparedStatement.setString(1,prodotto.getNomeNegozio());
@@ -185,7 +190,8 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 					preparedStatement.close();
 			} finally {
 				if(connection!=null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				//connection.close();
 			}
 		}
 
@@ -215,7 +221,8 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 				                 +" where Nome_Negozio= ? AND Nome_Categoria=? AND IdProdotto=?";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(update);
 			preparedStatement.setString(1,logo);
 			preparedStatement.setString(2,nomeNegozio);
@@ -235,7 +242,9 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
+					//connection.close();
 			}
 		 }
 		return flag;
@@ -253,7 +262,8 @@ public  synchronized boolean deleteProduct (int id ) throws SQLException {
 		String deleteSQL = "DELETE FROM prodotto WHERE IdProdotto = ? ";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1,id);
 
@@ -267,7 +277,9 @@ public  synchronized boolean deleteProduct (int id ) throws SQLException {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
+					//connection.close();
 			}
 		}
 		return (result != 0);
@@ -284,7 +296,8 @@ public synchronized Prodotto getProductById(int idProdotto) throws SQLException 
 		  String selectSQL = "SELECT * FROM prodotto WHERE IdProdotto=?";
 		  
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1,idProdotto);
 			
@@ -314,7 +327,9 @@ public synchronized Prodotto getProductById(int idProdotto) throws SQLException 
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
+					//connection.close();
 			}
 		}
 		return prodottoBean;
@@ -332,7 +347,8 @@ public synchronized boolean updateProdotto(Prodotto bean) throws SQLException {
 				                 +" where IdProdotto= ? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(update);
 			
 			preparedStatement.setInt(1,bean.getIva());
@@ -358,7 +374,9 @@ public synchronized boolean updateProdotto(Prodotto bean) throws SQLException {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
+				//connection.close();
 			}
 		 }
 		return flag;
