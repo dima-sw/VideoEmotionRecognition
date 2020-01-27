@@ -12,7 +12,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import eccezione.NegozioNonEsistenteException;
 import eccezione.ParametroNonCorrettoException;
-import manageraccouting.ClienteDAO;
+import model.ClienteDAO;
+import model.NegozioDAO;
 
 /**
  * 

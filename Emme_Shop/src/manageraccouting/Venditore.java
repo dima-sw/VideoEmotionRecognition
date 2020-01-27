@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import eccezione.ParametroNonCorrettoException;
 import eccezione.UtenteNonTrovatoException;
+import model.VenditoreDAO;
 
 public class Venditore extends Utente {
 

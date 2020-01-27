@@ -2,6 +2,8 @@ package manageraccouting;
 
 import java.sql.SQLException;
 
+import model.GestoreAccoutingDAO;
+
 public class GestoreAccouting extends Utente{
 
 	private static final long serialVersionUID = 1L;

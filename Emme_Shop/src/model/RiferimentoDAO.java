@@ -1,4 +1,4 @@
-package managerordine;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import managerordine.ArrayRiferimento;
+import managerordine.Fattura;
+import managerordine.Riferimento;
 
 public class RiferimentoDAO {
 	

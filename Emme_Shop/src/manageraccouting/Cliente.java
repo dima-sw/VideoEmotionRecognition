@@ -2,6 +2,8 @@ package manageraccouting;
 
 import java.sql.SQLException;
 
+import model.ClienteDAO;
+
 public class Cliente extends Utente{
 	private static final long serialVersionUID = 1L;
 	
