@@ -17,12 +17,12 @@ import manageraccouting.Venditore;
 
 public class VenditoreDAO implements Serializable {
 	
-	private static DataSource ds;
+	//private static DataSource ds;
 	private static final String TABLE_VENDITORE = "venditore";
 	
 	
 	
-	static {
+	/*static {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -34,7 +34,7 @@ public class VenditoreDAO implements Serializable {
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-	}
+	}*/
 	
 	/**
 	 * 
@@ -52,7 +52,9 @@ public class VenditoreDAO implements Serializable {
 		String selectSQL = "SELECT username,password FROM " + VenditoreDAO.TABLE_VENDITORE + " WHERE username = ? AND password = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
+			
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, password);
@@ -71,7 +73,9 @@ public class VenditoreDAO implements Serializable {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					connection.close();
+					//connection.close();
+					DriverManagerConnectionPool.releaseConnection(connection);
+				
 			}
 		}
 		
@@ -98,7 +102,8 @@ public class VenditoreDAO implements Serializable {
 				+"VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		try {	
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
 			preparedStatement = connection.prepareStatement(insertVenditore);
 
 			preparedStatement.setString(1,venditore.getUsername());
@@ -121,8 +126,8 @@ public class VenditoreDAO implements Serializable {
 					preparedStatement.close();
 			}finally {
 				if(connection!=null)
-					connection.close();
-			}
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 		}
 	}
 	
@@ -141,7 +146,8 @@ public  synchronized void deleteVenditore(String username) throws SQLException {
 	//System.out.println(nomeNegozio+" "+nomeCategoria);
 	try {
 		
-		connection = ds.getConnection();
+		//connection = ds.getConnection();
+		connection = DriverManagerConnectionPool.getDbConnection();
 		preparedStatement = connection.prepareStatement(deleteSQL);
 		preparedStatement.setString(1,username);
 
@@ -155,7 +161,9 @@ public  synchronized void deleteVenditore(String username) throws SQLException {
 				preparedStatement.close();
 		} finally {
 			if (connection != null)
-				connection.close();
+				//connection.close();
+				DriverManagerConnectionPool.releaseConnection(connection);
+			
 		}
 	}
 }
