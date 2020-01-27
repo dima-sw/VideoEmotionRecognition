@@ -12,9 +12,11 @@ public class DriverManagerConnectionPool {
 	
 	static {
 			freeDbConnections = new LinkedList<Connection>();
+			
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				System.out.println("");
+				
 			} catch (ClassNotFoundException e) {
 				System.out.println("DB driver not found!");
 			} catch (Exception e) {
