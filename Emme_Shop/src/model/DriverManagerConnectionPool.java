@@ -31,12 +31,9 @@ public class DriverManagerConnectionPool {
 		
 		String db = "jdbc/emmeshop_db";
 		String username="root";
-		String passwd="manlio98";
+		String passwd="cetrangolo";
+		//String passwd="manlio98";
 		
-		//String username="root";
-		//String passwd="Lorenzo98";
-		
-		//34.241.115.43
 		
 		Connection newConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/emmeshop_db?serverTimezone=CET", username, passwd);
 				newConnection.setAutoCommit(false);
