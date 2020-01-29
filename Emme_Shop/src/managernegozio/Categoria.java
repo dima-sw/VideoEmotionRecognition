@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 
+import eccezione.CategoriaNonEsisteException;
 import eccezione.ParametroNonCorrettoException;
 import model.CategoriaDAO;
 
@@ -131,7 +132,9 @@ private static final long serialVersionUID = 1L;
 	
 	
 	public Categoria getCategoria(String nomeNegozio,String nomeCategoria) throws SQLException {
-		return model.getCategoria(nomeNegozio, nomeCategoria);
+		Categoria cat= model.getCategoria(nomeNegozio, nomeCategoria);
+		
+			return cat;
 	}
 	
 	
