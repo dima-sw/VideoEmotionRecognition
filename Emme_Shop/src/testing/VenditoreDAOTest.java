@@ -42,6 +42,15 @@ class VenditoreDAOTest extends TestCase{
 			}
 		}
 		
+		@Test
+		void testAddVenditore() throws Exception{
+			try {
+				Venditore vend= new Venditore("Mario","Password0#","Mario","Cetrangolo","cetrangolomario98@gmail.com","F","3415578614","Umberto1","Salerno","85100");
+				
+			}finally {
+				model.deleteVenditore("Mario");
+			}
+		}
 		
 		
 		
