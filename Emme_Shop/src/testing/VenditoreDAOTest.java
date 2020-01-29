@@ -1,4 +1,4 @@
-package testing;
+/*package testing;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -28,6 +28,8 @@ class VenditoreDAOTest extends TestCase{
 		private static Connection connection;
 		
 		
+		
+		
 		@Test
 		 void testCheckLoginSeller() throws Exception{
 			try {
@@ -46,3 +48,4 @@ class VenditoreDAOTest extends TestCase{
 		
 		
 	}
+*/

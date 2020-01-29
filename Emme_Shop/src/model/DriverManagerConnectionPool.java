@@ -31,7 +31,7 @@ public class DriverManagerConnectionPool {
 		
 		String db = "jdbc/emmeshop_db";
 		String username="root";
-		String passwd="cetrangolo";
+		String passwd="manlio98";
 		
 		//String username="root";
 		//String passwd="Lorenzo98";

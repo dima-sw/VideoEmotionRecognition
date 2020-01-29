@@ -219,6 +219,41 @@ public class NegozioDAO implements Serializable {
 		}
 		return negozioBean;
 	}
+	
+	
+	public  synchronized void deleteShop(String nomeNegozio ) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		
+
+		String deleteSQL = "DELETE FROM negozio  WHERE nome = ? ";
+		//System.out.println(nomeNegozio+" "+nomeCategoria);
+		try {
+			
+			connection = DriverManagerConnectionPool.getDbConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setString(1,nomeNegozio);
+
+			 preparedStatement.executeUpdate();
+
+				connection.commit();
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					//connection.close();
+				    DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	
+	
 
 	
 }
