@@ -49,28 +49,49 @@ class CategoriaDAOTest {
 	
 	@Test
 	void testGetCat() throws Exception{
-		
+		try {
+			Categoria cat=new Categoria( "Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
+			model.addCategoria(cat);
+			assertEquals("Biscotti",model.getCategoria("Pacifico", "Biscotti").getNomeCategoria());
+		} finally {
+			model.deleteCategory("Pacifico", "Biscotti");
+		}
 	}
 	
 	@Test
 	void testGetAllCategoryBySeller() throws Exception{
-		
+		try {
+			Categoria cat=new Categoria( "Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
+			model.addCategoria(cat);
+			assertEquals(1,model.getAllCategoryBySeller("Mario").size());
+		} finally {
+			model.deleteCategory("Pacifico", "Biscotti");
+		}
 	}
 	
 	@Test
 	void testUpdatePathCat() throws Exception{
-		
+		try {
+			Categoria cat=new Categoria( "Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
+			model.addCategoria(cat);
+			model.updatePathCategoria("Pacifico", "Biscotti", "path/biscuits");
+			assertEquals("path/biscuits",model.getCategoria("Pacifico", "Biscotti").getPath());
+		} finally {
+			model.deleteCategory("Pacifico", "Biscotti");
+		}
 	}
 	
 	@Test
 	void testUpdateDescrizioneCat() throws Exception{
-		
+		try {
+			Categoria cat=new Categoria( "Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
+			model.addCategoria(cat);
+			model.updateDescrizioneCategoria("Pacifico", "Biscotti", "Desc");
+			assertEquals("Desc",model.getCategoria("Pacifico", "Biscotti").getDescrizione());
+		} finally {
+			model.deleteCategory("Pacifico", "Biscotti");
+		}
 	}
 	
-	@Test
-	void testDeleteCat() throws Exception{
-		
-	}
-
 
 }
