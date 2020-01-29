@@ -71,16 +71,24 @@ class NegozioDAOTest {
 			model.deleteShop("Pacifico");
 		}
 	}
-	/*
+	
+	
+	
+
 	@Test
 	void getNegozioByName() throws Exception {
 		try {
 			Negozio negozio = new Negozio("Pacifico","Mario","left","Verde","11111111112","2019-05-01","Pacifico nasce nel 1920, a Herzogenaurach","senerchia","casagiove","81023","images/negozi/Pacifico/Pacifico.png");
-			
-		}finally
+			model.addNegozio(negozio);
+			Negozio test = model.getNegozioByName(negozio.getNomeNegozio());
+			assertEquals(negozio.getNomeNegozio(),test.getNomeNegozio());
+		}finally {
+			model.deleteShop("Pacifico");
+		}
+		
 	}
 	
-	*/
+	
 	
 	
 	

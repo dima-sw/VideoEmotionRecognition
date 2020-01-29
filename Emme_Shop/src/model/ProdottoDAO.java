@@ -75,7 +75,47 @@ public class ProdottoDAO implements Serializable {
 				//connection.close();
 			}
 		}
-		return path;
+				return path;
+	}
+	
+	
+	public synchronized int getIDProd(String cat, String neg, String nomep) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		
+		String viewOrdineCliente = " SELECT IdProdotto from prodotto  WHERE Nome_Negozio=? AND Nome_Categoria=? AND nome=?";
+		int id=0;
+		try {
+			//connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getDbConnection();
+			preparedStatement = connection.prepareStatement(viewOrdineCliente);
+			preparedStatement.setString(1, neg);
+			preparedStatement.setString(2, cat);
+			preparedStatement.setString(3, nomep);
+			
+		
+			
+			ResultSet result =  preparedStatement.executeQuery();
+			
+			
+			while(result.next()) {
+				id=result.getInt("IdProdotto");
+			}
+			
+			
+				
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					DriverManagerConnectionPool.releaseConnection(connection);
+				//connection.close();
+			}
+		}
+				return id;
 	}
 	
 	
@@ -114,8 +154,8 @@ public class ProdottoDAO implements Serializable {
 				
 				listaProdotti.add(prodottoBean);
 				
-				
 			}
+
 
 		} finally {
 			try {
