@@ -25,8 +25,6 @@ class VenditoreDAOTest extends TestCase{
 
 		
 		private static VenditoreDAO model=new VenditoreDAO();
-		private static Connection connection;
-		
 		
 		
 		
@@ -48,7 +46,8 @@ class VenditoreDAOTest extends TestCase{
 		void testAddVenditore() throws Exception{
 			try {
 				Venditore vend= new Venditore("Mario","Password0#","Mario","Cetrangolo","cetrangolomario98@gmail.com","F","3415578614","Umberto1","Salerno","85100");
-				
+				model.addVenditore(vend);
+				assertEquals("Mario", model.checkLoginSeller("Mario", "Password0#").getUsername());
 			}finally {
 				model.deleteVenditore("Mario");
 			}
@@ -57,3 +56,4 @@ class VenditoreDAOTest extends TestCase{
 		
 		
 	}
+
