@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -32,9 +33,11 @@ public class RegisterSeller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PrintWriter out=response.getWriter();
+		String risposta="";
+		String address="";
+		
 		try {
-		
-		
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		String nome=request.getParameter("fname");
@@ -46,28 +49,109 @@ public class RegisterSeller extends HttpServlet {
 		String città=request.getParameter("city");
 		String cap=request.getParameter("CAP");
 		
-		Venditore venditore=null;
-		venditore=model.addVenditore(username, password, nome, cognome, email, sesso, telefono, via, città, cap);
+		if(Controlli.isUsername(username)) {
+			System.out.println("Username ok");
+			
+			if(Controlli.isPassword(password)) {
+				System.out.println("password ok");
+				
+				if(Controlli.isName(nome)) {
+					System.out.println("nome ok");
+					
+					if(Controlli.isName(cognome)) {
+						System.out.println("Cognome ok");
+						
+						if(Controlli.isEmail(email)) {
+							System.out.println("email ok");
+							
+							if(Controlli.isPhoneNumber(telefono)) {
+								System.out.println("Telefono ok");
+								
+								if(Controlli.isStreet(via)) {
+									System.out.println("Via ok");
+									
+									if(Controlli.isStreet(città)) {
+										System.out.println("città ok");
+										
+										if(Controlli.isCap(cap)) {
+											out.print("OK");
+											System.out.println("Cap ok");
+											Venditore venditore=null;
+											venditore=model.addVenditore(username, password, nome, cognome, email, sesso, telefono, via, città, cap);
+											HttpSession session=request.getSession();
+											session.setAttribute("username-venditore", venditore.getUsername());
+											address="./seller/questionNegozio.jsp";//domanda se vuoi creare il tuo negozio subito
+										}else {
+											System.out.println("Errore cap formato errato");
+											risposta="Errore cap formato errato";
+											String addresss="./seller/sellerRegistration.jsp";
+											response.sendRedirect(addresss);
+										}
+									}else {
+										System.out.println("Errore città formato errato");
+										risposta="Errore città formato errato";
+										String addresss="./seller/sellerRegistration.jsp";
+										response.sendRedirect(addresss);
+									}
+								}else {
+									System.out.println("Errore via formato errato");
+									risposta="Errore via formato errato";
+									String addresss="./seller/sellerRegistration.jsp";
+									response.sendRedirect(addresss);
+								}
+							}else {
+								System.out.println("Errore telefono formato errato");
+								risposta="Errore telefono formato errato";
+								String addresss="./seller/sellerRegistration.jsp";
+								response.sendRedirect(addresss);
+							}
+						}else {
+							System.out.println("Errore email formato errato");
+							risposta="Errore email formato errato";
+							String addresss="./seller/sellerRegistration.jsp";
+							response.sendRedirect(addresss);
+						}
+					}else {
+						System.out.println("Errore cognome formato errato");
+						risposta="Errore cognome formato errato";
+						String addresss="./seller/sellerRegistration.jsp";
+						response.sendRedirect(addresss);
+					}
+				}else {
+					System.out.println("Errore nome formato errato");
+					risposta="Errore nome formato errato";
+					String addresss="./seller/sellerRegistration.jsp";
+					response.sendRedirect(addresss);
+				}
+			}else {
+				System.out.println("Errore password formato errato");
+				risposta="Errore password formato errato";
+				String addresss="./seller/sellerRegistration.jsp";
+				response.sendRedirect(addresss);
+			}
+		}else {
+			System.out.println("Errore username formato errato");
+			risposta="Errore username formato errato";
+			String addresss="./seller/sellerRegistration.jsp";
+			response.sendRedirect(addresss);
+		}
+	
 		
-		
-		
-		HttpSession session=request.getSession();
-		session.setAttribute("username-venditore", venditore.getUsername());
-		String address="./seller/questionNegozio.jsp";//domanda se vuoi creare il tuo negozio subito
-
 		response.sendRedirect(address);
+		
+		out.print(risposta);
 	}
 	catch (SQLException e) {//errore ricarica il form registrazione
 		System.out.println("Error:" + e.getMessage());
-		String address="./seller/sellerRegistration.jsp";
-		response.sendRedirect(address);
+		String addresss="./seller/sellerRegistration.jsp";
+		response.sendRedirect(addresss);
 		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
