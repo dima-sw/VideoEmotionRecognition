@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,6 +34,10 @@ public class RegisterNegozio extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out=response.getWriter();
+		String risposta="";
+		String address="";
 		try {
 			
 			HttpSession session=request.getSession();
@@ -47,31 +52,93 @@ public class RegisterNegozio extends HttpServlet {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String dataIscrizione = sdf.format(dt);
 			
+			
 			String descrizione=request.getParameter("descrizione");
 			String via=request.getParameter("street");
 			String citta=request.getParameter("city");
 			String cap=request.getParameter("CAP");
 			String Logo=("images/favicon.ico");
 			
-			session.setAttribute("NomeNegozio", nomeNegozio);
-			session.setAttribute("urlLogoNegozio", Logo);
 			
 			
+			if(Controlli.isUsername(nomeNegozio)) {
+				System.out.println("Nome ok");
+				
+				if(Controlli.isPivaIT(partitaIva)) {
+					System.out.println("PIva ok");
+					
+					if(Controlli.isStreet(via)) {
+						System.out.println("Via ok");
+						
+						if(Controlli.isStreet(citta)) {
+							System.out.println("Città ok");
+							
+							if(Controlli.isDesc(descrizione)) {
+								System.out.println("Descrizione ok");
+							
+							if(Controlli.isCap(cap)) {
+								out.print("OK");		
+								System.out.println("Cap ok");
+								
+								session.setAttribute("NomeNegozio", nomeNegozio);
+								session.setAttribute("urlLogoNegozio", Logo);
+								model.addNegozio(nomeNegozio, usernameVenditore, template, colore, partitaIva,
+										 dataIscrizione, descrizione, via, citta, cap, Logo);
+								address="./seller/uploadImage.jsp";
+							}else {
+								System.out.println("Errore cap formato errato");
+								risposta="Errore cap formato errato";
+								String addresss="./seller/registrazione-negozio.jsp";
+								response.sendRedirect(addresss);
+							}
+							}else {
+								System.out.println("Errore descrizione formato errato");
+								risposta="Errore descrizione formato errato";
+								String addresss="./seller/registrazione-negozio.jsp";
+								response.sendRedirect(addresss);
+							}
+							
+						}else {
+							System.out.println("Errore città formato errato");
+							risposta="Errore città formato errato";
+							String addresss="./seller/registrazione-negozio.jsp";
+							response.sendRedirect(addresss);
+						}
+					}else {
+						System.out.println("Errore via formato errato");
+						risposta="Errore via formato errato";
+						String addresss="./seller/registrazione-negozio.jsp";
+						response.sendRedirect(addresss);
+					}
+				}else {
+					System.out.println("Errore Piva formato errato");
+					risposta="Errore Piva formato errato";
+					String addresss="./seller/registrazione-negozio.jsp";
+					response.sendRedirect(addresss);
+				}
+			}else {
+				System.out.println("Errore nome formato errato");
+				risposta="Errore nome formato errato";
+				String addresss="./seller/registrazione-negozio.jsp";
+				response.sendRedirect(addresss);
+			}
+						
+				
 			
-			model.addNegozio(nomeNegozio, usernameVenditore, template, colore, partitaIva,
-					 dataIscrizione, descrizione, via, citta, cap, Logo);
+			
 			
 			int n=1;
 			if(n==0) throw new SQLException();
 			//HttpSession session=request.getSession();
 			//session.removeAttribute("username-venditore");
 			
-			String address="./seller/uploadImage.jsp";
+			
 			response.sendRedirect(address);
+			out.print(risposta);
 	}
 	catch (SQLException e) {//errore ricarica il form registrazione
 		System.out.println("Error:" + e.getMessage());
-		String address="./seller/registrazione-negozio.jsp";
+		String addresss="./seller/registrazione-negozio.jsp";
 		response.sendRedirect(address);
 	}
 }
@@ -81,7 +148,7 @@ public class RegisterNegozio extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

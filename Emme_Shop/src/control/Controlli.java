@@ -16,6 +16,17 @@ public class Controlli {
 		file=new FileWriter("log.txt");
 	}
 	
+	public static boolean isDesc(String desc) {
+		if (desc.length()>3 && desc.length()<500) {
+			if (desc.contains("#") || desc.contains("^") ||desc.contains("°") ) {
+				return false;}
+		
+			return true;
+		}
+		else 
+			return false;
+	}
+	
 	public static boolean isName(String nome) {
 		if(nome.matches("[A-Za-z]{1,25}$"))
 			return true;
