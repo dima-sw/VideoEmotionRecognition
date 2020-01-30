@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -39,6 +40,7 @@ public class LoginVenditore extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
 		
 		Utente utente=null;
 		
@@ -46,8 +48,9 @@ public class LoginVenditore extends HttpServlet {
 			String address="";
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			
+	
 			utente = model.checkLogin(username, password);
+
 			
 			request.getSession().setAttribute("venditore-loggato","n");	
 			request.getSession().setAttribute("username", "");
@@ -69,18 +72,22 @@ public class LoginVenditore extends HttpServlet {
 				
 			
 			response.sendRedirect(address);
-		
+			
 		}
 		catch(NegozioNonEsistenteException e) {
+			
 			System.out.println("Errore:"+e.getMessage());
 			//carica la registrazione del negozio per il venditore se non esiste
 			response.sendRedirect("./seller/registrazione-negozio.jsp");
 		}
 		catch (UtenteNonTrovatoException e) {
+			out.print("Errore utente non trovato");
 			System.out.println("Error:" + e.getMessage());
-			request.getSession().setAttribute("messaggioerrore", e.getMessage());
-			request.getSession().setAttribute("redirecterror", "./index.jsp");
-			response.sendRedirect("./error-page.jsp");
+			//request.getSession().setAttribute("messaggioerrore", e.getMessage());
+			//request.getSession().setAttribute("redirecterror", "./index.jsp");
+			
+			response.sendRedirect("./error-page.jsp?messaggioerrore=Errore utente non trovato&redirecterror=./index.jsp");
+			
 			
 			//response.sendRedirect("./index.jsp");
 		}
@@ -102,7 +109,7 @@ public class LoginVenditore extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

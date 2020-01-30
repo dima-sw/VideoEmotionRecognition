@@ -31,7 +31,7 @@ public class Controlli {
 	}
 	
 	public static boolean isStreet(String via) {
-		if(via.matches("[0-9a-zA-Z]"))
+		if(via.matches("^[0-9a-zA-Z ]+$"))
 			return true;
 		else 
 			return false;

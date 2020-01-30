@@ -66,7 +66,7 @@ public class Venditore extends Utente {
 			Utente utente= model.checkLoginSeller(username, password);
 			
 			if(utente==null)
-				throw new UtenteNonTrovatoException("Venditore non trovato, non esiste");
+				throw new UtenteNonTrovatoException("Errore utente non trovato");
 			else 
 				return utente;
 	}

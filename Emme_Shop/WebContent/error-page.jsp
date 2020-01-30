@@ -32,11 +32,7 @@ String href="";
 
 
 
-</div>
-
-        <%@ include file="./WEB-INF/fragment/footer.jsp" %>
-
-        
+</div>  
 
 </body>
 </html>
