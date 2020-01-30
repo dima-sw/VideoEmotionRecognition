@@ -1,6 +1,8 @@
 package systemtesting;
 
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.Before;
 import org.junit.After;
 import static org.junit.Assert.*;
@@ -24,9 +26,12 @@ import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 public class LoginTest {
+	
+	
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
+  
   @Before
   public void setUp() {
   System.setProperty("webdriver.chrome.driver","D:\\cetra\\Users\\chromedriver.exe");
@@ -42,17 +47,15 @@ public class LoginTest {
   @Test
   public void testLoginVenditore() {
     driver.get("http://localhost:8080/Emme_Shop/index.jsp");
-    driver.manage().window().setSize(new Dimension(1326, 712));
+    driver.manage().window().setSize(new Dimension(1338, 724));
     driver.findElement(By.linkText("Accedi")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(2) > .text-input")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(2) > .text-input")).sendKeys("adidas");
-    driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(3) > .text-input")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(3) > .text-input")).sendKeys("Adidas2#");
     driver.findElement(By.cssSelector("form:nth-child(2) .send-button")).click();
-    driver.findElement(By.cssSelector("ul:nth-child(1) > li")).click();
-    driver.findElement(By.cssSelector("ul:nth-child(1) > li")).click();
-    driver.findElement(By.cssSelector(".fa-sign-out-alt")).click();
-    driver.findElement(By.cssSelector(".content")).click();
+    
+    assertEquals("http://localhost:8080/Emme_Shop/venditore/index-venditore.jsp",driver.getCurrentUrl());
+    
     driver.close();
   }
 }
