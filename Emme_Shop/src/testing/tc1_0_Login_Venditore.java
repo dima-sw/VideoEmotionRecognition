@@ -29,6 +29,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import control.LoginVenditore;
+import manageraccouting.Venditore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,7 +59,8 @@ class tc1_0_Login_Venditore {
 		session = mock(HttpSession.class);
 		myServlet = new LoginVenditore();
 		
-	
+		Venditore vend= new Venditore("Mario","Password0#","Mario","Cetrangolo","cetrangolomario98@gmail.com","F","3415578614","Umberto1","Salerno","85100");
+		model.addVenditore(vend);
 	}
 	
 
@@ -100,6 +102,6 @@ class tc1_0_Login_Venditore {
 		
 	}
 	
-
+	
 	
 }

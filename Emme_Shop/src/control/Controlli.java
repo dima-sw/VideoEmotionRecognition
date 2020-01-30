@@ -17,14 +17,14 @@ public class Controlli {
 	}
 	
 	public static boolean isName(String nome) {
-		if(nome.matches("[A-Za-z]{1,25}"))
+		if(nome.matches("[A-Za-z]{1,25}$"))
 			return true;
 		else 
 			return false;
 	}
 	
 	public static boolean isUsername(String username) {
-		if(username.matches("[0-9a-zA-Z]{3,16}"))
+		if(username.matches("^[0-9a-zA-Z]{3,16}$"))
 			return true;
 		else 
 			return false;
@@ -59,14 +59,14 @@ public class Controlli {
 	}
 	
 	public static boolean isText(String text) {
-		if(text.matches("([a-zA-Zאטלעש' ]$"))
+		if(text.matches("^([a-zA-Zאטלעש' ]$"))
 			return true;
 		else 
 			return false;
 	}
 	
 	public static boolean isPivaIT(String iva) {
-		if(iva.matches("[0-9]{11}"))
+		if(iva.matches("^[0-9]{11}$"))
 			return true;
 		else
 			return false;

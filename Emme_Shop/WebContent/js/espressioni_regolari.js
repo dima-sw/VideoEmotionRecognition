@@ -7,7 +7,7 @@ function isActive(){
 
 //verifica i nomi e cognomi solo lettere
 function isName(uname) {
-    var letters = /^[A-Za-z]+$/;
+    var letters = /^[A-Za-z]{1,25}$/;
     if (uname.value.match(letters)) {
     	//alert("ok");
     	//uname.style.backgroundColor="rgba(0,255,0,0.3)";//Javascript
