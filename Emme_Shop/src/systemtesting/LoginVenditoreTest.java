@@ -25,7 +25,7 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-public class LoginTest {
+public class LoginVenditoreTest {
 	
 	
   private WebDriver driver;
@@ -45,17 +45,44 @@ public class LoginTest {
     driver.quit();
   }
   @Test
-  public void testLoginVenditore() {
+  public void testLoginVenditore() throws InterruptedException {
     driver.get("http://localhost:8080/Emme_Shop/index.jsp");
     driver.manage().window().setSize(new Dimension(1338, 724));
     driver.findElement(By.linkText("Accedi")).click();
+    driver.findElement(By.cssSelector("form:nth-child(2) > p")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(2) > .text-input")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(2) > .text-input")).sendKeys("adidas");
+    driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(3) > .text-input")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(3) > .text-input")).sendKeys("Adidas2#");
+    driver.findElement(By.cssSelector("form:nth-child(2) span:nth-child(3)")).click();
     driver.findElement(By.cssSelector("form:nth-child(2) .send-button")).click();
     
     assertEquals("http://localhost:8080/Emme_Shop/venditore/index-venditore.jsp",driver.getCurrentUrl());
     
-    driver.close();
+    driver.findElement(By.id("#ContentWrapper")).click();
+    driver.findElement(By.id("#ContentWrapper")).click();
+    {
+      WebElement element = driver.findElement(By.id("#ContentWrapper"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element).clickAndHold().perform();
+    }
+    {
+      WebElement element = driver.findElement(By.id("#ContentWrapper"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element).perform();
+    }
+    {
+      WebElement element = driver.findElement(By.id("#ContentWrapper"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element).release().perform();
+    }
+    driver.findElement(By.id("#ContentWrapper")).click();
+    driver.findElement(By.id("#ContentWrapper")).click();
+    driver.findElement(By.cssSelector(".fa-sign-out-alt")).click();
+  
+    
+    assertEquals("http://localhost:8080/Emme_Shop/index.jsp",driver.getCurrentUrl());
+    
+    driver.quit();
   }
 }
