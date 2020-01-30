@@ -36,6 +36,7 @@ public class InserisciCategoria extends HttpServlet {
 		String nomeNegozio = request.getParameter("negozio");
 		request.getSession().setAttribute("negozioNome", nomeNegozio);
 		try {
+			
 			Negozio negozio =(Negozio) mnegozio.getNegozioByName(nomeNegozio);
 			request.getSession().setAttribute("negozio", negozio);
 			response.sendRedirect("./venditore/inserisci-categoria.jsp");
