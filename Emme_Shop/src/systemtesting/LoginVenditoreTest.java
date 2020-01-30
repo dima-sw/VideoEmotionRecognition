@@ -71,6 +71,7 @@ public class LoginVenditoreTest {
       Actions builder = new Actions(driver);
       builder.moveToElement(element).perform();
     }
+    
     {
       WebElement element = driver.findElement(By.id("#ContentWrapper"));
       Actions builder = new Actions(driver);

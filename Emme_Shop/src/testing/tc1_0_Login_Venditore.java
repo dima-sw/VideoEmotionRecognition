@@ -1,5 +1,6 @@
 package testing;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -29,7 +30,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import control.LoginVenditore;
+import manageraccouting.Utente;
 import manageraccouting.Venditore;
+import model.VenditoreDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +44,7 @@ import org.mockito.Mock;
 class tc1_0_Login_Venditore {
 
 	LoginVenditore myServlet;
+	VenditoreDAO model=new VenditoreDAO();
 	
 	@Mock
 	HttpServletRequest request;
@@ -50,6 +54,9 @@ class tc1_0_Login_Venditore {
 	
 	@Mock
 	HttpSession session;
+	
+	@Mock
+	Utente u;
 
 	
 	@BeforeEach
@@ -58,7 +65,6 @@ class tc1_0_Login_Venditore {
 		response = mock(HttpServletResponse.class);
 		session = mock(HttpSession.class);
 		myServlet = new LoginVenditore();
-		
 		Venditore vend= new Venditore("Mario","Password0#","Mario","Cetrangolo","cetrangolomario98@gmail.com","F","3415578614","Umberto1","Salerno","85100");
 		model.addVenditore(vend);
 	}
@@ -66,7 +72,7 @@ class tc1_0_Login_Venditore {
 
 	@AfterEach
 	public void tearDown() throws SQLException {
-		
+		model.deleteVenditore("Mario");
 	}
 	
 	
@@ -102,6 +108,30 @@ class tc1_0_Login_Venditore {
 		
 	}
 	
+	@Test
+	public void tc_1_0_3() throws IOException, ServletException {
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		when(request.getParameter("username")).thenReturn("Mario");
+		when(request.getParameter("password")).thenReturn("Password0#");
 	
+		
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("venditore-loggato")).thenReturn("n");
+		when(session.getAttribute("username")).thenReturn("");
+		when(session.getAttribute("utente")).thenReturn(null);
+		when(session.getAttribute("username-venditore")).thenReturn("Mario");
+		when(session.getAttribute("negozioBean")).thenReturn(null);
+		when(session.getAttribute("negozioNome")).thenReturn(null);
+		
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("OK", output.toString());
+		
+	}
 	
 }
