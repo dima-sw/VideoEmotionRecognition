@@ -1,5 +1,6 @@
 package control;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -35,9 +36,10 @@ public class InsertCategoria extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		PrintWriter writer = response.getWriter();
 		String address="";
 		String urlLogoCategoria="images/favicon.ico";
+		String risposta = "";
 		try {
 			
 			HttpSession session=request.getSession();
@@ -46,16 +48,23 @@ public class InsertCategoria extends HttpServlet {
 			Negozio neg=(Negozio) session.getAttribute("negozio");
 			String negozio=(String) session.getAttribute("negozioNome");
 			
+			
 			String nomeNegozio=request.getParameter("nomeNegozio");
 			String nomeCategoria=request.getParameter("nomeCategoria");
 			String descCategoria=request.getParameter("descCategoria");
 			
-			Categoria categoria=mcategoria.addCategoria(nomeNegozio,nomeCategoria,urlLogoCategoria,descCategoria);
-			request.getSession().setAttribute("nomeCategoriaImage",categoria.getNomeCategoria());
+			if(Controlli.isStreet(nomeCategoria)) {
+				System.out.println("ok nomeCategoria");
+				Categoria categoria=mcategoria.addCategoria(nomeNegozio,nomeCategoria,urlLogoCategoria,descCategoria);
+				request.getSession().setAttribute("nomeCategoriaImage",categoria.getNomeCategoria());
+				address="venditore/uploadImageCategoria.jsp";
+				response.sendRedirect(address);
+			}else {
+				System.out.println("Nome categoria errato");
+				risposta = "Nome categoria formato errato";
+			}
 			
-			address="venditore/uploadImageCategoria.jsp";
-			response.sendRedirect(address);
-			
+			writer.print(risposta);
 		}catch(SQLException e ) {
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
 			request.getSession().setAttribute("redirecterror", "./venditore/index-venditore.jsp");
@@ -68,7 +77,7 @@ public class InsertCategoria extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

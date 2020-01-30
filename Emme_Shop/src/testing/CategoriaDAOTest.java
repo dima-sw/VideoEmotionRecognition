@@ -38,7 +38,7 @@ class CategoriaDAOTest {
 	@Test
 	void testAddCat() throws Exception{
 		try {
-			Categoria cat=new Categoria( "Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
+			Categoria cat=new Categoria("Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
 			model.addCategoria(cat);
 			assertEquals("Pacifico",model.getCategoria("Pacifico", "Biscotti").getNomeNegozio());
 			assertEquals("Biscotti",model.getCategoria("Pacifico", "Biscotti").getNomeCategoria());
@@ -61,7 +61,7 @@ class CategoriaDAOTest {
 	@Test
 	void testGetAllCategoryBySeller() throws Exception{
 		try {
-			Categoria cat=new Categoria( "Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
+			Categoria cat=new Categoria("Pacifico",  "Biscotti", "path/biscotti",  "descrizione");
 			model.addCategoria(cat);
 			assertEquals(1,model.getAllCategoryBySeller("Mario").size());
 		} finally {
