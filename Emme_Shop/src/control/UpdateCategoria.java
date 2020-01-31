@@ -1,6 +1,8 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,16 +34,27 @@ public class UpdateCategoria extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
 		String address="";
 		HttpSession session=request.getSession();
 		
 		Categoria bean=new Categoria();
 		bean.setNomeNegozio(request.getParameter("nomeNegozio"));
 		bean.setNomeCategoria(request.getParameter("nomeCategoria"));
-		bean.setDescrizione(request.getParameter("descCategoria"));
+		String desc=request.getParameter("descCategoria");
+
+		if(Controlli.isDesc(desc)) {
+			bean.setDescrizione(desc);
+			out.print("OK");
+		}else {
+			System.out.println("Errore descrizione formato errato");
+			out.print("Errore descrizione formato errato");
+			String addresss="./venditore/modifica-categoria.jsp";
+			response.sendRedirect(addresss);
+		}
+		
 		bean.setPath(request.getParameter("path"));
 		session.setAttribute("urlLogoCategoria",bean.getPath());
-		
 		try 
 		{
 			session.setAttribute("urlLogoCategoria", bean.getPath());
@@ -51,6 +64,7 @@ public class UpdateCategoria extends HttpServlet {
 			
 			address="venditore/uploadImageCategoria.jsp";
 			response.sendRedirect(address);
+			
 	}
 		catch(Exception e) {
 			 address="errore-page.jsp";
@@ -59,16 +73,14 @@ public class UpdateCategoria extends HttpServlet {
 			 response.sendRedirect(address);
 			 System.out.print(e);
 		}
-		finally {
-			
-		}
+		
 	}
 		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

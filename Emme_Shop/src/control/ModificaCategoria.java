@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -36,6 +37,8 @@ public class ModificaCategoria extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//PrintWriter out=response.getWriter();
+		
 		String nomeNegozio=request.getParameter("negozio");
 		String nomeCategoria = request.getParameter("categoria");
 		request.getSession().setAttribute("negozioNome", nomeNegozio);
@@ -46,7 +49,7 @@ public class ModificaCategoria extends HttpServlet {
 			request.getSession().setAttribute("categoriaNegozio", categ);
 			request.getSession().setAttribute("negozioBean", negozio);
 			response.sendRedirect("./venditore/modifica-categoria.jsp");
-		
+			//out.print("OK");
 		} catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:" + e.getMessage());
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());

@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -37,6 +38,7 @@ public class RemoveCat extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PrintWriter out= response.getWriter();
 		
 		String address="./venditore/index-venditore.jsp";
 		String neg=request.getParameter("negozio");
@@ -53,6 +55,7 @@ public class RemoveCat extends HttpServlet {
 			categorie=model.getAllCategoryBySeller(utente.getUsername());
 			request.getSession().setAttribute("categorie", categorie);
 			response.sendRedirect(address);
+			out.print("OK");
 		}
 		catch (ParametroNonCorrettoException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -72,7 +75,7 @@ public class RemoveCat extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
