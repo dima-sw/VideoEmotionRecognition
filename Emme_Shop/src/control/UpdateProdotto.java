@@ -50,7 +50,8 @@ public class UpdateProdotto extends HttpServlet {
 			bean.setNomeCategoria(request.getParameter("nomeCategoria"));
 			bean.setNome(request.getParameter("nomeProdotto"));
 			bean.setDescrizione(request.getParameter("descProdotto"));
-			bean.setPrezzo(Float.parseFloat(request.getParameter("prezzoProdotto")));
+			String prezzo=request.getParameter("prezzoProdotto");
+			bean.setPrezzo(Float.parseFloat(prezzo));
 			bean.setIva(Integer.parseInt(request.getParameter("ivaProdotto")));
 			bean.setQuantita(Integer.parseInt(request.getParameter("qtaProdotto")));
 			bean.setSconto(Integer.parseInt(request.getParameter("scontoProdotto")));
@@ -65,7 +66,7 @@ public class UpdateProdotto extends HttpServlet {
 					risposta="OK";			
 					System.out.println("Descrizione ok");
 					
-					if(Controlli.isPrezzo(String.valueOf(bean.getPrezzo()))) {
+					if(Controlli.isPrezzo(prezzo)) {
 						risposta="OK";			
 						System.out.println("Prezzo ok");
 						
@@ -125,6 +126,14 @@ public class UpdateProdotto extends HttpServlet {
 				response.sendRedirect(address);
 				out.print(risposta);
 	}
+		catch(NumberFormatException e) {
+			System.out.println("Errore quantità formato errato");
+			risposta="Errore quantità formato errato";
+			
+			String addresss="./venditore/modifica-prodotto.jsp";
+			response.sendRedirect(addresss);
+			out.print(risposta);
+		}
 	catch(Exception e) {
 		 address="errore-page.jsp";
 		 request.getSession().setAttribute("messaggioerrore", e.getMessage());

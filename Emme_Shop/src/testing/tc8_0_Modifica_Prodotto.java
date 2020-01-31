@@ -234,6 +234,214 @@ UpdateProdotto myServlet;
 		
 	}
 	
+	@Test
+	public void tc_8_0_5() throws IOException, ServletException, SQLException {
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		int id= modelp.getIDProd("Biscotti","Pacifico","ringo");
+		System.out.println(id);
+		Collection<Prodotto>prodotti;
+		prodotti=modelp.getAllProductBySellerCategory(vend.getUsername(), cat.getNomeCategoria());
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("prodotti")).thenReturn(prodotti);
+		when(session.getAttribute("username-venditore")).thenReturn(vend.getUsername());
+		when(session.getAttribute("categoria")).thenReturn(cat.getNomeCategoria());
+		when(session.getAttribute("urlLogoProdotto")).thenReturn(cat.getPath());
+		when(session.getAttribute("nomeProdottoImage")).thenReturn(prod.getIdProdotto());
+		when(session.getAttribute("nomeProdottoCat")).thenReturn(prod.getNomeCategoria());
+		
+	
+		when(request.getParameter("id")).thenReturn(String.valueOf(id));
+		when(request.getParameter("nomeNegozio")).thenReturn(neg.getNomeNegozio());
+		when(request.getParameter("nomeCategoria")).thenReturn(cat.getNomeCategoria());
+		
+
+		when(request.getParameter("nomeProdotto")).thenReturn(prod.getNome());
+		when(request.getParameter("descProdotto")).thenReturn(prod.getDescrizione());
+		when(request.getParameter("prezzoProdotto")).thenReturn("25");
+		when(request.getParameter("ivaProdotto")).thenReturn(String.valueOf(prod.getIva()));
+		when(request.getParameter("qtaProdotto")).thenReturn(String.valueOf(prod.getQuantita()));
+		when(request.getParameter("scontoProdotto")).thenReturn(String.valueOf(prod.getSconto()));
+		
+
+		when(request.getParameter("path")).thenReturn(prod.getPath());
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("Errore prezzo formato errato", output.toString());
+		
+	}
+	
+	@Test
+	public void tc_8_0_6() throws IOException, ServletException, SQLException {
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		int id= modelp.getIDProd("Biscotti","Pacifico","ringo");
+		System.out.println(id);
+		Collection<Prodotto>prodotti;
+		prodotti=modelp.getAllProductBySellerCategory(vend.getUsername(), cat.getNomeCategoria());
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("prodotti")).thenReturn(prodotti);
+		when(session.getAttribute("username-venditore")).thenReturn(vend.getUsername());
+		when(session.getAttribute("categoria")).thenReturn(cat.getNomeCategoria());
+		when(session.getAttribute("urlLogoProdotto")).thenReturn(cat.getPath());
+		when(session.getAttribute("nomeProdottoImage")).thenReturn(prod.getIdProdotto());
+		when(session.getAttribute("nomeProdottoCat")).thenReturn(prod.getNomeCategoria());
+		
+	
+		when(request.getParameter("id")).thenReturn(String.valueOf(id));
+		when(request.getParameter("nomeNegozio")).thenReturn(neg.getNomeNegozio());
+		when(request.getParameter("nomeCategoria")).thenReturn(cat.getNomeCategoria());
+		
+
+		when(request.getParameter("nomeProdotto")).thenReturn(prod.getNome());
+		when(request.getParameter("descProdotto")).thenReturn(prod.getDescrizione());
+		when(request.getParameter("prezzoProdotto")).thenReturn(String.valueOf(prod.getPrezzo()));
+		when(request.getParameter("ivaProdotto")).thenReturn(String.valueOf(222));
+		when(request.getParameter("qtaProdotto")).thenReturn(String.valueOf(prod.getQuantita()));
+		when(request.getParameter("scontoProdotto")).thenReturn(String.valueOf(prod.getSconto()));
+		
+
+		when(request.getParameter("path")).thenReturn(prod.getPath());
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("Errore iva formato errato", output.toString());
+		
+	}
+	
+	@Test
+	public void tc_8_0_7() throws IOException, ServletException, SQLException {
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		int id= modelp.getIDProd("Biscotti","Pacifico","ringo");
+		System.out.println(id);
+		Collection<Prodotto>prodotti;
+		prodotti=modelp.getAllProductBySellerCategory(vend.getUsername(), cat.getNomeCategoria());
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("prodotti")).thenReturn(prodotti);
+		when(session.getAttribute("username-venditore")).thenReturn(vend.getUsername());
+		when(session.getAttribute("categoria")).thenReturn(cat.getNomeCategoria());
+		when(session.getAttribute("urlLogoProdotto")).thenReturn(cat.getPath());
+		when(session.getAttribute("nomeProdottoImage")).thenReturn(prod.getIdProdotto());
+		when(session.getAttribute("nomeProdottoCat")).thenReturn(prod.getNomeCategoria());
+		
+	
+		when(request.getParameter("id")).thenReturn(String.valueOf(id));
+		when(request.getParameter("nomeNegozio")).thenReturn(neg.getNomeNegozio());
+		when(request.getParameter("nomeCategoria")).thenReturn(cat.getNomeCategoria());
+		
+
+		when(request.getParameter("nomeProdotto")).thenReturn(prod.getNome());
+		when(request.getParameter("descProdotto")).thenReturn(prod.getDescrizione());
+		when(request.getParameter("prezzoProdotto")).thenReturn(String.valueOf(prod.getPrezzo()));
+		when(request.getParameter("ivaProdotto")).thenReturn(String.valueOf(prod.getIva()));
+		when(request.getParameter("qtaProdotto")).thenReturn("2@");
+		when(request.getParameter("scontoProdotto")).thenReturn(String.valueOf(prod.getSconto()));
+		
+
+		when(request.getParameter("path")).thenReturn(prod.getPath());
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("Errore quantità formato errato", output.toString());
+		
+	}
+	
+
+	@Test
+	public void tc_8_0_8() throws IOException, ServletException, SQLException {
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		int id= modelp.getIDProd("Biscotti","Pacifico","ringo");
+		System.out.println(id);
+		Collection<Prodotto>prodotti;
+		prodotti=modelp.getAllProductBySellerCategory(vend.getUsername(), cat.getNomeCategoria());
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("prodotti")).thenReturn(prodotti);
+		when(session.getAttribute("username-venditore")).thenReturn(vend.getUsername());
+		when(session.getAttribute("categoria")).thenReturn(cat.getNomeCategoria());
+		when(session.getAttribute("urlLogoProdotto")).thenReturn(cat.getPath());
+		when(session.getAttribute("nomeProdottoImage")).thenReturn(prod.getIdProdotto());
+		when(session.getAttribute("nomeProdottoCat")).thenReturn(prod.getNomeCategoria());
+		
+	
+		when(request.getParameter("id")).thenReturn(String.valueOf(id));
+		when(request.getParameter("nomeNegozio")).thenReturn(neg.getNomeNegozio());
+		when(request.getParameter("nomeCategoria")).thenReturn(cat.getNomeCategoria());
+		
+
+		when(request.getParameter("nomeProdotto")).thenReturn(prod.getNome());
+		when(request.getParameter("descProdotto")).thenReturn(prod.getDescrizione());
+		when(request.getParameter("prezzoProdotto")).thenReturn(String.valueOf(prod.getPrezzo()));
+		when(request.getParameter("ivaProdotto")).thenReturn(String.valueOf(prod.getIva()));
+		when(request.getParameter("qtaProdotto")).thenReturn(String.valueOf(prod.getQuantita()));
+		when(request.getParameter("scontoProdotto")).thenReturn(String.valueOf(233));
+		
+
+		when(request.getParameter("path")).thenReturn(prod.getPath());
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("Errore sconto formato errato", output.toString());
+		
+	}
+	
+
+	@Test
+	public void tc_8_0_9() throws IOException, ServletException, SQLException {
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		int id= modelp.getIDProd("Biscotti","Pacifico","ringo");
+		System.out.println(id);
+		Collection<Prodotto>prodotti;
+		prodotti=modelp.getAllProductBySellerCategory(vend.getUsername(), cat.getNomeCategoria());
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("prodotti")).thenReturn(prodotti);
+		when(session.getAttribute("username-venditore")).thenReturn(vend.getUsername());
+		when(session.getAttribute("categoria")).thenReturn(cat.getNomeCategoria());
+		when(session.getAttribute("urlLogoProdotto")).thenReturn(cat.getPath());
+		when(session.getAttribute("nomeProdottoImage")).thenReturn(prod.getIdProdotto());
+		when(session.getAttribute("nomeProdottoCat")).thenReturn(prod.getNomeCategoria());
+		
+	
+		when(request.getParameter("id")).thenReturn(String.valueOf(id));
+		when(request.getParameter("nomeNegozio")).thenReturn(neg.getNomeNegozio());
+		when(request.getParameter("nomeCategoria")).thenReturn(cat.getNomeCategoria());
+		
+
+		when(request.getParameter("nomeProdotto")).thenReturn(prod.getNome());
+		when(request.getParameter("descProdotto")).thenReturn(prod.getDescrizione());
+		when(request.getParameter("prezzoProdotto")).thenReturn(String.valueOf(prod.getPrezzo()));
+		when(request.getParameter("ivaProdotto")).thenReturn(String.valueOf(prod.getIva()));
+		when(request.getParameter("qtaProdotto")).thenReturn(String.valueOf(prod.getQuantita()));
+		when(request.getParameter("scontoProdotto")).thenReturn(String.valueOf(prod.getSconto()));
+		
+
+		when(request.getParameter("path")).thenReturn(prod.getPath());
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("OK", output.toString());
+		
+	}
+	
+	
 	VenditoreDAO model=new VenditoreDAO();
 	NegozioDAO modeln=new NegozioDAO();
 	ProdottoDAO modelp=new ProdottoDAO();
