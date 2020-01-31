@@ -12,12 +12,20 @@ import eccezione.ParametroNonCorrettoException;
 import model.ProdottoDAO;
 
 /**
- * 
  * la classe Prodotto gestisce le operazioni di modifica, cancellazione di un prodotto
- * */
+ *
+ * @author cetra
+ *
+ */
 public class Prodotto {
 	
+	/**
+	 * Permette di usare la classe Prodotto DAO
+	 */
 	static ProdottoDAO model=new ProdottoDAO();
+	/**
+	 * Permette di usare la classe CategoriaDAO
+	 */
 	static Categoria categoria=new Categoria();
 	
 	private String nomeNegozio;
@@ -32,6 +40,9 @@ public class Prodotto {
 	private String descrizione;
 	private int prova = 0;
 	
+	/**
+	 * Costruttore vuoto
+	 */
 	public Prodotto() {
 		this.nomeNegozio = "";
 		this.nomeCategoria = "";
@@ -45,6 +56,19 @@ public class Prodotto {
 		this.descrizione = "";
 	}
 	
+	/**
+	 * Costruttore crea un oggetto Prodotto
+	 * @param idProdotto
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @param nome
+	 * @param iva
+	 * @param path
+	 * @param prezzo
+	 * @param qta
+	 * @param sconto
+	 * @param descrizione
+	 */
 	public Prodotto(int idProdotto,String nomeNegozio,String nomeCategoria,String nome,int iva, String path, float prezzo, int qta, int sconto, String descrizione) {
 		this.nomeNegozio = nomeNegozio;
 		this.nomeCategoria = nomeCategoria;
@@ -59,9 +83,9 @@ public class Prodotto {
 	}
 	
 	/**
-	 * 
+	 * Crea il path per inserire image del prodotto
 	 * @param id
-	 * @return String path dell'id
+	 * @return string, path dell'image del prodotto
 	 * @throws SQLException
 	 */
 	public String getPathByID(int id) throws SQLException{
@@ -69,13 +93,16 @@ public class Prodotto {
 		String path=model.getPathByID(id);
 		return path;
 	}
+	
 	/**
-	 * restituisce tutti i prodotti relativa a quella categoria di quel venditore.
+	 *  restituisce tutti i prodotti relativa a quella categoria di quel venditore.
+	 * <h2>Precondizione</h2>
+	 * <pre>venditore, categoria devono non essere null</pre>
 	 * @param venditore
 	 * @param categoria
-	 * @return Collection<Prodotto> può essere anche vuota
+	 * @return Collection di prodotti relativi a quella categoria di quel venditore
 	 * @throws SQLException
-	 * @throws ParametroNonCorrettoException 
+	 * @throws ParametroNonCorrettoException
 	 */
 	public Collection<Prodotto> getAllProductBySellerCategory(String venditore,String categoria) throws SQLException, ParametroNonCorrettoException{
 		if (venditore==null || categoria==null) {
@@ -85,6 +112,15 @@ public class Prodotto {
 		return prodotti;
 	}
 	
+	
+	/**
+	 * Aggiunge un prodotto nel database
+	 * <pre>il prodotto passato in input non deve essere null</pre>
+	 * @param prodotto
+	 * @return Prodotto, restituisce il prodotto appena aggiunto o un eccezione
+	 * @throws SQLException
+	 * @throws ParametroNonCorrettoException
+	 */
 	public Prodotto addProdotto(Prodotto prodotto) throws SQLException, ParametroNonCorrettoException {
 		if (prodotto==null) {
 			throw new ParametroNonCorrettoException("Prodotto inserito non valido!!");
@@ -95,6 +131,12 @@ public class Prodotto {
 	}
 	
 	
+	/**
+	 * crea la cartella se non esiste se no preleva il path per restituirlo
+	 * @param nomeNegozio
+	 * @param UPLOAD_DIRECTORY
+	 * @return String, url path dove inserisce image del prodotto
+	 */
 	public String openCartellaNegozio(String nomeNegozio, String UPLOAD_DIRECTORY) {				
 		/*
 		UPLOAD_DIRECTORY+="\\"+nomeNegozio;
@@ -142,26 +184,48 @@ public class Prodotto {
 	 * @param nomeCategoria
 	 * @param id
 	 * @param logo
-	 * @return boolean 
+	 * @return boolean  true in caso di successo
 	 * @throws SQLException
 	 */
 	public boolean updatePathProdotto(String nomeNegozio, String nomeCategoria, int id, String logo) throws SQLException {
 		
-		model.updatePathProdotto(nomeNegozio, nomeCategoria, id, logo);
+		return model.updatePathProdotto(nomeNegozio, nomeCategoria, id, logo);
 		
-		return true;
 	}
 	
+	
+	/**
+	 * Cancella il prodotto tramite il suo id dal database
+	 * @param id
+	 * @return boolean true se la cancellazione ha avuto successo
+	 * @throws SQLException
+	 */
 	public   boolean deleteProduct (int id ) throws SQLException {
 		return model.deleteProduct(id);
 	}
 	
+	/**
+	 * restituisce il prodotto tramite il suo id
+	 * @param idProdotto
+	 * @return Prodotto
+	 * @throws SQLException
+	 */
 	public Prodotto getProductById(int idProdotto) throws SQLException {
 		return model.getProductById(idProdotto);
 	}
 	
+	/**
+	 * Modifica il prodotto
+	 * @param bean
+	 * @return boolean true se avvenuta la modifica
+	 * @throws SQLException
+	 */
 	public boolean updateProdotto(Prodotto bean) throws SQLException {
-		return model.updateProdotto(bean);
+		boolean flag= model.updateProdotto(bean);
+		if(flag)
+			return true;
+		else 
+			return false;
 	}
 	
 	

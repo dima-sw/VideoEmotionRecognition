@@ -33,6 +33,12 @@ public class Controlli {
 		else 
 			return false;
 	}
+	/*public static boolean isNameProdotto(String nome) {
+		if(nome.matches("[0-9A-Za-z]{2,25}$"))
+			return true;
+		else 
+			return false;
+	}*/
 	
 	public static boolean isUsername(String username) {
 		if(username.matches("^[0-9a-zA-Z]{3,16}$"))

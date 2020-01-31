@@ -1,6 +1,8 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,9 +36,11 @@ public class UpdateProdotto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out=response.getWriter();
 		String address="";
 		HttpSession session=request.getSession();
-		
+		String risposta="";
 		Prodotto bean=new Prodotto();
 		try
 		{	
@@ -52,12 +56,73 @@ public class UpdateProdotto extends HttpServlet {
 			bean.setPath(request.getParameter("path"));
 			session.setAttribute("urlLogoProdotto",bean.getPath());
 		
+			if(Controlli.isStreet(bean.getNome())) {
+				risposta="OK";		
+				System.out.println("Nome ok");
+				
+				if(Controlli.isDesc(bean.getDescrizione())) {
+					risposta="OK";			
+					System.out.println("Descrizione ok");
+					
+					if(Controlli.isPrezzo(String.valueOf(bean.getPrezzo()))) {
+						risposta="OK";			
+						System.out.println("Prezzo ok");
+						
+						if(Controlli.isSconto(String.valueOf(bean.getIva()))) {
+							risposta="OK";		
+							System.out.println("Iva ok");
+							
+							if(Controlli.isQuantità(String.valueOf(bean.getQuantita()))) {
+								risposta="OK";		
+								System.out.println("Quantità ok");
+								
+								if(Controlli.isSconto(String.valueOf(bean.getSconto()))) {
+									risposta="OK";			
+									System.out.println("Sconto ok");
+								
+								}else {
+									System.out.println("Errore sconto formato errato");
+									risposta="Errore sconto formato errato";
+									String addresss="./venditore/modifica-prodotto.jsp";
+									response.sendRedirect(addresss);
+								}
+							}else {
+								System.out.println("Errore quantità formato errato");
+								risposta="Errore quantità formato errato";
+								String addresss="./venditore/modifica-prodotto.jsp";
+								response.sendRedirect(addresss);
+							}
+						}else {
+							System.out.println("Errore iva formato errato");
+							risposta="Errore iva formato errato";
+							String addresss="./venditore/modifica-prodotto.jsp";
+							response.sendRedirect(addresss);
+						}
+					}else {
+						System.out.println("Errore prezzo formato errato");
+						risposta="Errore prezzo formato errato";
+						String addresss="./venditore/modifica-prodotto.jsp";
+						response.sendRedirect(addresss);
+					}
+				}else {
+					System.out.println("Errore descrizione formato errato");
+					risposta="Errore descrizione formato errato";
+					String addresss="./venditore/modifica-prodotto.jsp";
+					response.sendRedirect(addresss);
+				}
+			}else {
+				System.out.println("Errore nome formato errato");
+				risposta="Errore nome formato errato";
+				String addresss="./venditore/modifica-prodotto.jsp";
+				response.sendRedirect(addresss);
+			}
 				modelProd.updateProdotto(bean);
 				
 				session.setAttribute("nomeProdottoImage",bean.getIdProdotto());
 				session.setAttribute("nomeProdottoCat",bean.getNomeCategoria());
 				address="venditore/uploadImageProdotto.jsp";
 				response.sendRedirect(address);
+				out.print(risposta);
 	}
 	catch(Exception e) {
 		 address="errore-page.jsp";
@@ -75,7 +140,7 @@ public class UpdateProdotto extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

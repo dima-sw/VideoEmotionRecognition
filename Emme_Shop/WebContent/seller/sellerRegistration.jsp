@@ -51,7 +51,7 @@
     						</td>
     						<td>                         
 	                       	 	<div class="tooltip"><img class="imageInfo" src="../images/info.png" width="20px" >	
-	  								<span class="tooltiptext">Campo Nome <br>formato: solo lettere.<br> Esempio:Max</span>
+	  								<span class="tooltiptext">Campo Nome <br>formato: solo lettere minimo 1 max 25.<br> Esempio:Max</span>
 								</div>  
 							</td>
 						</tr>
@@ -65,7 +65,7 @@
                    	       	</td>
 		                   	<td>       	
 		                   	     <div class="tooltip"><img class="imageInfo" src="../images/info.png" width="20px" >	
-		  								<span class="tooltiptext">Campo Cognome <br>formato: solo lettere.<br>Esempio: Super</span>
+		  								<span class="tooltiptext">Campo Cognome <br>formato: solo lettere minimo 1 max 25.<br>Esempio: Super</span>
 									</div>  
 							</td>
 						</tr>
@@ -90,7 +90,7 @@
                       	 </td>
                       	 <td>  
 	                       	 <div class="tooltip"><img class="imageInfo" src="../images/info.png" width="20px" >	
-	  								<span class="tooltiptext">Campo Email <br>formato: <br> una sola @.<br>Esempio: max@gmail.com</span>
+	  								<span class="tooltiptext">Campo Email <br>formato: <br> una sola @, un punto con max 3 lettere alla fine .<br>Esempio: max@gmail.com</span>
 								</div>  
 						 </td>
 						</tr>

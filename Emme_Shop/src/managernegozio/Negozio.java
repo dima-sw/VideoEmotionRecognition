@@ -12,17 +12,19 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import eccezione.NegozioNonEsistenteException;
 import eccezione.ParametroNonCorrettoException;
-import model.ClienteDAO;
-import model.NegozioDAO;
 
+import model.NegozioDAO;
 /**
- * 
+ * La classe negozio permette di aggiungere un negozio, creare la cartella del negozio sul server
+ * restituire oggetto negozio di un determinato venditore
  * @author cetra
- * la classe Negozio gestisce le operazioni di aggiunta,rimozione,modifca di un prodotto e categoria
  *
  */
 public class Negozio implements Serializable {
 
+	/**
+	 * Permette di accedere alla classe DAO
+	 */
 	static NegozioDAO model= new NegozioDAO();
 	
 	
@@ -39,6 +41,9 @@ public class Negozio implements Serializable {
 	private String cap;
 	private String logo;
 	
+	/**
+	 * costruttore vuoto
+	 */
 	public Negozio() {
 		this.nomeNegozio = "";
 		this.usernameVenditore = "";
@@ -53,6 +58,20 @@ public class Negozio implements Serializable {
 		this.logo = "";
 	}
 	
+	/**
+	 * Costruttore che crea un istanza di negozio
+	 * @param nomeNegozio
+	 * @param usernameVenditore
+	 * @param template
+	 * @param colore
+	 * @param partitaIva
+	 * @param dataIscrizione
+	 * @param descrizione
+	 * @param via
+	 * @param citta
+	 * @param cap
+	 * @param Logo
+	 */
 	public Negozio(String nomeNegozio, String usernameVenditore, String template, String colore, String partitaIva,
 				String dataIscrizione, String descrizione, String via, String citta, String cap, String Logo) {
 			this.nomeNegozio = nomeNegozio;
@@ -69,13 +88,13 @@ public class Negozio implements Serializable {
 		}
 		
 		/**
-		 *
-		 *Restituisce il negozio del venditore passato come username
-		 *
-		 * @param usernameVenditore 
-		 * @return Negozio
+		 * Restituisce il negozio associato ad un venditore
+		 * <pre>Il parametro usernameVenditore è controllato nella servlet</pre>
+		 * 
+		 * @param usernameVenditore, venditore su cui fare la ricerca
+		 * @return Negozio, oggetto negozio del determinato venditore, altrimenti lancia un eccezione
 		 * @throws SQLException
-		 * @throws NegozioNonEsistenteException 
+		 * @throws NegozioNonEsistenteException
 		 */
 		public Negozio getNegozio(String usernameVenditore) throws SQLException, NegozioNonEsistenteException {
 			
@@ -86,9 +105,11 @@ public class Negozio implements Serializable {
 				return negozio;
 		}
 
+		
 		/**
-		 * Aggiunge un nuovo negozio, i parametri di ingresso sono controllati al momento dell'inserimento con javascript
-		 * 
+		 * Aggiunge un nuovo negozio nel Database
+		 * <pre>I parametri di input vengono controllati sia lato cliente nelle jsp che lato server nelle servlet.
+		 * per riferimento abbiamo un tabella dei formati nel RAD</pre>
 		 * @param nomeNegozio
 		 * @param usernameVenditore
 		 * @param template
@@ -100,7 +121,7 @@ public class Negozio implements Serializable {
 		 * @param citta
 		 * @param cap
 		 * @param Logo
-		 * @return Negozio restituisce il negozio creato
+		 * @return Negozio, ritorna oggetto negozio appenna aggiunto, altrimenti si genera un eccezione in caso di errore.
 		 * @throws SQLException
 		 */
 		public Negozio addNegozio(String nomeNegozio, String usernameVenditore, String template, String colore, String partitaIva,
@@ -132,6 +153,14 @@ public class Negozio implements Serializable {
 			return UPLOAD_DIRECTORY;
 		}
 		
+		/**
+		 * Crea il la stringa del path per il logo del negozio
+		 * @param multiparts
+		 * @param nomeNegozio
+		 * @param UPLOAD_DIRECTORY
+		 * @return stringa del path
+		 * @throws Exception
+		 */
 		public String createPathLogo(List<FileItem> multiparts, String nomeNegozio, String UPLOAD_DIRECTORY) throws Exception {
 			
 			String urlLogo="";
@@ -150,6 +179,13 @@ public class Negozio implements Serializable {
 			return urlLogo;
 		}
 		
+		/**
+		 * Modifica url del path del logo negozio
+		 * @param nomeNegozio
+		 * @param urlLogo
+		 * @return boolean, true se andato a buon fine la modifica altrimenti false
+		 * @throws SQLException
+		 */
 		public boolean updateLogoNegozio(String nomeNegozio,String urlLogo) throws SQLException {
 			return model.updateLogoNegozio(nomeNegozio, urlLogo);
 		}
@@ -170,104 +206,162 @@ public class Negozio implements Serializable {
 			return model.getNegozioByName(nomeNegozio);
 		}
 
-		
-		
-		
-		public String getLogo() {
-			return this.logo;
-		}
-
-
-
-		public void setLogo(String logo) {
-			this.logo = logo;
-		}
-
-
-
+		/**
+		 * @return the nomeNegozio
+		 */
 		public String getNomeNegozio() {
 			return nomeNegozio;
 		}
-	
+
+		/**
+		 * @param nomeNegozio the nomeNegozio to set
+		 */
 		public void setNomeNegozio(String nomeNegozio) {
 			this.nomeNegozio = nomeNegozio;
 		}
-		
+
+		/**
+		 * @return the usernameVenditore
+		 */
 		public String getUsernameVenditore() {
 			return usernameVenditore;
 		}
-		
+
+		/**
+		 * @param usernameVenditore the usernameVenditore to set
+		 */
 		public void setUsernameVenditore(String usernameVenditore) {
 			this.usernameVenditore = usernameVenditore;
 		}
-		
+
+		/**
+		 * @return the design
+		 */
 		public String getDesign() {
 			return design;
 		}
-		
+
+		/**
+		 * @param design the design to set
+		 */
 		public void setDesign(String design) {
 			this.design = design;
 		}
-		
+
+		/**
+		 * @return the colore
+		 */
 		public String getColore() {
 			return colore;
 		}
-		
+
+		/**
+		 * @param colore the colore to set
+		 */
 		public void setColore(String colore) {
 			this.colore = colore;
 		}
-		
+
+		/**
+		 * @return the partitaIva
+		 */
 		public String getPartitaIva() {
 			return partitaIva;
 		}
-		
+
+		/**
+		 * @param partitaIva the partitaIva to set
+		 */
 		public void setPartitaIva(String partitaIva) {
 			this.partitaIva = partitaIva;
 		}
-		
+
+		/**
+		 * @return the dataIscrizione
+		 */
 		public String getDataIscrizione() {
 			return dataIscrizione;
 		}
-		
+
+		/**
+		 * @param dataIscrizione the dataIscrizione to set
+		 */
 		public void setDataIscrizione(String dataIscrizione) {
 			this.dataIscrizione = dataIscrizione;
 		}
-		
+
+		/**
+		 * @return the descrizione
+		 */
 		public String getDescrizione() {
 			return descrizione;
 		}
-		
+
+		/**
+		 * @param descrizione the descrizione to set
+		 */
 		public void setDescrizione(String descrizione) {
 			this.descrizione = descrizione;
 		}
-		
+
+		/**
+		 * @return the via
+		 */
 		public String getVia() {
 			return via;
 		}
-		
+
+		/**
+		 * @param via the via to set
+		 */
 		public void setVia(String via) {
 			this.via = via;
 		}
-		
+
+		/**
+		 * @return the citta
+		 */
 		public String getCitta() {
 			return citta;
 		}
-		
+
+		/**
+		 * @param citta the citta to set
+		 */
 		public void setCitta(String citta) {
 			this.citta = citta;
 		}
-		
+
+		/**
+		 * @return the cap
+		 */
 		public String getCap() {
 			return cap;
 		}
-		
+
+		/**
+		 * @param cap the cap to set
+		 */
 		public void setCap(String cap) {
 			this.cap = cap;
 		}
 
-		
-		
+		/**
+		 * @return the logo
+		 */
+		public String getLogo() {
+			return logo;
+		}
 
+		/**
+		 * @param logo the logo to set
+		 */
+		public void setLogo(String logo) {
+			this.logo = logo;
+		}
+
+		
+		
 
 }
 
