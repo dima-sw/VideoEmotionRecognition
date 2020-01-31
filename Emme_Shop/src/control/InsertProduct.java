@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import managernegozio.Prodotto;
 
 /**
- * Servlet implementation class InsertProduct
+ * Servlet che inserisce un nuovo prodotto
  */
 @WebServlet("/InsertProduct")
 public class InsertProduct extends HttpServlet {

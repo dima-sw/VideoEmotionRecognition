@@ -18,7 +18,9 @@ import managerordine.ArrayRiferimento;
 import managerordine.Riferimento;
 
 /**
- * Servlet implementation class VisualizzaOrdine_Venditore
+ * Servlet che reindirizza il venditore alla visione degli ordini
+ * @author cetra
+ *
  */
 @WebServlet("/VisualizzaOrdineVenditore")
 public class VisualizzaOrdineVenditore extends HttpServlet {

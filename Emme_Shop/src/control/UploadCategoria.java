@@ -19,7 +19,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import managernegozio.Categoria;
 
 /**
- * Servlet implementation class Upload
+ * Servlet effettua upload del logo della categoria
+ * @author cetra
+ *
  */
 @WebServlet("/UploadCategoria")
 public class UploadCategoria extends HttpServlet {

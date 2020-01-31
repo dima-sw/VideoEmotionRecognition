@@ -18,7 +18,9 @@ import managernegozio.Categoria;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class RemoveCat
+ * Servlet cancella categoria
+ * @author cetra
+ *
  */
 @WebServlet("/RemoveCat")
 public class RemoveCat extends HttpServlet {

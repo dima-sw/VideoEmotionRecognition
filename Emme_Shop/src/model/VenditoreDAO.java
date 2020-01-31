@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import manageraccouting.Utente;
 import manageraccouting.Venditore;
 
-
+/**
+ * Permette di effettuare le operazioni CRUD per la table Venditore
+ * @author cetra
+ *
+ */
 public class VenditoreDAO implements Serializable {
 	
 	//private static DataSource ds;
@@ -37,10 +41,11 @@ public class VenditoreDAO implements Serializable {
 	}*/
 	
 	/**
-	 * 
+	 * Verifica la presenza di un venditore nel database
+	 * <pre>Controlla se quello restituito dal database è null</pre>
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return Utente
 	 * @throws SQLException
 	 */
 	public synchronized Utente checkLoginSeller(String username,String password) throws SQLException {
@@ -87,7 +92,8 @@ public class VenditoreDAO implements Serializable {
 	}
 	
 	/**
-	 * 
+	 * Aggiunge un venditore nel database
+	 * <pre>Username e password non devono essere giù presenti nel db</pre>
 	 * @param venditore
 	 * @throws SQLException
 	 */
@@ -132,11 +138,12 @@ public class VenditoreDAO implements Serializable {
 	}
 	
 
-
-
-
-
-
+/**
+ * Cancella il venditore dal database tramite username
+ * <pre>Username deve essere presente nel database</pre>
+ * @param username
+ * @throws SQLException
+ */
 public  synchronized void deleteVenditore(String username) throws SQLException {
 	
 	Connection connection = null;

@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 import manageraccouting.Venditore;
 
 /**
- * Servlet implementation class RegisterSeller
+ * Servlet registrazione del venditore
+ * @author cetra
+ *
  */
 @WebServlet("/RegisterSeller")
 public class RegisterSeller extends HttpServlet {

@@ -13,7 +13,11 @@ import javax.sql.DataSource;
 
 import managernegozio.Negozio;
 
-
+/**
+ * Realizza le operazioni da effettuare con li databese riferite alla table Negozio
+ * @author cetra
+ *
+ */
 public class NegozioDAO implements Serializable {
 
 	//private static DataSource ds;
@@ -35,9 +39,12 @@ public class NegozioDAO implements Serializable {
 	}*/
 	
 	/**
-	 * 
+	 * Restituisce il negozio di un venditore
+	 * <pre>
+	 * Il venditore deve essere presente nel db e deve aver creato un negozio
+	 * </pre>
 	 * @param usernameVenditore
-	 * @return il negozio riferito a quel venditore
+	 * @return Negozio, riferito ad un venditore
 	 * @throws SQLException
 	 */
 	public synchronized Negozio getNegozio(String usernameVenditore) throws SQLException {
@@ -87,7 +94,10 @@ public class NegozioDAO implements Serializable {
 	
 
 	/**
-	 * 
+	 * Aggiunge un negozio nel db
+	 * <pre>
+	 * il negozio deve rispettare il formato per essere inserito
+	 * <pre>
 	 * @param negozio
 	 * @throws SQLException
 	 */
@@ -135,6 +145,16 @@ public class NegozioDAO implements Serializable {
 		}
 	}
 	
+	/**
+	 * Modifica il path del logo del negozio
+	 * <pre>
+	 * Il negozio deve essere già presente
+	 * </pre>
+	 * @param nomeNegozio
+	 * @param logo
+	 * @return boolean, true se avvenuto la modifica
+	 * @throws SQLException
+	 */
 	public synchronized boolean updateLogoNegozio(String nomeNegozio,String logo) throws SQLException {
 		 
 		 Connection connection = null;
@@ -173,7 +193,13 @@ public class NegozioDAO implements Serializable {
 			return flag;
 	 }
 	
-	
+	/**
+	 * Restituisce il nome del negozio 
+	 * <pre>Il negozio deve essere già presente con nome uguale al parametro negozio</pre>
+	 * @param negozio
+	 * @return Negozio 
+	 * @throws SQLException
+	 */
 	public synchronized Negozio getNegozioByName(String negozio) throws SQLException {
   	  
   	  Connection connection = null;
@@ -220,7 +246,11 @@ public class NegozioDAO implements Serializable {
 		return negozioBean;
 	}
 	
-	
+	/**
+	 * Cancella un negozio
+	 * @param nomeNegozio
+	 * @throws SQLException
+	 */
 	public  synchronized void deleteShop(String nomeNegozio ) throws SQLException {
 		
 		Connection connection = null;

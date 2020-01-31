@@ -12,9 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import managernegozio.Prodotto;
 
-
 /**
- * Servlet implementation class UpdateProdotto
+ * Servlet modifica prodotto
+ * @author cetra
+ *
  */
 @WebServlet("/UpdateProdotto")
 public class UpdateProdotto extends HttpServlet {

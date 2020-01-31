@@ -15,7 +15,9 @@ import managernegozio.Negozio;
 import managernegozio.Prodotto;
 
 /**
- * Servlet implementation class ViewProdotto
+ * Servlet ricarica la jsp dei prodotti di una relativa categoria di un negozio
+ * @author cetra
+ *
  */
 @WebServlet("/ViewProdotto")
 public class ViewProdotto extends HttpServlet {

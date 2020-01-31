@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class RegisterNegozio
+ *Servlet Registrazione del negozio
+ * @author cetra
+ *
  */
 @WebServlet("/RegisterNegozio")
 public class RegisterNegozio extends HttpServlet {

@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import managerordine.ArrayRiferimento;
 import managerordine.Fattura;
 import managerordine.Riferimento;
-
+/**
+ * Permette di operare sulla table riferimento per operazioni CRUD
+ * @author cetra
+ *
+ */
 public class RiferimentoDAO implements Serializable {
 	
 	private static DataSource ds;
@@ -37,7 +41,8 @@ public class RiferimentoDAO implements Serializable {
 	
 	
 	/**
-	 * 
+	 * Restituisce la lista di riferimento di un determinato negozio
+	 * <pre> Il negozio deve essere presente nel db</pre>
 	 * @param nomeNegozio
 	 * @return ArrayRiferimento lista che contiene tutte le fatture del determinato negozio passato come input
 	 * @throws SQLException

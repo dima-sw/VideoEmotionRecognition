@@ -13,7 +13,9 @@ import eccezione.ParametroNonCorrettoException;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class InserisciCategoria
+ * Servlet usata per reindirezzare utente all' aggiunta della categoria
+ * @author cetra
+ *
  */
 @WebServlet("/InserisciCategoria")
 public class InserisciCategoria extends HttpServlet {

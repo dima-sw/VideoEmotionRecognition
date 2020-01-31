@@ -17,6 +17,11 @@ import com.mysql.jdbc.Statement;
 
 import managernegozio.Prodotto;
 
+/**
+ * Permette di gestire la table Prodotto nel database con le operazioni più comuni
+ * @author cetra
+ *
+ */
 public class ProdottoDAO implements Serializable {
 	
 	//private static DataSource ds;
@@ -38,9 +43,10 @@ public class ProdottoDAO implements Serializable {
 	}*/
 	
 	/**
-	 * 
-	 * @param id prodotto
-	 * @return string path dell'imagine per id 
+	 * Restituisc il path (url dove sono salvate le immagini del negozio) del prodotto tramite id
+	 *	<pre> ID del negozio deve essere presente nel database</pre>
+	 * @param id
+	 * @return String, path del negozio
 	 * @throws SQLException
 	 */
 	public synchronized String getPathByID(int id) throws SQLException{
@@ -79,6 +85,16 @@ public class ProdottoDAO implements Serializable {
 	}
 	
 	
+	/**
+	 * Restituisce id del negozio tramite la categoria negozio e prodotto
+	 * <pre> Negozio deve essere presente avere la categoria indicata nel parametro cat. 
+	 * Nella categoria deve essere presente il prodotto riferito con nome nomep.
+	 * @param cat
+	 * @param neg
+	 * @param nomep
+	 * @return int, id del negozio
+	 * @throws SQLException
+	 */
 	public synchronized int getIDProd(String cat, String neg, String nomep) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -118,7 +134,16 @@ public class ProdottoDAO implements Serializable {
 				return id;
 	}
 	
-	
+	/**
+	 * Restituisce la collezione di prodotti in base al venditore e categoria
+	 * <pre> i parametri venditori e categoria devono essere presenti nel database.
+	 * la categoria deve essere associata al negozio del venditore passato per parametro.
+	 * </pre>
+	 * @param venditore
+	 * @param categoria
+	 * @return Collection<Prodotto>, lista di prodotti
+	 * @throws SQLException
+	 */
 	public synchronized Collection<Prodotto> getAllProductBySellerCategory(String venditore,String categoria) throws SQLException {
   	  
   	  Connection connection = null;
@@ -172,6 +197,9 @@ public class ProdottoDAO implements Serializable {
 	
 /**
  * Aggiunge un prodotto alla categoria specificata
+ * <pre> La categoria, negozio devono essere presenti nel database.
+ * Il negozio deve avere la categoria, specificata per insirire il prodotto.
+ * </pre>
  * @param prodotto
  * @return Prodotto aggiunto
  * @throws SQLException
@@ -242,11 +270,15 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 
 /**
  * Ritorna true o false a seconda se il path è stato modificato
+ * <pre>Nome negozio deve essere presente nel db , 
+ *  la categoria deve essere associata al negozio e deve essere presente nel db table categoria,
+ *  id del prodotto deve essere riferito allo stesso negozio e categoria.
+ *  </pre>
  * @param nomeNegozio
  * @param nomeCategoria
  * @param id
  * @param logo
- * @return boolean
+ * @return boolean, true se la modifica è avvenuta
  * @throws SQLException
  */
 	public synchronized boolean updatePathProdotto(String nomeNegozio,String nomeCategoria,int id,String logo) throws SQLException {
@@ -291,7 +323,14 @@ public synchronized Prodotto addProdotto(Prodotto prodotto) throws SQLException 
 }
 
 	
-	
+/**
+ * Cancella il prodotto tramite id del prodotto
+ * <pre>id del prodotto deve essere presente nel database
+ * </pre>
+ * @param id
+ * @return
+ * @throws SQLException
+ */
 public  synchronized boolean deleteProduct (int id ) throws SQLException {
 		
 		Connection connection = null;
@@ -325,6 +364,14 @@ public  synchronized boolean deleteProduct (int id ) throws SQLException {
 		return (result != 0);
 	}
 
+
+/**
+ * Restituisce il prodotto, tramite il suo id
+ * <pre>id deve essere presente nel database</pre>
+ * @param idProdotto
+ * @return  Prodotto
+ * @throws SQLException
+ */
 public synchronized Prodotto getProductById(int idProdotto) throws SQLException {
 	  
 	  Connection connection = null;
@@ -375,7 +422,16 @@ public synchronized Prodotto getProductById(int idProdotto) throws SQLException 
 		return prodottoBean;
 	}
 
-
+/**
+ * Modifica il prodotto
+ * <pre> Id del prodotto deve essere presente nel database,
+ * nome negozio e nome categoria devono essere associati nel database allo stesso id prodotto
+ * </pre>
+ * 
+ * @param bean
+ * @return booleam, true se il prodotto viene modificato
+ * @throws SQLException
+ */
 public synchronized boolean updateProdotto(Prodotto bean) throws SQLException {
 	 
 	 Connection connection = null;

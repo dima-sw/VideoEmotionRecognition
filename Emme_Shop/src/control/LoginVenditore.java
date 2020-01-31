@@ -20,7 +20,9 @@ import managernegozio.Categoria;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class LoginVenditore
+ * Servlet effettua il login al venditore
+ * @author cetra
+ *
  */
 @WebServlet("/LoginVenditore")
 public class LoginVenditore extends HttpServlet {

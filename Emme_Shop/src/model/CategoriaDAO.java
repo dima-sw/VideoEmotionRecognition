@@ -14,7 +14,11 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import managernegozio.Categoria;
-
+/**
+ * Posside le operazioni di gestione la table Categoria all'interno del database
+ * @author cetra
+ *
+ */
 public class CategoriaDAO implements Serializable {
 
 //	private static DataSource ds;
@@ -35,9 +39,9 @@ public class CategoriaDAO implements Serializable {
 	}*/
 
 	/**
-	 * 
+	 * Restituisce una lista di categorie di un determinato venditore
 	 * @param venditore
-	 * @return Collection di categorie di quel venditore
+	 * @return Collection<Categoria>, lista di categoria
 	 * @throws SQLException
 	 */
 	public synchronized Collection<Categoria> getAllCategoryBySeller(String venditore) throws SQLException {
@@ -85,6 +89,15 @@ public class CategoriaDAO implements Serializable {
 		return listaCategorie;
 	}
 	
+	/**
+	 * Aggiunge una nuova categoria
+	 * <pre> 
+	 * Il nome del negozio, nome venditore deve essere già presente nel database
+	 * Il nome della categoria non può essere inserito in caso sia già presente con lo stesso nome, nome del venditore, negozio
+	 * </pre>
+	 * @param categoria
+	 * @throws SQLException
+	 */
 	public synchronized void addCategoria(Categoria categoria) throws SQLException {
 		
 		Connection connection = null;
@@ -124,6 +137,18 @@ public class CategoriaDAO implements Serializable {
 		
 	}
 
+	/**
+	 * Modifica il path della categoria
+	 * <pre>nel caso il path non sia già aggiunto lo inserisce
+	 * il parametro nomeNegozio deve essere presente nel database
+	 * il parametro nomeCategoria deve essere riferito al nomeNegozio è deve essere presente nel db
+	 *</pre>
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @param logo
+	 * @return boolean true in caso di successo della modifica
+	 * @throws SQLException
+	 */
 	public synchronized boolean updatePathCategoria(String nomeNegozio,String nomeCategoria,String logo) throws SQLException {
 	 
 		Connection connection = null;
@@ -163,6 +188,16 @@ public class CategoriaDAO implements Serializable {
 		return flag;
 }
 	
+	/**
+	 * Restituisce la categoria di un determinato negozio
+	 * <pre>
+	 * nel database deve essere presente il negozio, e la categoria associata a quel negozio
+	 * </pre>
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @return restituisce la categoria 
+	 * @throws SQLException
+	 */
 	public synchronized Categoria getCategoria(String nomeNegozio,String nomeCategoria) throws SQLException {
 
 		Connection connection = null;
@@ -213,7 +248,17 @@ public class CategoriaDAO implements Serializable {
 		
 	}
 	
-	
+	/**
+	 * Modifica la descrizione di una categoria
+	 * <pre>
+	 * nel database devono essere presente nome negozio e il nome categoria associato al negozio
+	 * <pre>
+	 * @param nomeNegozio
+	 * @param nomeCategoria
+	 * @param descrizione
+	 * @return flag boolean true se la modifica avviene altrimenti false
+	 * @throws SQLException
+	 */
 	public synchronized boolean updateDescrizioneCategoria(String nomeNegozio, String nomeCategoria, String descrizione) throws SQLException
 	{
 		Connection connection = null;
@@ -256,7 +301,16 @@ public class CategoriaDAO implements Serializable {
 	}
 
 
-
+/**
+ * Cancella la categoria di un determinato negozio
+ * <pre> 
+ * il nome negozio e la categoria associata, da cancellare devono essere presenti nel db
+ * </pre>
+ * @param nomeNegozio
+ * @param nomeCategoria
+ * @return boolean true se la cancellazione avviene con successo
+ * @throws SQLException
+ */
 public  synchronized boolean deleteCategory(String nomeNegozio, String nomeCategoria ) throws SQLException {
 	
 	Connection connection = null;

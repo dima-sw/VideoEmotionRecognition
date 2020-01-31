@@ -15,7 +15,9 @@ import eccezione.ParametroNonCorrettoException;
 import managernegozio.Prodotto;
 
 /**
- * Servlet implementation class RemoveProd
+ * Servlet rimuove prodotto
+ * @author cetra
+ *
  */
 @WebServlet("/RemoveProd")
 public class RemoveProd extends HttpServlet {

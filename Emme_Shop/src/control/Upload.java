@@ -20,7 +20,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class Upload
+ * Servlet fa upload del logo del negozio
+ * @author cetra
+ *
  */
 @WebServlet("/Upload")
 public class Upload extends HttpServlet {

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginGestoreAccouting
+ * Servlet effettua il login del gestore accouting
+ * @author cetra
+ *
  */
 @WebServlet("/LoginGestoreAccouting")
 public class LoginGestoreAccouting extends HttpServlet {

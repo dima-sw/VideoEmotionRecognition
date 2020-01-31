@@ -13,7 +13,9 @@ import eccezione.ParametroNonCorrettoException;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class InserisciProdotto
+ * Servlet che reindirizza utente alla creazione di un nuovo prodotto
+ * @author cetra
+ *
  */
 @WebServlet("/InserisciProdotto")
 public class InserisciProdotto extends HttpServlet {

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginCliente
+ * Servlet effettua il login del cliente
+ * @author cetra
+ *
  */
 @WebServlet("/LoginCliente")
 public class LoginCliente extends HttpServlet {

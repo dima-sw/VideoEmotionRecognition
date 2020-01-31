@@ -15,7 +15,9 @@ import managernegozio.Negozio;
 
 
 /**
- * Servlet implementation class InsertCategoria
+ * Servlet per inserire una nuova categoria
+ * @author cetra
+ *
  */
 @WebServlet("/InsertCategoria")
 public class InsertCategoria extends HttpServlet {

@@ -19,7 +19,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import managernegozio.Prodotto;
 
 /**
- * Servlet implementation class UploadProdotto
+ * Servlet effettua upload del logo del prodotto
+ * @author cetra
+ *
  */
 @WebServlet("/uploadProdotto")
 public class UploadProdotto extends HttpServlet {

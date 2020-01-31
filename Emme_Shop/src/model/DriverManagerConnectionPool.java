@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Connessione con il db tramite ConnectionPool
+ * @author cetra
+ *
+ */
 public class DriverManagerConnectionPool {
 
 	static private List<Connection> freeDbConnections;

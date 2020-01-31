@@ -16,7 +16,9 @@ import managernegozio.Categoria;
 import managernegozio.Negozio;
 
 /**
- * Servlet implementation class ModificaCategoria
+ * Servlet che effetua la modifica della categoria
+ * @author cetra
+ *
  */
 @WebServlet("/ModificaCategoria")
 public class ModificaCategoria extends HttpServlet {
