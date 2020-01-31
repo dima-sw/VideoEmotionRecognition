@@ -81,6 +81,10 @@ class tc1_0_Login_Venditore {
 		StringWriter output=new StringWriter();
 		PrintWriter out=new PrintWriter(output);
 		
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("messaggioerrore")).thenReturn("Errore utente non trovato");
+		when(session.getAttribute("redirecterror")).thenReturn("./index.jsp");
+		
 		when(request.getParameter("username")).thenReturn("aaaaa");
 		when(request.getParameter("password")).thenReturn("Password0#");
 		
@@ -96,6 +100,10 @@ class tc1_0_Login_Venditore {
 	public void tc_1_0_2() throws IOException, ServletException {
 		StringWriter output=new StringWriter();
 		PrintWriter out=new PrintWriter(output);
+		
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("messaggioerrore")).thenReturn("Errore utente non trovato");
+		when(session.getAttribute("redirecterror")).thenReturn("./index.jsp");
 		
 		when(request.getParameter("username")).thenReturn("Mario");
 		when(request.getParameter("password")).thenReturn("aaaaa");

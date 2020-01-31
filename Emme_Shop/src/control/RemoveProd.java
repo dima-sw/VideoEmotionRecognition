@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -34,6 +35,8 @@ public class RemoveProd extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out=response.getWriter();
+		
 		String address="./venditore/index-venditore-prodotti.jsp";
 		int id =Integer.parseInt(request.getParameter("ID"));
 		Collection<Prodotto> prodotti = null;
@@ -41,12 +44,14 @@ public class RemoveProd extends HttpServlet {
 		String nomeCategoria = (String) request.getSession().getAttribute("categoria");
 		
 		try {
-			
+			/*Prodotto p;
+			if((p=modProd.getProductById(id))==null)
+				out.print("Errore id non presente");*/
 			modProd.deleteProduct(id);
 			prodotti = modProd.getAllProductBySellerCategory(usernameVenditore, nomeCategoria);
 			request.getSession().setAttribute("prodotti", prodotti);
 			response.sendRedirect(address);	
-			
+			out.print("OK");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			
@@ -55,6 +60,7 @@ public class RemoveProd extends HttpServlet {
 			request.getSession().setAttribute("messaggioerrore", e.getMessage());
 			request.getSession().setAttribute("redirecterror", "./ViewProdotto");
 			response.sendRedirect("./error-page.jsp");
+			
 		}
 		
 	}
@@ -62,7 +68,7 @@ public class RemoveProd extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
