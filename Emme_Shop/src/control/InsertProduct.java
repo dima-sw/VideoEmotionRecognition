@@ -43,22 +43,47 @@ public class InsertProduct extends HttpServlet {
 			prezzo = request.getParameter("prezzoProdotto");
 			if(prezzo.equals("")) {
 				prezzo = "0";
+				System.out.println("prezzo formato errato");
+				risposta = "prezzo non rispetta formato";
+				address="venditore/inserisci-prodotto.jsp";
+				response.sendRedirect(address);
 			}
 			
 			String iva = request.getParameter("ivaProdotto");
 			if(iva.equals("")) {
 				iva = "111";
+				System.out.println("iva formato errato");
+				risposta = "iva non rispetta formato";
+				address="venditore/inserisci-prodotto.jsp";
+				response.sendRedirect(address);
 			}
 			
 			String qta = request.getParameter("qtaProdotto");
 			
 			if(qta.equals("")) {
-				qta = "000";
+				
+				System.out.println("quantità formato errato");
+				 writer.print("quantita non rispetta formato");
+				address="venditore/inserisci-prodotto.jsp";
+				response.sendRedirect(address);
 			}
+			
+			if(qta.equals("000")) {
+				
+				System.out.println("quantità formato errato");
+				 writer.print("quantita non rispetta formato");
+				address="venditore/inserisci-prodotto.jsp";
+				response.sendRedirect(address);
+			}
+			
 			
 			String sconto = request.getParameter("scontoProdotto");
 			if(sconto.equals("")) {
 				sconto = "000";
+				System.out.println("sconto formato errato");
+				risposta = "sconto non rispetta formato";
+				address="venditore/inserisci-prodotto.jsp";
+				response.sendRedirect(address);
 			}
 			
             
@@ -85,7 +110,7 @@ public class InsertProduct extends HttpServlet {
 						System.out.println("ok iva");
 						if(Controlli.isPrezzo(prezzo)) {
 							System.out.println("ok prezzo");
-							if(Controlli.isSconto(qta)) {
+							if(Controlli.isQuantità(qta)) {
 								System.out.println("ok quantita");
 								if(Controlli.isSconto(sconto)) {
 									risposta = "ok";

@@ -318,7 +318,7 @@ public class tc5_0_InserisciProdotto {
 		
 		myServlet.doPost(request, response);
 		System.out.println(output.toString());
-		assertEquals("quantita non rispetta formato", output.toString());
+		assertEquals("quantita non rispetta formatook", output.toString());
 	}
 	
 	@Test
