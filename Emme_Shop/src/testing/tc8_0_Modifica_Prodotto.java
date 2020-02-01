@@ -31,6 +31,11 @@ import model.NegozioDAO;
 import model.ProdottoDAO;
 import model.VenditoreDAO;
 
+/**
+ * Test Case 8_0_Modifica_Prodotto
+ * @author cetra
+ *
+ */
 class tc8_0_Modifica_Prodotto {
 
 UpdateProdotto myServlet;

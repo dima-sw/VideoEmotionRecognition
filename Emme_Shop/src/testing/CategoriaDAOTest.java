@@ -15,6 +15,11 @@ import model.CategoriaDAO;
 import model.NegozioDAO;
 import model.VenditoreDAO;
 
+/**
+ * Test di unita Categoria DAO
+ * @author cetra
+ *
+ */
 class CategoriaDAOTest {
 	static Venditore vend;
 	static VenditoreDAO modelv=new VenditoreDAO();

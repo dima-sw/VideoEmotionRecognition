@@ -25,6 +25,11 @@ import manageraccouting.Utente;
 import manageraccouting.Venditore;
 import model.VenditoreDAO;
 
+/**
+ * Test Case 2_0_Registrazione_Venditore
+ * @author cetra
+ *
+ */
 class tc2_0_Registrazione_Venditore {
 
 	RegisterSeller myServlet;

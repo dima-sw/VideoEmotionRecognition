@@ -30,6 +30,11 @@ import model.CategoriaDAO;
 import model.NegozioDAO;
 import model.VenditoreDAO;
 
+/**
+ * Test Case 6_0_Modifica_Categoria
+ * @author cetra
+ *
+ */
 class tc6_0_Modifica_Categoria {
 
 UpdateCategoria myServlet;

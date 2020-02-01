@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 import manageraccouting.Venditore;
 import model.VenditoreDAO;
 
+/**
+ * Test di unita Venditore
+ * @author cetra
+ *
+ */
 class VenditoreTest {
 	static VenditoreDAO model= new VenditoreDAO();
 	

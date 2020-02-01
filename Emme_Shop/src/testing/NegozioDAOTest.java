@@ -18,7 +18,11 @@ import managernegozio.Negozio;
 import model.NegozioDAO;
 import model.VenditoreDAO;
 
-
+/**
+ * Test di unita NegozioDAO
+ * @author cetra
+ *
+ */
 class NegozioDAOTest {
 	private static NegozioDAO model=new NegozioDAO();
 	private static Connection connection;

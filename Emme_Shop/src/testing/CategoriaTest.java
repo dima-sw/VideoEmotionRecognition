@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import managernegozio.Categoria;
 
+/**
+ * Test di unita Categoria
+ * @author cetra
+ *
+ */
 class CategoriaTest {
 
 	@Test

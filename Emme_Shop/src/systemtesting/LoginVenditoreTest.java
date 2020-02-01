@@ -25,6 +25,12 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+/**
+ * Test di sistema Login Venditore
+ * @author cetra
+ *
+ */
 public class LoginVenditoreTest {
 	
 	

@@ -31,6 +31,11 @@ import model.NegozioDAO;
 import model.ProdottoDAO;
 import model.VenditoreDAO;
 
+/**
+ * TestCase 9_0_Cancellazione_Prodotto
+ * @author cetra
+ *
+ */
 class tc9_0_Cancellazione_Prodotto {
 
 	RemoveProd myServlet;

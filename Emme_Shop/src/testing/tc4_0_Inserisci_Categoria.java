@@ -42,6 +42,11 @@ import javax.servlet.http.HttpSession;
 
 import org.mockito.Mock;
 
+/**
+ * Test Case TC_4_0_Inserisci_Categoria
+ * @author cetra
+ *
+ */
 class tc4_0_Inserisci_Categoria {
 	
 	InsertCategoria myServlet;

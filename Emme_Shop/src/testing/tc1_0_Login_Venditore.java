@@ -41,6 +41,11 @@ import javax.servlet.http.HttpSession;
 import org.mockito.Mock;
 
 
+/**
+ * Test Case 1_0_Login_Venditore 
+ * @author cetra
+ *
+ */
 class tc1_0_Login_Venditore {
 
 	LoginVenditore myServlet;

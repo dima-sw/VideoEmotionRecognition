@@ -21,6 +21,11 @@ import junit.framework.TestCase;
 import manageraccouting.Venditore;
 import model.VenditoreDAO;
 
+/**
+ * Test di unita 9_0_VenditoreDAO
+ * @author cetra
+ *
+ */
 class VenditoreDAOTest extends TestCase{
 
 		

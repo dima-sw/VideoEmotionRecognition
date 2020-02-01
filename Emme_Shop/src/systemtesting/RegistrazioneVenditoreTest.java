@@ -1,5 +1,6 @@
 package systemtesting;
 import org.junit.Test;
+
 import org.junit.Before;
 import org.junit.After;
 import static org.junit.Assert.*;
@@ -30,6 +31,12 @@ import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+
+/**
+ * Test di sistema Registrazione Venditore
+ * @author cetra
+ *
+ */
 public class RegistrazioneVenditoreTest {
   private WebDriver driver;
   private Map<String, Object> vars;

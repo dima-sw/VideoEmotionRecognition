@@ -32,6 +32,11 @@ import model.NegozioDAO;
 import model.ProdottoDAO;
 import model.VenditoreDAO;
 
+/**
+ * Test Case 7_0_Cancellazione_Categoria
+ * @author cetra
+ *
+ */
 class tc7_0_Cancellazione_Categoria {
 
 
