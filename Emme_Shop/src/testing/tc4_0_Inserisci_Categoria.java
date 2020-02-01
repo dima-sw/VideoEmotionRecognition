@@ -42,11 +42,6 @@ import javax.servlet.http.HttpSession;
 
 import org.mockito.Mock;
 
-/**
- * Test Case TC_4_0_Inserisci_Categoria
- * @author cetra
- *
- */
 class tc4_0_Inserisci_Categoria {
 	
 	InsertCategoria myServlet;
@@ -86,15 +81,39 @@ class tc4_0_Inserisci_Categoria {
 		when(session.getAttribute("urlLogoCategoria")).thenReturn("images/favicon.ico");
 		
 		when(request.getParameter("nomeNegozio")).thenReturn("Adidas");
-		when(request.getParameter("nomeCategoria")).thenReturn("@Biscotti");
-		when(request.getParameter("descCategoria")).thenReturn("descrizione");
+		when(request.getParameter("nomeCategoria")).thenReturn("Biscotti");
+		when(request.getParameter("descCategoria")).thenReturn("");
 		
 		
 		when(response.getWriter()).thenReturn(out);
 		
 		myServlet.doPost(request, response);
 		System.out.println(output.toString());
-		assertEquals("Nome categoria formato errato", output.toString());
+		assertEquals("descrizione formato errato", output.toString());
+
+	}
+	
+	
+
+	@Test
+	void tc_4_0_2() throws IOException, ServletException{
+		StringWriter output=new StringWriter();
+		PrintWriter out=new PrintWriter(output);
+		
+		
+		when(request.getSession()).thenReturn(session);
+		when(session.getAttribute("urlLogoCategoria")).thenReturn("images/favicon.ico");
+		
+		when(request.getParameter("nomeNegozio")).thenReturn("Adidas");
+		when(request.getParameter("nomeCategoria")).thenReturn("Biscotti");
+		when(request.getParameter("descCategoria")).thenReturn("#descrizione");
+		
+		
+		when(response.getWriter()).thenReturn(out);
+		
+		myServlet.doPost(request, response);
+		System.out.println(output.toString());
+		assertEquals("descrizione formato errato", output.toString());
 
 	}
 	
@@ -103,7 +122,7 @@ class tc4_0_Inserisci_Categoria {
 	
     /*test inserisci categoria senza errori*/
 	@Test
-	void tc_4_0_2() throws IOException, ServletException{
+	void tc_4_0_3() throws IOException, ServletException{
 		StringWriter output=new StringWriter();
 		PrintWriter out=new PrintWriter(output);
 		
@@ -120,7 +139,7 @@ class tc4_0_Inserisci_Categoria {
 		
 		myServlet.doPost(request, response);
 		System.out.println(output.toString());
-		assertEquals("", output.toString());
+		assertEquals("ok", output.toString());
 
 	}
 	

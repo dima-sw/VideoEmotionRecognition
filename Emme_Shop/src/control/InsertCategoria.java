@@ -55,15 +55,16 @@ public class InsertCategoria extends HttpServlet {
 			String nomeCategoria=request.getParameter("nomeCategoria");
 			String descCategoria=request.getParameter("descCategoria");
 			
-			if(Controlli.isStreet(nomeCategoria)) {
-				System.out.println("ok nomeCategoria");
+			if(Controlli.isDesc(descCategoria)) {
+				System.out.println("ok descrizione");
+				risposta = "ok";
 				Categoria categoria=mcategoria.addCategoria(nomeNegozio,nomeCategoria,urlLogoCategoria,descCategoria);
 				request.getSession().setAttribute("nomeCategoriaImage",categoria.getNomeCategoria());
 				address="venditore/uploadImageCategoria.jsp";
 				response.sendRedirect(address);
 			}else {
-				System.out.println("Nome categoria errato");
-				risposta = "Nome categoria formato errato";
+				System.out.println("descrizione errato");
+				risposta = "descrizione formato errato";
 			}
 			
 			writer.print(risposta);
