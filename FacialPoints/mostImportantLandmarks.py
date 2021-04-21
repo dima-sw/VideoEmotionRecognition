@@ -31,9 +31,12 @@ def getPoints(subdir, file):
     faces = detector(img_gray)
 
     landmarks = predictor(img_gray, faces[0])
+
+    mx=landmarks.part(34).x
+    my=landmarks.part(34).y
     for n in range(0, 68):
-        x = landmarks.part(n).x
-        y = landmarks.part(n).y
+        x = landmarks.part(n).x -mx
+        y = landmarks.part(n).y -my
         landmarksPoints.append((x, y))
     points = np.array(landmarksPoints, np.int32)
 
