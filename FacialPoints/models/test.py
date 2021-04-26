@@ -19,7 +19,7 @@ print(x_train[0].shape)
 model = Sequential()
 
 # IF you are running with a GPU, try out the CuDNNLSTM layer type instead (don't pass an activation, tanh is required)
-model.add(LSTM(128, input_shape=(x_train.shape[13:14]), activation='relu', return_sequences=True))
+model.add(LSTM(128, input_shape=(13,14), activation='relu', return_sequences=True))
 model.add(Dropout(0.2))
 
 model.add(LSTM(128, activation='relu'))
@@ -32,7 +32,7 @@ model.add(Dense(7, activation='softmax'))
 
 opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
 
-# Compile model
+# Compile model2
 model.compile(
     loss='sparse_categorical_crossentropy',
     optimizer=opt,
