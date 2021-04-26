@@ -6,7 +6,9 @@ from pathlib import Path
 import pandas as pd
 
 rootdir=r'C:\Users\TheDimitri\Desktop\imgDataset'
-
+p = r'C:\Users\TheDimitri\Desktop\VideoEmotionRecognition\FacialPoints\customDlibPredictor\essential_predictor.dat'
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor(p)
 for subdir, dirs, files in os.walk(rootdir):
     for file in files:
 
@@ -17,9 +19,7 @@ for subdir, dirs, files in os.walk(rootdir):
 
                 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                p = r'C:\Users\TheDimitri\Desktop\VideoEmotionRecognition\68FacialPoints\customDlibPredictor\eye_predictor.dat'
-                detector = dlib.get_frontal_face_detector()
-                predictor = dlib.shape_predictor(p)
+
 
                 faces = detector(img_gray)
 
@@ -29,8 +29,8 @@ for subdir, dirs, files in os.walk(rootdir):
 
                     landmarks_points = []
 
-                    for n in range(0, 12):
-                        print(n)
+                    for n in range(15):
+
                         x = landmarks.part(n).x
                         y = landmarks.part(n).y
                         landmarks_points.append((x, y))

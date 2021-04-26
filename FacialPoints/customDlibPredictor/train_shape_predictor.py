@@ -81,4 +81,4 @@ dlib.train_shape_predictor(args["training"], args["model"], options)
 
 "Terminal commands: "
 
-" python train_shape_predictor.py --training ibug_300W_large_face_landmark_dataset/labels_ibug_300W_train_eyes.xml --model eye_predictor.dat"
+"python train_shape_predictor.py --training ibug_300W_large_face_landmark_dataset/labels_ibug_300W_train_essential.xml --model essential_predictor.dat"
