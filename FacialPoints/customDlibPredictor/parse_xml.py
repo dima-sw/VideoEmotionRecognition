@@ -15,7 +15,7 @@ args = vars(ap.parse_args())
 # facial feature (i.e., eye, mouth, nose, etc.) -- in order to train a
 # dlib shape predictor on *just* the eyes, we must first define the
 # integer indexes that belong to the eyes
-LANDMARKS = set(list((17,19,21,22,24,26,33,37,40,44,47,48,54,62,66)))
+LANDMARKS = set(list((17,19,21,22,24,26,33,37,40,44,47,48,51,54,57)))
 
 # to easily parse out the eye locations from the XML file we can
 # utilize regular expressions to determine if there is a 'part'
