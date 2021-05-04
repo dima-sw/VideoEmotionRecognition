@@ -15,6 +15,8 @@ print("[INFO] setting shape predictor options...")
 options = dlib.shape_predictor_training_options()
 
 
+
+"2 4 6 8"					"6"
 # define the depth of each regression tree -- there will be a total
 # of 2^tree_depth leaves in each tree; small values of tree_depth
 # will be *faster* but *less accurate* while larger values will
@@ -22,6 +24,7 @@ options = dlib.shape_predictor_training_options()
 # *far slower* when making predictions
 options.tree_depth = 4
 
+"0.1 0.2 0.25 0.3"        "0.25"
 # regularization parameter in the range [0, 1] that is used to help
 # our model generalize -- values closer to 1 will make our model fit
 # the training data better, but could cause overfitting; values closer
@@ -29,14 +32,14 @@ options.tree_depth = 4
 # training data in the order of 1000s of data points
 options.nu = 0.25
 
-
+"14 16 18 22"       "20"
 # the number of cascades used to train the shape predictor -- this
 # parameter has a *dramtic* impact on both the *accuracy* and *output
 # size* of your model; the more cascades you have, the more accurate
 # your model can potentially be, but also the *larger* the output size
 options.cascade_depth = 18
 
-
+"100 250 500 1000"    "500"
 # number of pixels used to generate features for the random trees at
 # each cascade -- larger pixel values will make your shape predictor
 # more accurate, but slower; use large values if speed is not a
@@ -44,19 +47,20 @@ options.cascade_depth = 18
 # devices
 options.feature_pool_size = 500
 
-
+"20 50 100 200"    "200"
 # selects best features at each cascade when training -- the larger
 # this value is, the *longer* it will take to train but (potentially)
 # the more *accurate* your model will be
 options.num_test_splits = 200
 
-
+"5 10 20 50"       "25"
 # controls amount of "jitter" (i.e., data augmentation) when training
 # the shape predictor -- applies the supplied number of random
 # deformations, thereby performing regularization and increasing the
 # ability of our model to generalize
 options.oversampling_amount = 20
 
+"0 0.01 0.025 0.05"     "0.02"
 # amount of translation jitter to apply -- the dlib docs recommend
 # values in the range [0, 0.5]
 options.oversampling_translation_jitter = 0.01
