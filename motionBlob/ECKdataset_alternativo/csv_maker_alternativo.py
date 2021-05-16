@@ -31,7 +31,7 @@ def makeXY():
     curDirr = ""
     n_video = 0
     n_frame=0
-    n_pixel=100
+    n_pixel=5
     t1 = time.time()
     for subdir, dirs, files in os.walk(labelPath):
         if (subdir[len(subdir) - 4:] in cartelle):
@@ -59,10 +59,11 @@ def makeXY():
 
                             print(img_r)
                             for j in range(len(img_r)):
-                                blob=np.zeros(n_pixel+2)
-                                count=2
+                                blob=np.zeros(n_pixel+3)
+                                count=3
                                 blob[0]=n_video
                                 blob[1]=n_frame
+                                blob[2]=label
                                 riga=img_r[j]
                                 for r in riga:
                                     blob[count]=r
@@ -87,7 +88,7 @@ def makeXY():
             #print(subdir)
 
 
-    with open('ECKFrame100_alternativo.csv', 'w', newline='') as file:
+    with open('ECKFrame5.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(dataSet)
 
