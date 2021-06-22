@@ -2,6 +2,15 @@
 import multiprocessing
 import argparse
 import dlib
+
+
+
+"""Questo file contiene i parametri e il training per avere un modello con meno landmark da predire"""
+
+
+
+
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-t", "--training", required=True,

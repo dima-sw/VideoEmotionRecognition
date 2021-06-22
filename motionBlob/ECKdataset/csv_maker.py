@@ -10,7 +10,6 @@ import math
 import csv
 import time
 from pathlib import Path
-from numba import njit,prange, set_num_threads
 
 imgPath=r"C:\Users\alexl\OneDrive\Desktop\cohn-kanade-images"
 labelPath=r"C:\Users\alexl\OneDrive\Desktop\Emotion"
@@ -46,7 +45,7 @@ def makeXY():
                             #path_image=imagesPath+f
                             img1 = cv2.imread(os.path.join(imagesPath,f), cv2.IMREAD_GRAYSCALE)
 
-                            img_r=cv2.resize(img1,(30,30))
+                            img_r=cv2.resize(img1,(100,100))
 
 
                             #cv2.imwrite(path_image,img_r)

@@ -1,25 +1,25 @@
 import cv2
-import numpy as np
+
 import dlib
 from PIL import Image
 import os
 from os.path import isfile, join
 from os import listdir
 import numpy as np
-import math
+
 import csv
 import time
-from pathlib import Path
-from numba import njit,prange, set_num_threads
 
-imgPath=r"C:\Users\alexl\OneDrive\Desktop\cohn-kanade-images"
-labelPath=r"C:\Users\alexl\OneDrive\Desktop\Emotion"
+
+
+imgPath=r"C:\Users\TheDimitri\Desktop\imgDataset"
+labelPath=r"C:\Users\TheDimitri\Desktop\Emotion"
 #68 15
 n_points=15
 #34 6
 joint_point=6
-casc = 'haarcascade_frontalface_default.xml'
-faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
+#casc = 'haarcascade_frontalface_default.xml'
+#faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
 cartelle=[r"\001",r"\002",r"\003",r"\004",r"\005",r"\006",r"\007",r"\008",r"\009"]
 #p = r'C:\Users\alexl\OneDrive\Desktop\VideoEmotionRecognition-main\VideoEmotionRecognition-main\FacialPoints\customDlibPredictor\essential_predictor.dat'
 detector = dlib.get_frontal_face_detector()
@@ -31,7 +31,8 @@ def makeXY():
     curDirr = ""
     n_video = 0
     n_frame=0
-    n_pixel=5
+    n_pixel=100
+    outDirs=123
     t1 = time.time()
     for subdir, dirs, files in os.walk(labelPath):
         if (subdir[len(subdir) - 4:] in cartelle):
@@ -44,7 +45,7 @@ def makeXY():
                         onlyfiles = [f for f in listdir(imagesPath) if isfile(join(imagesPath, f))]
 
                         for f in (onlyfiles):
-                            print(f)
+
                             #path_image=imagesPath+f
                             img1 = cv2.imread(os.path.join(imagesPath,f), cv2.IMREAD_GRAYSCALE)
 
@@ -57,7 +58,7 @@ def makeXY():
 
 
 
-                            print(img_r)
+
                             for j in range(len(img_r)):
                                 blob=np.zeros(n_pixel+3)
                                 count=3
@@ -84,11 +85,11 @@ def makeXY():
             curDirr = subdir[len(subdir) - 8:len(subdir) - 4]
 
             #print("immagini processate: ", images, " in ", time.time() - t1)
-            #print(curDirs / outDirs)
+            print(curDirs / outDirs)
             #print(subdir)
 
 
-    with open('ECKFrame5.csv', 'w', newline='') as file:
+    with open('ECKFrame100.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(dataSet)
 

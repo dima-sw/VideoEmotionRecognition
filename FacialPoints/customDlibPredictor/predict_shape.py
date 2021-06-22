@@ -5,6 +5,11 @@ import imutils
 import time
 import dlib
 import cv2
+
+"""Questo file contiene """
+
+
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--shape-predictor", required=True,

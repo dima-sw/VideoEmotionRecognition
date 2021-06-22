@@ -20,6 +20,7 @@ def loadCSV(csvFile):
     counter=0
 
     temp=[]
+    print("ciao")
     for index, row in css.iterrows():
 
         curidx=row[0]
@@ -34,7 +35,7 @@ def loadCSV(csvFile):
 
     #dimension=int(sum(temp) / len(temp)) *2
 
-    print(dimension)
+    print("ciao",dimension)
 
     for index, row in css.iterrows():
 

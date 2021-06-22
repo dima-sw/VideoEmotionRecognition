@@ -5,14 +5,15 @@ from tensorflow.keras.regularizers import l2
 import matplotlib.pyplot as plt
 from time import time
 #from FacialPoints.ECKDataset.
-from loadDataset import loadCSV,parseCSV
-
-X,Y=loadCSV(r"C:\Users\alexl\OneDrive\Desktop\VideoEmotionRecognition-main\VideoEmotionRecognition-main\motionBlob\ECKdataset\ECKFrame20.csv")
+#from motionBlob.ECKdataset_alternativo.loadDataset import loadCSV
+from FacialPoints.ECKDataset.loadDataset import parseCSV, loadCSV
+X,Y=loadCSV(r"C:\Users\TheDimitri\Desktop\VideoEmotionRecognition\motionBlob\ECKdataset_alternativo\ECKFrame5.csv")
 
 xt,xv,yt,yv=parseCSV(X,Y,percentage2=0.2,percentage=0.8)
 
 print(tf.__version__)
-#print(xt.shape)
+#(252,70,28)
+print(xt.shape)
 
 #for i in range(2,50):
 #seed=1
